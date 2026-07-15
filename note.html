@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>เอกสารแจ้งเตือนระบบ (System Notice)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #a81c2a;
+            --primary-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            --bg-page: #f0f2f5;
+            --bg-doc: #ffffff;
+            --text-dark: #1d3557;
+            --text-main: #4a4a4a;
+            --text-light: #6c757d;
+            --accent-yellow: #ffb703;
+            --light-red: #fff0f3;
+            --border-color: #e9ecef;
+        }
+
+        body { 
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            font-family: 'Sarabun', sans-serif; 
+            margin: 0; 
+            padding: 40px; 
+            display: flex; 
+            flex-direction: row; 
+            justify-content: center; 
+            align-items: flex-start; 
+            gap: 40px; 
+            min-height: 100vh;
+        }
+        
+        .document { 
+            background: var(--bg-doc); 
+            width: 210mm; 
+            height: 297mm; 
+            padding: 15mm 20mm; 
+            box-sizing: border-box; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 15px rgba(255, 65, 108, 0.05);
+            position: relative; 
+            color: var(--text-main); 
+            flex-shrink: 0;
+            border-radius: 4px; 
+            overflow: hidden;
+            display: flex;
+            flex-direction: column; 
+        }
+
+        .document::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 15px; 
+            background: var(--primary-gradient);
+            z-index: 10;
+        }
+
+        .document::after {
+            content: "FIRSTSIGHTKIDS";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 85px; 
+            font-weight: 800; 
+            color: rgba(230, 57, 70, 0.03); 
+            z-index: 0;
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: 5px; 
+        }
+
+        .bg-decor {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: var(--primary-gradient);
+            opacity: 0.04;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header-note {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+            z-index: 1;
+            margin-top: 10px;
+        }
+
+        .header-title-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.2);
+            flex-shrink: 0;
+        }
+        
+        .header-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-title h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .header-title p {
+            margin: 5px 0 0;
+            font-size: 13.5px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .header-meta {
+            text-align: right;
+            font-size: 13px;
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 5px;
+            align-items: center;
+        }
+
+        .meta-label {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-right: 8px;
+            width: 50px;
+            text-align: right;
+        }
+
+        .meta-value {
+            color: var(--text-dark);
+            font-weight: 600;
+            width: 130px;
+            text-align: left;
+        }
+
+        .status-badge {
+            background-color: #fff9e6;
+            color: #d97706;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid #fde68a;
+            display: inline-block;
+        }
+
+        .alert-box {
+            background: #fffcf5;
+            border: 1px solid #ffe082;
+            border-left: 5px solid var(--accent-yellow);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-dark);
+            flex-shrink: 0;
+        }
+
+        .alert-box i {
+            color: #f57f17;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+
+        .content-text {
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-align: left; /* แก้ไขเป็นจัดชิดซ้ายปกติ */
+            flex-shrink: 0;
+        }
+
+        .content-text p {
+            margin-bottom: 12px;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .highlight-text {
+            background-color: #fff9e6;
+            color: #d97706;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .highlight-text-blue {
+            background-color: #f0f7ff;
+            color: #0369a1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .details-container {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            flex-shrink: 0; 
+        }
+
+        .details-header {
+            background: #f8f9fa;
+            padding: 12px 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .details-header i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .details-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-bottom: 1px dashed var(--border-color);
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .details-row:last-child {
+            border-bottom: none;
+            background-color: #fef5f5;
+        }
+
+        .row-label {
+            color: var(--text-main);
+            font-weight: 500;
+            width: 45%;
+        }
+
+        .row-value {
+            color: var(--text-dark);
+            font-weight: 700;
+            text-align: right;
+            width: 55%;
+        }
+
+        .total-row .row-label {
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 14.5px;
+            width: 65%;
+            line-height: 1.5;
+            white-space: normal; 
+        }
+
+        .total-row .row-value {
+            font-size: 16px;
+            color: var(--primary-color);
+            width: 35%;
+            text-align: right;
+        }
+
+        .currency-unit {
+            font-size: 0.8em;
+            color: var(--text-light);
+            margin-left: 4px;
+        }
+        
+        .total-row .currency-unit {
+            color: var(--primary-color);
+            opacity: 0.8;
+        }
+
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end; 
+            margin-top: auto; 
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .system-note {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 6px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            width: 48%; 
+        }
+
+        .system-note i {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-top: 2px;
+        }
+
+        .system-note-content h4 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .system-note-content p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .signature-area { 
+            position: relative; 
+            padding: 0 10px; 
+        } 
+        
+        .sign-box { 
+            text-align: center; 
+            position: relative; 
+            width: 240px; 
+            padding-top: 20px; 
+        } 
+        
+        .signature-img {
+            width: 140px; 
+            height: auto;
+            position: absolute; 
+            bottom: -10px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10; 
+            mix-blend-mode: multiply; 
+            filter: contrast(1.1) drop-shadow(0 2px 2px rgba(0,0,0,0.05)); 
+        }
+
+        .signature-img-2 {
+            width: 120px; 
+            height: auto;
+            position: absolute; 
+            bottom: 5px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 11; 
+            mix-blend-mode: multiply; 
+        }
+        
+        .sign-name { 
+            font-size: 14.5px; 
+            font-weight: 800; 
+            color: var(--text-dark); 
+            position: relative; 
+            z-index: 1; 
+            margin-bottom: 2px; 
+        } 
+        .sign-title { 
+            color: var(--text-light); 
+            font-size: 12px; 
+            position: relative; 
+            z-index: 1;
+            font-weight: 500; 
+        } 
+
+        .sign-line {
+            border-top: 1px solid var(--border-color);
+            margin-bottom: 8px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .control-panel { 
+            background: rgba(255, 255, 255, 0.85); 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+            width: 340px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+            position: sticky;
+            top: 40px; 
+            flex-shrink: 0;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+        .control-panel h2 { 
+            margin-top: 0; 
+            font-size: 22px; 
+            margin-bottom: 10px; 
+            color: var(--text-dark); 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .control-panel h2 i { color: var(--primary-color); }
+        .control-group { display: flex; flex-direction: column; position: relative;}
+        .control-group label { 
+            font-weight: 600; 
+            margin-bottom: 8px; 
+            font-size: 14px; 
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .control-group label i { color: var(--primary-color); opacity: 0.8; font-size: 12px; }
+        .control-group input, .control-group textarea { 
+            padding: 14px 14px 14px 40px; 
+            border: 2px solid var(--border-color); 
+            border-radius: 8px; 
+            font-family: 'Sarabun', sans-serif; 
+            font-size: 15px; 
+            transition: all 0.3s ease; 
+            background: #ffffff;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .control-group textarea { 
+            padding-left: 14px; 
+            resize: vertical; 
+            min-height: 60px; 
+        }
+        .control-group i.input-icon {
+            position: absolute;
+            left: 14px;
+            top: 40px;
+            color: #adb5bd;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .control-group input:focus, .control-group textarea:focus { 
+            border-color: var(--primary-color); 
+            outline: none; 
+            box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1); 
+        }
+        .control-group input:focus + i.input-icon { color: var(--primary-color); }
+        
+        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .print-btn { 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-family: 'Sarabun', sans-serif; 
+            font-weight: 700; 
+            font-size: 15px; 
+            flex: 1;
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .print-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .print-btn:active { transform: translateY(1px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        @media print {
+            @page { size: A4; margin: 0; } 
+            body { background: white; padding: 0; display: block; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .control-panel { display: none; }
+            .document { 
+                box-shadow: none; 
+                border: none; 
+                margin: 0 auto; 
+                width: 210mm; 
+                height: 297mm; 
+                page-break-after: avoid; 
+                page-break-inside: avoid;
+                border-radius: 0;
+            }
+            .bg-decor { display: none; }
+        }
+        
+        @media (max-width: 1024px) {
+            body { flex-direction: column; align-items: center; padding: 20px; }
+            .control-panel { width: 100%; max-width: 210mm; position: static; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="document">
+        <div class="bg-decor"></div>
+        
+        <div class="header-note">
+            <div class="header-title-area">
+                <div class="header-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <div class="header-title">
+                    <h1>เอกสารแจ้งเตือนระบบ (System Notice)</h1>
+                    <p>ฝ่ายปฏิบัติการและควบคุมฐานข้อมูลอิเล็กทรอนิกส์</p>
+                </div>
+            </div>
+            <div class="header-meta">
+                <div class="meta-row">
+                    <span class="meta-label">Ref No:</span>
+                    <span class="meta-value">CC/NOTI/2026/084</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">Date:</span>
+                    <span class="meta-value" id="current-date-display">1 พฤษภาคม 2569</span>
+                </div>
+                <div class="meta-row">
+                    <span class="meta-label">Status:</span>
+                    <span class="meta-value"><span class="status-badge">Action Required</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert-box">
+            <strong><i class="fas fa-exclamation-triangle"></i> หมายเหตุสำคัญ:</strong> ขณะนี้ยอดวงเงินทั้งหมดของสมาชิกได้ <span style="font-weight:700;">ถูกระงับไว้ในแพลตฟอร์มชั่วคราว</span> ซึ่งทางระบบไม่สามารถทำการอ่านค่าและทำการสั่งจ่ายจากหมายเหตุเดิมของร้านค้าได้ จึงเรียนแจ้งให้สมาชิกทำการแก้ไขหมายเหตุ เพื่อดำเนินการสั่งจ่ายยอดเงินทั้งหมดของตน
+        </div>
+
+        <div class="content-text">
+            <p><strong>เรียน สมาชิกผู้ใช้งานระบบ,</strong></p>
+            <p>ทางระบบตรวจสอบพบว่า สมาชิกได้มีการระบุหมายเหตุในการเบิกถอนเงินไม่ถูกต้อง โดยระบบตรวจพบข้อความที่ระบุมาเป็น: <span class="highlight-text" id="doc-wrong-note">ไม่ได้ระบุหมายเหตุ</span></p>
+            <p>เพื่อให้ระบบสามารถอ่านค่าคำสั่งและประมวลผลข้อมูลการสั่งจ่ายยอดเงินทั้งหมดได้อย่างถูกต้อง <strong>ระบบมีความจำเป็นต้องให้ท่านดำเนินการระบุหมายเหตุใหม่ที่ถูกต้องเป็น:</strong> <span class="highlight-text-blue" id="doc-correct-note">Nanunn / imjeeshop</span></p>
+            <p>ทางระบบจึงขอเรียนแจ้งให้สมาชิกดำเนินการแก้ไขหมายเหตุและข้อมูลร้านค้าของท่านให้ถูกต้อง เพื่อให้ระบบสามารถทำการสั่งจ่ายยอดวงเงินในครั้งนี้ได้สำเร็จ หากสมาชิกไม่ดำเนินการแก้ไขหมายเหตุตามที่ระบุข้างต้น จะส่งผลให้ระบบไม่สามารถทำการสั่งจ่ายยอดวงเงินได้ เนื่องจากระบบอัตโนมัติมีความจำเป็นต้องอ่านค่าคำสั่งจากหมายเหตุที่ถูกต้องเท่านั้น ทั้งนี้ การดำเนินการแก้ไขนี้เป็นขั้นตอนสำคัญเพื่อให้ระบบสามารถยืนยันคำสั่งและทำการสั่งจ่ายยอดเงินทั้งหมดได้อย่างสมบูรณ์</p>
+        </div>
+
+        <div class="details-container">
+            <div class="details-header">
+                <i class="fas fa-file-invoice-dollar"></i> รายละเอียดบัญชีและยอดดำเนินการ
+            </div>
+            <div class="details-row">
+                <span class="row-label">บัญชีผู้ใช้งานระบบ</span>
+                <span class="row-value" id="doc-shop-name">Nanunn / imjeeshop</span>
+            </div>
+            <div class="details-row">
+                <span class="row-label">ผู้ยื่นรับผิดชอบ</span>
+                <span class="row-value" id="doc-resp-name">กัญญธนัฏฐ์ ศรีวัฒนกุล</span>
+            </div>
+            <div class="details-row">
+                <span class="row-label">ยอดข้อมูล/ยอดเงินทั้งหมดในระบบ</span>
+                <span class="row-value"><span id="doc-amount1">79,236.00</span><span class="currency-unit">THB</span></span>
+            </div>
+            <div class="details-row total-row">
+                <span class="row-label">ต้องทำการฝากแก้ไขคำสั่งและซ่อมแซมร้านค้า (<span id="doc-percent-val">100</span>%)</span>
+                <span class="row-value"><span id="doc-amount2">79,236.00</span> <span class="currency-unit" style="font-size: 1em; font-weight: 800;">THB</span></span>
+            </div>
+        </div>
+
+        <div class="bottom-section">
+            <div class="system-note">
+                <i class="fas fa-info-circle"></i>
+                <div class="system-note-content">
+                    <h4>หมายเหตุระบบ:</h4>
+                    <p>เอกสารฉบับนี้ถูกสร้างขึ้นโดยระบบอัตโนมัติ โปรดดำเนินการแก้ไขตามขั้นตอนที่ระบุข้างต้น เพื่อให้ระบบประมวลผลให้เสร็จสิ้นสมบูรณ์</p>
+                </div>
+            </div>
+
+            <div class="signature-area">
+                <div class="sign-box">
+                    <img src="Signature.png" alt="Signature" class="signature-img" onerror="this.style.display='none'">
+                    <img src="ลายเซ็น.png" alt="ลายเซ็น" class="signature-img-2" onerror="this.style.display='none'">
+                    <div class="sign-line"></div>
+                    <div class="sign-name" id="doc-sign-name">(นายวิทวุฒิ ภัยชำนาญ)</div>
+                    <div class="sign-title">ผู้อำนวยการฝ่ายตรวจสอบระบบดิจิทัล</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <h2><i class="fas fa-sliders-h"></i> ตั้งค่าเอกสาร Note</h2>
+        
+        <div class="control-group">
+            <label><i class="fas fa-store"></i> ชื่อร้านค้า / บัญชี</label>
+            <input type="text" id="ctrl-shop" value='Nanunn / imjeeshop'>
+            <i class="fas fa-edit input-icon"></i>
+        </div>
+        
+        <div class="control-group">
+            <label><i class="fas fa-user-circle"></i> ผู้ยื่นรับผิดชอบ</label>
+            <input type="text" id="ctrl-resp" value="กัญญธนัฏฐ์ ศรีวัฒนกุล">
+            <i class="fas fa-user input-icon"></i>
+        </div>
+
+        <div class="control-group">
+            <label><i class="fas fa-comment-slash"></i> ข้อความหมายเหตุเดิม (ที่ผิด)</label>
+            <input type="text" id="ctrl-wrong-note" value="ไม่ได้ระบุหมายเหตุ">
+            <i class="fas fa-times-circle input-icon"></i>
+        </div>
+
+        <div class="control-group">
+            <label><i class="fas fa-money-bill-wave"></i> ยอดเงินในระบบ (THB)</label>
+            <input type="number" id="ctrl-amount" value="79236">
+            <i class="fas fa-coins input-icon"></i>
+        </div>
+
+        <div class="control-group">
+            <label><i class="fas fa-percentage"></i> เปอร์เซ็นต์ที่ต้องฝากแก้ไข (%)</label>
+            <input type="number" id="ctrl-percent" value="100">
+            <i class="fas fa-percent input-icon"></i>
+        </div>
+
+        <div class="control-group">
+            <label><i class="fas fa-signature"></i> ชื่อผู้ลงนาม</label>
+            <input type="text" id="ctrl-sign-name" value="(นายวิทวุฒิ ภัยชำนาญ)">
+            <i class="fas fa-pen input-icon"></i>
+        </div>
+        
+        <div class="btn-group">
+            <button class="print-btn" onclick="saveAsImage()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                <i class="fas fa-image"></i> บันทึกรูปภาพ
+            </button>
+            <button class="print-btn" onclick="copyToClipboard()" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                <i class="fas fa-copy"></i> คัดลอกรูปภาพ
+            </button>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #e63946; margin-top: 5px;">
+            <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.5;">
+                <i class="fas fa-info-circle" style="color: #e63946;"></i> <strong>ธีมสีแดง (Index Theme)</strong><br>
+                ปรับแต่งให้เข้าชุดกับ index.html สามารถแก้ ชื่อ, ยอด, เปอร์เซ็นต์ และหมายเหตุได้
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function formatCurrency(num) {
+            return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setCurrentDate() {
+            const today = new Date();
+            const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+            const day = today.getDate();
+            const month = thaiMonths[today.getMonth()];
+            const year = today.getFullYear() + 543;
+            document.getElementById('current-date-display').innerText = `${day} ${month} ${year}`;
+        }
+
+        function updateDocument() {
+            const shopName = document.getElementById('ctrl-shop').value;
+            document.getElementById('doc-shop-name').innerText = shopName;
+            document.getElementById('doc-correct-note').innerText = shopName; 
+            
+            document.getElementById('doc-resp-name').innerText = document.getElementById('ctrl-resp').value;
+            document.getElementById('doc-wrong-note').innerText = document.getElementById('ctrl-wrong-note').value;
+            document.getElementById('doc-sign-name').innerText = document.getElementById('ctrl-sign-name').value;
+
+            const amount = parseFloat(document.getElementById('ctrl-amount').value) || 0;
+            const percent = parseFloat(document.getElementById('ctrl-percent').value) || 100;
+            
+            const formattedAmount = formatCurrency(amount);
+            const calculatedAmount = formatCurrency(amount * (percent / 100));
+
+            document.getElementById('doc-amount1').innerText = formattedAmount;
+            document.getElementById('doc-percent-val').innerText = percent;
+            document.getElementById('doc-amount2').innerText = calculatedAmount;
+        }
+
+        async function saveAsImage() {
+            if (window.getSelection) { window.getSelection().removeAllRanges(); }
+            const docElement = document.querySelector('.document');
+            try {
+                const canvas = await html2canvas(docElement, { scale: 2, useCORS: true });
+                const link = document.createElement('a');
+                link.download = 'note_document.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (err) {
+                alert('เกิดข้อผิดพลาดในการบันทึกรูปภาพ: ' + err);
+            }
+        }
+
+        async function copyToClipboard() {
+            if (window.getSelection) { window.getSelection().removeAllRanges(); }
+            const docElement = document.querySelector('.document');
+            try {
+                const canvas = await html2canvas(docElement, { scale: 2, useCORS: true });
+                canvas.toBlob(async function(blob) {
+                    try {
+                        const item = new ClipboardItem({ "image/png": blob });
+                        await navigator.clipboard.write([item]);
+                        alert('คัดลอกรูปภาพสำเร็จ!');
+                    } catch (err) {
+                        alert('ไม่สามารถคัดลอกรูปภาพได้: เบราว์เซอร์ของคุณอาจไม่รองรับ หรือต้องใช้งานผ่านการเชื่อมต่อแบบ HTTPS');
+                    }
+                });
+            } catch (err) {
+                alert('เกิดข้อผิดพลาดในการคัดลอกรูปภาพ: ' + err);
+            }
+        }
+
+        const inputs = ['ctrl-shop', 'ctrl-resp', 'ctrl-wrong-note', 'ctrl-amount', 'ctrl-percent', 'ctrl-sign-name'];
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', updateDocument);
+        });
+        
+        setCurrentDate();
+        updateDocument();
+    </script>
+</body>
+</html>

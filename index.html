@@ -2,642 +2,298 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>ใบแจ้งสถานะและแผนงานแก้ไข</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIRSTSIGHTKIDS - ระบบจัดการเอกสาร</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- เพิ่ม html2canvas สำหรับแปลง HTML เป็นรูปภาพ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        /* =========================================
-           Modern, Clean & Colorful Redesign (A4 Fit & Bug Fixed)
-           ========================================= */
         :root {
             --primary-color: #e63946;
-            --secondary-color: #a81c2a;
             --primary-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            --bg-page: #f0f2f5;
-            --bg-doc: #ffffff;
             --text-dark: #1d3557;
             --text-main: #4a4a4a;
             --text-light: #6c757d;
-            --accent-yellow: #ffb703;
-            --light-red: #fff0f3;
-            --border-color: #e9ecef;
+            --bg-card: #ffffff;
         }
 
-        body { 
+        body {
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            font-family: 'Sarabun', sans-serif; 
-            margin: 0; 
-            padding: 40px; 
-            display: flex; 
-            flex-direction: row; 
-            justify-content: center; 
-            align-items: flex-start; 
-            gap: 40px; 
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-        }
-        
-        /* A4 Document */
-        .document { 
-            background: var(--bg-doc); 
-            width: 210mm; 
-            height: 297mm; /* A4 size */
-            padding: 12mm 20mm; /* ปรับ Padding ให้เหมือนต้นฉบับเพื่อไม่ให้ล้น */
-            box-sizing: border-box; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 15px rgba(255, 65, 108, 0.05);
-            position: relative; 
-            color: var(--text-main); 
-            flex-shrink: 0;
-            border-radius: 4px; /* ปรับขอบโค้งให้เหลือน้อยลงเหมือนเดิม */
-            overflow: hidden;
-            display: block; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Top Border Line */
-        .document::before {
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- Header Section --- */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(230, 57, 70, 0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .platform-name {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .platform-sub {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-divider {
+            width: 60px;
+            height: 4px;
+            background: var(--primary-gradient);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Grid & Cards --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 10px;
+        }
+
+        .menu-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        .menu-card:nth-child(1) { animation-delay: 0.1s; }
+        .menu-card:nth-child(2) { animation-delay: 0.2s; }
+        .menu-card:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Top Line Accent */
+        .menu-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 15px; /* ปรับความหนาให้เหมือนเดิม */
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
             background: var(--primary-gradient);
-            z-index: 10;
+            transition: height 0.3s ease;
         }
 
-        /* Watermark */
-        .document::after {
-            content: "FIRSTSIGHTKIDS";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 85px; /* ปรับขนาดให้เหมือนเดิม */
-            font-weight: 800; /* ปรับน้ำหนักให้เหมือนเดิม */
-            color: rgba(230, 57, 70, 0.03); 
-            z-index: 0;
-            white-space: nowrap;
-            pointer-events: none;
-            letter-spacing: 5px; /* ปรับระยะห่างให้เหมือนเดิม */
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(230, 57, 70, 0.12);
         }
 
-        /* Floating Decor element */
-        .bg-decor {
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: var(--primary-gradient);
-            opacity: 0.04;
+        .menu-card:hover::before {
+            height: 12px;
+        }
+
+        /* Icon Container */
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: #fff0f3;
             border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Control Panel */
-        .control-panel { 
-            background: rgba(255, 255, 255, 0.85); 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
-            width: 340px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-            position: sticky;
-            top: 40px; 
-            flex-shrink: 0;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.6);
-        }
-        .control-panel h2 { 
-            margin-top: 0; 
-            font-size: 22px; 
-            margin-bottom: 10px; 
-            color: var(--text-dark); 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--border-color);
-        }
-        .control-panel h2 i { color: var(--primary-color); }
-        .control-group { display: flex; flex-direction: column; position: relative;}
-        .control-group label { 
-            font-weight: 600; 
-            margin-bottom: 8px; 
-            font-size: 14px; 
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .control-group label i { color: var(--primary-color); opacity: 0.8; font-size: 12px; }
-        .control-group input { 
-            padding: 14px 14px 14px 40px; 
-            border: 2px solid var(--border-color); 
-            border-radius: 8px; 
-            font-family: 'Sarabun', sans-serif; 
-            font-size: 15px; 
-            transition: all 0.3s ease; 
-            background: #ffffff;
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-        .control-group i.input-icon {
-            position: absolute;
-            left: 14px;
-            top: 40px;
-            color: #adb5bd;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-        .control-group input:focus { 
-            border-color: var(--primary-color); 
-            outline: none; 
-            box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1); 
-        }
-        .control-group input:focus + i.input-icon { color: var(--primary-color); }
-        
-        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .print-btn { 
-            color: white; 
-            border: none; 
-            padding: 12px 20px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-family: 'Sarabun', sans-serif; 
-            font-weight: 700; 
-            font-size: 15px; 
-            flex: 1;
-            transition: all 0.3s ease; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
             display: flex;
             justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .card-icon i {
+            font-size: 32px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        .menu-card:hover .card-icon {
+            background: var(--primary-gradient);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.2);
+        }
+
+        .menu-card:hover .card-icon i {
+            background: #ffffff;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Text Content */
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0 0 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        .card-desc {
+            font-size: 14.5px;
+            color: var(--text-light);
+            margin: 0 0 25px 0;
+            line-height: 1.5;
+        }
+
+        /* Action Button */
+        .card-btn {
+            background: #f8f9fa;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 24px;
+            border-radius: 50px;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-        .print-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .print-btn:active { transform: translateY(1px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        
-        /* Document Styles */
-        .header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start; /* ปรับกลับเป็น flex-start */
-            margin-bottom: 12px; /* ปรับ margin ลดลง */
-            border-bottom: 2px dashed var(--border-color); 
-            padding-bottom: 10px; /* ปรับ padding ลดลง */
-            position: relative; 
-            z-index: 1;
-            margin-top: 0px; /* ปรับ margin ลดลง */
-        }
-        
-        .logo-area { display: flex; align-items: center; gap: 12px; } /* ปรับ gap ลดลง */
-        .logo-img { width: 45px; height: 45px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); } /* ปรับขนาดโลโก้กลับ */
-        
-        .logo-text-wrapper { display: flex; flex-direction: column; }
-        .logo-text { 
-            color: var(--primary-color); /* ใช้สีแดงทึบแทนการทำ gradient fill เพราะ html2canvas จะเห็นเป็นกล่องไฮไลท์ */
-            font-weight: 800; font-size: 22px; line-height: 1; margin-bottom: 3px; letter-spacing: 0.5px; /* ปรับขนาดอักษรกลับ */
-        } 
-        .sub-logo { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--text-light); } /* ปรับขนาดอักษรกลับ */
-        
-        .doc-title { text-align: right; }
-        .doc-title h1 { margin: 0; font-size: 17px; font-weight: 800; color: var(--text-dark); text-transform: uppercase;} /* ปรับขนาดอักษรกลับ */
-        .doc-title p { margin: 4px 0 0; font-size: 12px; color: var(--text-light); font-weight: 600; letter-spacing: 0.5px;} /* เอาพื้นหลังไฮไลท์ออก */
-        
-        /* Recipient Box */
-        .recipient-box { 
-            background: #f8f9fa;
+            transition: all 0.3s ease;
             border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-color); /* ปรับขนาดเส้นขอบกลับ */
-            border-radius: 6px; /* ปรับความโค้งกลับ */
-            padding: 8px 15px; /* ปรับ padding ลดลง */
-            margin-bottom: 12px; /* ปรับ margin ลดลง */
-            position: relative; 
-            z-index: 1;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .recipient-box .small-text { font-size: 12px; color: var(--text-light); margin-bottom: 4px; font-weight: 600; display: flex; align-items: center; gap: 6px;} /* ปรับขนาดอักษรและ margin กลับ */
-        .recipient-box .small-text i { color: var(--primary-color); }
-        .recipient-box .name { font-size: 17px; font-weight: 800; color: var(--text-dark); letter-spacing: 0.2px;} /* ปรับขนาดอักษรกลับ */
-        
-        /* Sections */
-        .section { margin-bottom: 12px; position: relative; z-index: 1; } /* ปรับ margin ลดลง */
-        .section-title { 
-            font-size: 14px; /* ปรับขนาดอักษรกลับ */
-            font-weight: 800; 
-            color: var(--text-dark); 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; /* ปรับ gap ลดลง */
-            margin-bottom: 6px; /* ปรับ margin ลดลง */
-        }
-        .section-title span.icon-wrapper { 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 22px; /* ปรับขนาดกลับ */
-            height: 22px; /* ปรับขนาดกลับ */
-            background: var(--primary-gradient);
-            border-radius: 6px;
-            color: white;
-            font-size: 11px; /* ปรับขนาดอักษรกลับ */
-            box-shadow: 0 2px 5px rgba(255, 65, 108, 0.2);
-        }
-        p { font-size: 13.5px; line-height: 1.45; margin: 0 0 6px; color: var(--text-main); text-align: justify;} /* ปรับขนาดอักษร, line-height, margin กลับ */
-        
-        .highlight-box { 
-            background: #fff9e6; 
-            border: 1px solid #ffe082;
-            border-left: 3px solid var(--accent-yellow); /* ปรับขนาดเส้นขอบกลับ */
-            padding: 8px 12px; /* ปรับ padding ลดลง */
-            border-radius: 4px; /* ปรับความโค้งกลับ */
-            margin: 6px 0; /* ปรับ margin ลดลง */
-            color: var(--text-dark); 
-            font-size: 13px; /* ปรับขนาดอักษรกลับ */
-            line-height: 1.5; /* ปรับ line-height กลับ */
-        }
-        .highlight-box i { color: #f57f17; font-size: 14px; } /* ปรับขนาดอักษรกลับ */
-        .text-red { color: var(--primary-color); font-weight: 800; }
-        .text-dark { font-weight: 800; color: var(--text-dark); }
-        
-        /* Lists */
-        .custom-list { 
-            border: 1px solid var(--border-color); 
-            background: #ffffff; 
-            border-radius: 6px; /* ปรับความโค้งกลับ */
-            padding: 8px 12px 8px 30px; /* ปรับ padding ลดลง */
-            list-style: none; 
-            margin: 0; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        } 
-        .custom-list li { position: relative; margin-bottom: 4px; font-size: 13px; line-height: 1.45; color: var(--text-main); } /* ปรับขนาดอักษร, line-height, margin กลับ */
-        .custom-list li::before { 
-            content: "\f0da"; 
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            color: var(--primary-color); 
-            font-size: 11px; /* ปรับขนาดอักษรกลับ */
-            position: absolute; 
-            left: -15px; /* ปรับระยะห่างกลับ */
-            top: 2px; 
-        }
-        .custom-list li:last-child { margin-bottom: 0; }
-        
-        /* Summary Box */
-        .summary-box {
-            background: transparent; 
-            border: none; 
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-        .summary-box li {
-            padding: 6px 0 6px 25px; /* ปรับ padding ลดลง */
-            background: transparent; /* กลับไปใช้พื้นใส */
-            border-radius: 0; /* เอาความโค้งออก */
-            margin-bottom: 4px; /* ปรับ margin ลดลง */
-            border: none;
-            border-bottom: 1px dashed var(--border-color); /* ใช้ขอบเส้นประแบบเดิม */
-            font-size: 13px; /* ปรับขนาดอักษรกลับ */
-            position: relative;
-            line-height: 1.45; /* ปรับ line-height กลับ */
-            transition: all 0.2s ease;
-        }
-        .summary-box li:hover {
-            background: #f8f9fa; /* ลดความเด่นตอน hover ลง */
-            border-color: #cbd5e1;
-            box-shadow: none; /* เอา shadow ออก */
-        }
-        .summary-box li:last-child { border-bottom: none; margin-bottom: 0;}
-        .summary-box li::before {
-            content: "\f00c"; /* เปลี่ยนกลับเป็นเครื่องหมายติ๊กถูกแบบเดิม */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            color: #27ae60;
-            position: absolute;
-            left: 0; /* ปรับระยะห่างกลับ */
-            top: 6px; /* ปรับระยะห่างกลับ */
-            font-size: 14px; /* ปรับขนาดอักษรกลับ */
         }
 
-        /* Footer Banner */
-        .footer-banner { 
-            background: var(--primary-gradient);
-            text-align: center; 
-            padding: 10px; /* ปรับ padding ลดลง */
-            border-radius: 6px; /* ปรับความโค้งกลับ */
-            margin-top: 15px; /* ปรับ margin ลดลง */
-            position: relative; 
-            z-index: 1;
-            box-shadow: 0 4px 10px rgba(255, 65, 108, 0.25);
-            overflow: hidden;
+        .card-btn i {
+            font-size: 12px;
+            transition: transform 0.3s ease;
         }
-        .footer-banner::before {
-            content: '\f132';
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            right: -10px; /* ปรับระยะห่างกลับ */
-            top: -20px; /* ปรับระยะห่างกลับ */
-            font-size: 60px; /* ปรับขนาดอักษรกลับ */
-            color: rgba(255,255,255,0.15);
-            transform: rotate(-15deg);
+
+        .menu-card:hover .card-btn {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
         }
-        .footer-banner h3 { color: #ffffff; text-align: center; margin: 0 0 3px; font-size: 13.5px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);} /* ปรับขนาดอักษร, margin กลับ */
-        .footer-banner p { color: #ffffff; text-align: center; margin: 0; font-size: 11px; font-weight: 500; } /* ปรับสีเป็นสีขาวและให้อยู่ตรงกลางตามที่ต้องการ */
-        
-        /* Signatures Area */
-        .signature-area { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            margin-top: 70px; /* ปรับให้พอดีตามแบบเดิม (70px) */
-            position: relative; 
-            z-index: 1; 
-            padding: 0 10px; /* ปรับ padding กลับ */
-        } 
-        .date-area { 
-            font-size: 13.5px; /* ปรับขนาดอักษรกลับ */
-            line-height: 1.5; /* ปรับ line-height กลับ */
-            color: var(--text-light); 
-            background: transparent; /* เอาพื้นหลังออกเหมือนเดิม */
-            padding: 0; /* เอา padding ออก */
-            border-radius: 0;
-            border: none;
-            margin-bottom: 0px;
-        } 
-        
-        .sign-box { 
-            text-align: center; 
-            position: relative; 
-            width: 220px; /* ปรับขนาดกลับ */
-            padding-top: 40px; /* ปรับ padding-top กลับ */
-            padding-right: 10px; /* เพิ่ม padding-right ตามต้นฉบับ */
-        } 
-        
-        .signature-img {
-            width: 145px; /* ปรับขนาดรูปกลับ */
-            height: auto;
-            position: absolute; 
-            bottom: -10px; /* ปรับตำแหน่งกลับ */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10; 
-            mix-blend-mode: multiply; 
-            filter: contrast(1.1) drop-shadow(0 2px 2px rgba(0,0,0,0.05)); /* ปรับเงาให้ใกล้เคียงเดิม */
+
+        .menu-card:hover .card-btn i {
+            transform: translateX(4px);
         }
-        
-        .sign-name { 
-            font-size: 14.5px; /* ปรับขนาดอักษรกลับ */
-            font-weight: 800; 
-            color: var(--text-dark); 
-            position: relative; 
-            z-index: 1; 
-            margin-bottom: 2px; /* ปรับ margin กลับ */
-        } 
-        .sign-title { 
-            color: var(--text-light); 
-            font-size: 12px; /* ปรับขนาดอักษรกลับ */
-            margin-top: 0px; 
-            position: relative; 
-            z-index: 1;
-            font-weight: 500; /* ปรับน้ำหนักอักษรกลับ */
-        } 
-        
-        /* Print Configuration */
-        @media print {
-            @page { size: A4; margin: 0; } 
-            body { background: white; padding: 0; display: block; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .control-panel { display: none; }
-            .document { 
-                box-shadow: none; 
-                border: none; 
-                margin: 0 auto; 
-                width: 210mm; 
-                height: 297mm; 
-                page-break-after: avoid; 
-                page-break-inside: avoid;
-                border-radius: 0; /* นำ border-radius ออกเวลาพิมพ์ */
-            }
-            /* ยกเลิก background decor เวลาพิมพ์ */
-            .bg-decor { display: none; }
+
+        /* --- Footer --- */
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 13px;
+            font-weight: 500;
         }
-        
-        /* Responsive */
-        @media (max-width: 1024px) {
-            body { flex-direction: column; align-items: center; padding: 20px; }
-            .control-panel { width: 100%; max-width: 210mm; position: static; box-sizing: border-box; }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .platform-name { font-size: 28px; }
+            .menu-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ตัวเอกสาร A4 (อยู่ซ้าย) -->
-    <div class="document">
-        <div class="bg-decor"></div>
+    <div class="container">
+        <!-- Header -->
         <div class="header">
-            <div class="logo-area">
-                <!-- ใส่โลโก้ Logo.png -->
-                <img src="Logo.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'"> 
-                <div class="logo-text-wrapper">
-                    <div class="logo-text">FIRSTSIGHTKIDS</div>
-                    <div class="sub-logo">STANDARD DIGITAL COMPLIANCE</div>
+            <!-- ดึงรูปโลโก้ของคุณมาแสดง -->
+            <img src="Logo.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
+            <h1 class="platform-name">FIRSTSIGHTKIDS</h1>
+            <div class="platform-sub">Standard Digital Compliance</div>
+            <div class="header-divider"></div>
+        </div>
+
+        <!-- Menu Cards -->
+        <div class="menu-grid">
+            
+            <!-- Card 1: ซ่อม 3% -->
+            <a href="threerounds.html" class="menu-card">
+                <div class="card-icon">
+                    <i class="fas fa-sync-alt"></i>
                 </div>
-            </div>
-            <div class="doc-title">
-                <h1>ใบแจ้งสถานะและแผนงานแก้ไข</h1>
-                <p>REF NO: CC/ADM/2026/001-A</p>
-            </div>
+                <h2 class="card-title">ซ่อม 3%</h2>
+                <p class="card-desc">ระบบออกเอกสารแจ้งเตือนซ่อมแซมยอดวงเงิน (Three Rounds)</p>
+                <div class="card-btn">
+                    คลิกเพื่อใช้งาน <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Card 2: ซ่อมบันทึกช่วยจำ -->
+            <a href="memo.html" class="menu-card">
+                <div class="card-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <h2 class="card-title">ซ่อมบันทึกช่วยจำ</h2>
+                <p class="card-desc">ระบบออกเอกสารบันทึกข้อความช่วยจำเพื่อยืนยันคำสั่ง</p>
+                <div class="card-btn">
+                    คลิกเพื่อใช้งาน <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Card 3: ซ่อมหมายเหตุ -->
+            <a href="note.html" class="menu-card">
+                <div class="card-icon">
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                <h2 class="card-title">ซ่อมหมายเหตุ</h2>
+                <p class="card-desc">ระบบออกเอกสารแจ้งเตือนข้อผิดพลาดเกี่ยวกับการระบุหมายเหตุ</p>
+                <div class="card-btn">
+                    คลิกเพื่อใช้งาน <i class="fas fa-arrow-right"></i>
+                </div>
+            </a>
+
         </div>
 
-        <div class="recipient-box">
-            <div class="small-text"><i class="fas fa-user-circle"></i> เรียน ร้านค้าสมาชิกผู้รับบริการ</div>
-            <div class="name" id="doc-shop-name">B1 และ B2</div>
-        </div>
-
-        <div class="section">
-            <div class="section-title"><span class="icon-wrapper"><i class="fas fa-search"></i></span> ข้อมูลการตรวจสอบระบบ</div>
-            <p>จากการตรวจสอบแล้วสมาชิกร้านค้า <span class="doc-shop-text text-dark">B1 และ B2</span> ทำรายการแบบทดสอบเสร็จตามที่ระบบได้มอบหมายให้แล้ว แต่ระบบพบว่าสมาชิกไม่ได้หักค่าดำเนินการไว้ให้กับทางแพลตฟอร์มของบริษัทโดยทางบริษัทแจ้งให้สมาชิกเหลือค่าดำเนินการไว้ในแพลตฟอร์ม 3 เปอร์เซ็นต์</p>
-            <div class="highlight-box">
-                <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i> ซึ่งสมาชิกได้ทำรายการผิดพลาดโดยการดำเนินถอนเงินเองทั้งหมดจึงทำให้เกิดการเสียหาย ทำให้สมาชิกไม่ได้รับยอดเงินในส่วนตรงนี้เนื่องจากระบบไม่สามารถสั่งจ่ายให้ได้ สมาชิกทำผิดตามเงื่อนไขข้อควรระวังในแบบทดสอบของบริษัท <strong>ต้องเข้าแก้ไขเพื่อถอนเงินใหม่อีกครั้งทำตามคำแนะนำที่เจ้าหน้าที่แจ้งเท่านั้น</strong> (หากดำเนินการเองเกิดข้อผิดพลาดทางระบบจะปรับ 3-5 เท่า)
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title"><span class="icon-wrapper"><i class="fas fa-tools"></i></span> มาตรการการแก้ไขเพื่อเบิกถอนเงิน</div>
-            <p>จากการที่สมาชิกไม่ได้ทำตามเจ้าหน้าที่อย่างถูกต้องตามที่ระบบกำหนดสมาชิกทำผิดพลาดจึงทำให้ระบบได้รับความเสียหาย ทางระบบจึงให้สมาชิกทำการแก้ไขเพื่อถอนเงินอีกครั้ง โดยการทำรายการแก้ไขเพื่อถอนเงินครั้งใหม่ <span id="doc-base-amt" class="text-red">26,412</span> บาท คูณ <span id="doc-mult-val" class="text-dark">2</span> เท่ากับ <span id="doc-total-amt1" class="text-red">52,824 บาท</span> หลังทำการแก้ไขสำเร็จสามารถถอนทั้งหมด</p>
-        </div>
-
-        <div class="section">
-            <div class="section-title"><span class="icon-wrapper"><i class="fas fa-list-check"></i></span> ขั้นตอนและเงื่อนไขการปฏิบัติ</div>
-            <ul class="custom-list">
-                <li>แผนการแก้ไขระบบร้านค้าของ สมาชิกร้านค้า "<strong class="doc-shop-text text-dark">B1 และ B2</strong>"</li>
-                <li>รหัสแผนการแก้ไขระบบร้านค้าใหม่หนึ่งแผนงานสามครั้ง</li>
-                <li>ต้องเข้าทำรายการแก้ไขให้เสร็จให้แล้วเสร็จภายใน 1 ชั่วโมง</li>
-                <li>ทาง <strong>FIRSTSIGHTKIDS</strong> ได้วางเงินประกันจำนวนเงินทั้งหมดเรียบร้อยแล้ว แผนงานครั้งละเป็นเงิน <strong id="doc-total-amt2" class="text-red">52,824 บาท</strong></li>
-                <li>ฝากแก้ไขระบบรอบสุดท้ายต้องบันทึกช่วยจำตามที่แจ้งเท่านั้น<br>หากไม่ปฏิบัติตามระบบจะพิจารณาค่าปรับคูณสาม<br>รับประกันหากทำการแก้ไขระบบร้านค้าเสร็จสิ้นสามารถถอนทุนพร้อมค่าผลตอบแทนได้ทันทีรับประกันรายได้ที่มั่นคง</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <div class="section-title"><span class="icon-wrapper"><i class="fas fa-wallet"></i></span> สรุปยอดเงินหลังดำเนินการ</div>
-            <ul class="summary-box">
-                <li>สมาชิกต้องทำรายการฝากยอด <strong id="doc-total-amt3" class="text-red">52,824 บาท</strong> เพื่อแก้ไขระบบร้านค้า</li>
-                <li>หากสมาชิกแก้ไขเสร็จสิ้น ยอดเงินที่ทำการถอนผิดพลาด <strong id="doc-base-amt2" class="text-dark">26,412</strong> บาทจะถูกตีกลับเข้าร้านค้าอีกครั้ง</li>
-                <li>สมาชิกฝากยอด <strong id="doc-total-amt4" class="text-red">52,824 บาท</strong> เพื่อแก้ไขระบบครั้งนี้ เมื่อเสร็จสิ้นจะสามารถถอนเงินทั้งหมดได้ทันทีโดยไม่ต้องหักใดๆ ทั้งสิ้น</li>
-            </ul>
-        </div>
-
-        <div class="footer-banner">
-            <h3>บริษัทรับประกันความปลอดภัยของเงินทุนสูงสุด 3,000,000 บาท</h3>
-            <p>เอกสารฉบับนี้ได้รับการรับรองจากฝ่ายตรวจสอบดิจิทัลอย่างเป็นทางการ</p>
-        </div>
-
-        <div class="signature-area">
-            <div class="date-area">
-                <br>ออกเอกสารรับรอง ณ วันที่:<br><strong id="current-date-display" style="color:var(--primary-color); font-size: 14.5px;"></strong>
-            </div>
-            <div class="sign-box">
-                <!-- รูปลายเซ็นและตราประทับ ที่จะลอยทับข้อความด้านล่าง -->
-                <img src="Signature.png" alt="Signature" class="signature-img" onerror="this.style.display='none'">
-                
-                <!-- ข้อความชื่อและตำแหน่ง (แสดงปกติ แต่โดนรูปทับด้วย mix-blend-mode) -->
-                <div class="sign-name">(นายวิทวุฒิ ภัยชำนาญ)</div>
-                <div class="sign-title">ผู้อำนวยการฝ่ายตรวจสอบระบบดิจิทัล</div>
-            </div>
+        <!-- Footer -->
+        <div class="footer">
+            &copy; 2026 FIRSTSIGHTKIDS. All rights reserved.
         </div>
     </div>
 
-    <!-- แผงควบคุม (อยู่ขวา) -->
-    <div class="control-panel">
-        <h2><i class="fas fa-sliders-h"></i> ตั้งค่าเอกสาร</h2>
-        
-        <div class="control-group">
-            <label><i class="fas fa-store"></i> ชื่อร้านค้าสมาชิก</label>
-            <input type="text" id="ctrl-shop" value='Bellbell และ HappyCat'>
-            <i class="fas fa-edit input-icon"></i>
-        </div>
-        
-        <div class="control-group">
-            <label><i class="fas fa-money-bill-wave"></i> ยอดเงินผิดพลาด (บาท)</label>
-            <input type="number" id="ctrl-base" value="25025">
-            <i class="fas fa-coins input-icon"></i>
-        </div>
-        
-        <div class="control-group">
-            <label><i class="fas fa-times"></i> จำนวนคูณ</label>
-            <input type="number" id="ctrl-mult" value="2">
-            <i class="fas fa-calculator input-icon"></i>
-        </div>
-        
-        <div class="btn-group">
-            <button class="print-btn" onclick="saveAsImage()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                <i class="fas fa-image"></i> บันทึกรูปภาพ
-            </button>
-            <button class="print-btn" onclick="copyToClipboard()" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-                <i class="fas fa-copy"></i> คัดลอกรูปภาพ
-            </button>
-        </div>
-        
-        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-top: 5px;">
-            <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.5;">
-                <i class="fas fa-info-circle" style="color: #3b82f6;"></i> <strong>คำแนะนำ:</strong><br>
-                นำไฟล์นี้ไปวางทับไฟล์เดิมได้เลย การออกแบบจะอัปเดตเป็นแบบใหม่และขนาดพอดีกับหน้ากระดาษ A4
-            </p>
-        </div>
-    </div>
-
-    <script>
-        // ปรับแต่งไม่ให้มีทศนิยม
-        function formatCurrency(num) {
-            return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-        }
-
-        // เซ็ตวันที่ให้เป็นวันปัจจุบัน
-        function setCurrentDate() {
-            const today = new Date();
-            const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-            const day = today.getDate();
-            const month = thaiMonths[today.getMonth()];
-            const year = today.getFullYear() + 543;
-            document.getElementById('current-date-display').innerText = `${day} ${month} พ.ศ. ${year}`;
-        }
-
-        function updateDocument() {
-            const shopNameInput = document.getElementById('ctrl-shop').value;
-            const shopName = shopNameInput || '-';
-            const baseAmount = parseFloat(document.getElementById('ctrl-base').value) || 0;
-            const multiplier = parseInt(document.getElementById('ctrl-mult').value) || 1;
-            const totalAmount = baseAmount * multiplier;
-
-            // 1. อัปเดตชื่อร้านค้า
-            document.getElementById('doc-shop-name').innerText = shopName;
-            document.querySelectorAll('.doc-shop-text').forEach(el => el.innerText = shopName);
-
-            // 2. อัปเดตตัวเลขยอดเงินและจำนวนคูณ (ใช้ฟังก์ชันใหม่ที่ไม่มีทศนิยม)
-            document.getElementById('doc-base-amt').innerText = formatCurrency(baseAmount);
-            document.getElementById('doc-base-amt2').innerText = formatCurrency(baseAmount);
-            document.getElementById('doc-mult-val').innerText = multiplier;
-            
-            const totalFormatted = formatCurrency(totalAmount);
-            document.getElementById('doc-total-amt1').innerText = totalFormatted + " บาท";
-            document.getElementById('doc-total-amt2').innerText = totalFormatted + " บาท";
-            document.getElementById('doc-total-amt3').innerText = totalFormatted + " บาท";
-            document.getElementById('doc-total-amt4').innerText = totalFormatted + " บาท";
-        }
-
-        // ฟังก์ชันสำหรับดาวน์โหลดเป็นรูปภาพ
-        async function saveAsImage() {
-            // เคลียร์การคลุมดำข้อความ (Selection) ออกก่อนบันทึกภาพ เพื่อป้องกันไฮไลท์สีฟ้า/แดงติดไปในภาพ
-            if (window.getSelection) { window.getSelection().removeAllRanges(); }
-            
-            const docElement = document.querySelector('.document');
-            try {
-                const canvas = await html2canvas(docElement, { scale: 2, useCORS: true });
-                const link = document.createElement('a');
-                link.download = 'document.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            } catch (err) {
-                alert('เกิดข้อผิดพลาดในการบันทึกรูปภาพ: ' + err);
-            }
-        }
-
-        // ฟังก์ชันสำหรับคัดลอกรูปลงคลิปบอร์ด
-        async function copyToClipboard() {
-            // เคลียร์การคลุมดำข้อความ (Selection) ออกก่อนบันทึกภาพ
-            if (window.getSelection) { window.getSelection().removeAllRanges(); }
-            
-            const docElement = document.querySelector('.document');
-            try {
-                const canvas = await html2canvas(docElement, { scale: 2, useCORS: true });
-                canvas.toBlob(async function(blob) {
-                    try {
-                        const item = new ClipboardItem({ "image/png": blob });
-                        await navigator.clipboard.write([item]);
-                        alert('คัดลอกรูปภาพสำเร็จ!');
-                    } catch (err) {
-                        alert('ไม่สามารถคัดลอกรูปภาพได้: เบราว์เซอร์ของคุณอาจไม่รองรับ หรือต้องใช้งานผ่านการเชื่อมต่อแบบ HTTPS');
-                    }
-                });
-            } catch (err) {
-                alert('เกิดข้อผิดพลาดในการคัดลอกรูปภาพ: ' + err);
-            }
-        }
-
-        // Add input event listeners
-        document.getElementById('ctrl-shop').addEventListener('input', updateDocument);
-        document.getElementById('ctrl-base').addEventListener('input', updateDocument);
-        document.getElementById('ctrl-mult').addEventListener('input', updateDocument);
-        
-        // Initial render
-        setCurrentDate();
-        updateDocument();
-    </script>
 </body>
 </html>

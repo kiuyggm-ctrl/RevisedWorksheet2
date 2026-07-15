@@ -273,13 +273,26 @@
             width: 145px; 
             height: auto;
             position: absolute; 
-            bottom: 20px; 
+            bottom: -15px; 
             left: 50%;
             transform: translateX(-50%);
             z-index: 10; 
             mix-blend-mode: multiply; 
             filter: contrast(1.1) drop-shadow(0 2px 2px rgba(0,0,0,0.05));
         }
+
+        /* --- เพิ่ม CSS สำหรับรูปภาพ ลายเซ็น.png --- */
+        .signature-img-2 {
+            width: 120px;
+            height: auto;
+            position: absolute; 
+            bottom: 5px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 11; 
+            mix-blend-mode: multiply; 
+        }
+        /* ------------------------------------------ */
         
         .sign-name { 
             font-size: 14.5px;
@@ -479,6 +492,10 @@
             </div>
             <div class="sign-box">
                 <img src="Signature.png" alt="Signature" class="signature-img" onerror="this.style.display='none'">
+                
+                <!-- เพิ่มรูป ลายเซ็น.png ไว้ใต้ Signature.png -->
+                <img src="ลายเซ็น.png" alt="ลายเซ็น" class="signature-img-2" onerror="this.style.display='none'">
+                
                 <div class="sign-line"></div>
                 <div class="sign-name" id="doc-sign-name">(นายวิทวุฒิ ภัยชำนาญ)</div>
                 <div class="sign-title">ผู้อำนวยการฝ่ายตรวจสอบระบบดิจิทัล</div>
