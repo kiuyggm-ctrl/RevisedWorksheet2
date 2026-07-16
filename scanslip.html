@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIRSTSIGHTKIDS - Premium Verification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --success-color: #10b981;
+            --primary-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            --text-dark: #1d3557;
+            --text-main: #4a4a4a;
+            --text-light: #6c757d;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 60px;
+            color: var(--text-main);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(230, 57, 70, 0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover { transform: scale(1.05); }
+
+        .platform-name {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .platform-sub {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-divider {
+            width: 60px;
+            height: 4px;
+            background: var(--primary-gradient);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        .selector {
+            background: var(--bg-card);
+            padding: 8px 15px;
+            border-radius: 50px;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            animation: fadeInDown 0.8s ease 0.1s both;
+        }
+
+        .btn-num {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--text-dark);
+            font-family: 'Sarabun', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-num:hover { color: var(--primary-color); }
+        .btn-num.active {
+            background: var(--primary-gradient);
+            color: #FFF;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 35px 25px;
+            width: 320px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            animation: fadeInUp 0.8s ease backwards;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            transition: height 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(230, 57, 70, 0.08);
+        }
+        .card:hover::before { height: 8px; }
+
+        /* ----- อัปเดตช่องกรอกชื่อร้านค้าให้ดู Premium ขึ้น ----- */
+        .input-group {
+            position: relative;
+            margin-bottom: 25px; 
+        }
+        .input-group i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            transition: all 0.3s ease;
+            pointer-events: none; 
+            z-index: 2;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 15px 45px; /* เพิ่มพื้นที่ด้านในให้ดูโปร่ง */
+            border-radius: 50px;
+            border: 2px solid transparent; /* ปรับขอบให้เนียนขึ้น */
+            background: #ffffff; /* พื้นหลังสีขาวสว่าง */
+            color: var(--text-dark);
+            font-family: 'Sarabun', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            box-sizing: border-box;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04), inset 0 2px 4px rgba(0,0,0,0.01); /* เงาลอยๆ */
+        }
+        .input-group input::placeholder {
+            font-weight: 400;
+            color: #a0aec0;
+            transition: opacity 0.3s ease;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: rgba(230, 57, 70, 0.4);
+            background: #FFF;
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.15);
+            transform: translateY(-2px);
+        }
+        .input-group input:focus + i, 
+        .input-group input:focus ~ i {
+            color: var(--primary-color);
+        }
+
+        /* เอฟเฟกต์แจ้งเตือน: สั่นเมื่อลืมกรอกชื่อร้าน */
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px) rotate(-1deg); }
+            50% { transform: translateX(6px) rotate(1deg); }
+            75% { transform: translateX(-6px) rotate(-1deg); }
+        }
+        .input-error {
+            animation: errorShake 0.4s ease-in-out !important;
+            border-color: var(--primary-color) !important;
+            background: #fff0f3 !important;
+            color: var(--primary-color) !important;
+        }
+        .input-error::placeholder {
+            color: rgba(230, 57, 70, 0.6) !important;
+        }
+
+        /* เอฟเฟกต์สีแดงสวยๆ: เมื่อกดตรวจสอบผ่านแล้ว */
+        .input-group input.highlight-red {
+            color: var(--primary-color) !important;
+            font-weight: 800 !important;
+            font-size: 18px !important;
+            letter-spacing: 1.5px; /* ยืดระยะห่างฟอนต์ให้ดูพรีเมียม */
+            background: #ffffff !important;
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 10px 25px rgba(230, 57, 70, 0.2) !important;
+            transform: scale(1.02); /* ขยายขนาดขึ้นนิดนึงให้เด่น */
+        }
+        .input-group input.highlight-red ~ i {
+            color: var(--primary-color) !important;
+        }
+        /* ---------------------------------------------------- */
+
+        .drop-zone {
+            width: 100%;
+            aspect-ratio: 3/4;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            background: #f8f9fa;
+            position: relative;
+            transition: all 0.3s ease;
+            margin-bottom: 5px;
+        }
+        
+        .drop-zone span {
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .drop-zone span i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #cbd5e1;
+        }
+        .drop-zone img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .stamp-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent; 
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            border-radius: 12px; 
+        }
+        
+        .stamp {
+            position: relative;
+            color: var(--primary-color); 
+            font-size: 46px; 
+            font-weight: 800;
+            font-family: 'Sarabun', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 4px 12px rgba(230, 57, 70, 0.4), 0 2px 5px rgba(0,0,0,0.25);
+            transform: scale(1.5) rotate(-15deg);
+            opacity: 0;
+        }
+
+        .stamp.success {
+            color: var(--success-color);
+            text-shadow: 2px 4px 12px rgba(16, 185, 129, 0.4), 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .result-msg {
+            display: none;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 15px;
+            padding: 12px 15px;
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid rgba(230, 57, 70, 0.15);
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.05);
+            border-left: 4px solid var(--primary-color);
+            text-align: left;
+            position: relative;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        
+        .msg-header {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .msg-header i {
+            margin-right: 6px;
+            font-size: 14px;
+            animation: pulseAlert 2s infinite;
+        }
+
+        .msg-body {
+            font-size: 14.5px;
+            color: var(--text-dark);
+            font-weight: 500;
+            padding-left: 20px;
+        }
+
+        .result-msg.success {
+            border-left: 4px solid var(--success-color);
+            border-color: rgba(16, 185, 129, 0.15);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);
+        }
+        .result-msg.success .msg-header {
+            color: var(--success-color);
+        }
+
+        .action-btn {
+            background: #f8f9fa;
+            color: var(--text-dark);
+            font-family: 'Sarabun', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative; 
+            overflow: hidden;
+        }
+
+        .action-btn i { font-size: 14px; transition: transform 0.3s ease; }
+
+        .action-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 15px rgba(230, 57, 70, 0.2);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes stampPop {
+            to { transform: scale(1) rotate(-15deg); opacity: 1; }
+        }
+        @keyframes slideDown {
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulseAlert {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.15); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="Logo.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
+        <h1 class="platform-name">FIRSTSIGHTKIDS</h1>
+        <div class="platform-sub">Premium Verification</div>
+        <div class="header-divider"></div>
+    </div>
+
+    <div class="selector">
+        <button class="btn-num active" onclick="render(1)">1</button>
+        <button class="btn-num" onclick="render(2)">2</button>
+        <button class="btn-num" onclick="render(3)">3</button>
+    </div>
+
+    <div class="cards-container" id="cards-container"></div>
+</div>
+
+<script>
+    let slips = {1:null, 2:null, 3:null};
+    let activeChannel = 1;
+    let currentCount = 1;
+
+    function render(n) {
+        currentCount = n;
+        document.querySelectorAll('.btn-num').forEach((btn, i) => btn.classList.toggle('active', i === n-1));
+        const container = document.getElementById('cards-container');
+        container.innerHTML = '';
+        
+        for(let i=1; i<=n; i++) {
+            let animDelay = i * 0.1;
+            
+            container.innerHTML += `
+                <div class="card" id="card-${i}" style="animation-delay: ${animDelay}s;">
+                    <div class="input-group">
+                        <!-- ใส่ ID เพื่อรับค่า และ oninput เพื่อล้างสไตล์สีแดงออกตอนเริ่มพิมพ์ใหม่ -->
+                        <input type="text" id="shopname-${i}" placeholder="ระบุชื่อร้านค้า" oninput="resetShopName(${i})">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    
+                    <div class="drop-zone" onclick="setActive(${i})" id="dropzone-${i}">
+                        ${slips[i] ? `<img src="${slips[i]}">` : '<span><i class="fas fa-file-image"></i><br>วางรูปภาพสลิปที่นี่</span>'}
+                        
+                        <div class="stamp-overlay" id="stamp-${i}">
+                            <div class="stamp">ไม่ผ่าน</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-msg" id="msg-${i}">
+                    </div>
+
+                    <button class="action-btn" onclick="verify(event, ${i})">
+                        ตรวจสอบสลิป <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            `;
+        }
+        setActive(activeChannel > n ? 1 : activeChannel);
+    }
+
+    // ฟังก์ชันสำหรับล้างค่าสไตล์พิเศษออกเวลาผู้ใช้พิมพ์แก้ข้อความ
+    function resetShopName(i) {
+        const input = document.getElementById(`shopname-${i}`);
+        input.classList.remove('highlight-red', 'input-error');
+    }
+
+    function setActive(i) { 
+        activeChannel = i; 
+        document.querySelectorAll('.drop-zone').forEach((dz, index) => {
+            if(index + 1 === i) {
+                dz.style.borderColor = 'var(--primary-color)';
+                dz.style.background = '#fff0f3'; 
+                dz.style.borderStyle = 'solid';
+            } else {
+                dz.style.borderColor = '#cbd5e1';
+                dz.style.background = '#f8f9fa';
+                dz.style.borderStyle = 'dashed';
+            }
+        });
+    }
+    
+    function verify(event, i) {
+        const shopInput = document.getElementById(`shopname-${i}`);
+        
+        // 1. ตรวจสอบว่ากรอกชื่อร้านค้าหรือยัง
+        if(!shopInput.value.trim()) {
+            shopInput.classList.remove('input-error'); // ลบก่อนเผื่อกดซ้ำ
+            void shopInput.offsetWidth; // บังคับรีเฟรช 
+            shopInput.classList.add('input-error'); // แอนิเมชันสั่น+ขอบแดง
+            shopInput.focus();
+            return;
+        }
+
+        // 2. ตรวจสอบว่าอัปโหลดสลิปหรือยัง
+        if(!slips[i]) { alert('กรุณาวางรูปภาพสลิปก่อนดำเนินการครับ'); return; }
+        
+        // 3. เมื่อผ่านเงื่อนไข ให้เปลี่ยนดีไซน์ช่องชื่อร้านค้าเป็นสีแดงหรูหรา
+        shopInput.classList.add('highlight-red');
+
+        // 4. ระบบคำนวณ ซ้าย-ขวา 
+        const rect = event.currentTarget.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const isSuccess = clickX >= (rect.width / 2);
+
+        const stampOverlay = document.getElementById(`stamp-${i}`);
+        const stampElement = stampOverlay.querySelector('.stamp');
+        const msgElement = document.getElementById(`msg-${i}`);
+
+        stampElement.style.animation = 'none';
+        msgElement.style.animation = 'none';
+        void stampElement.offsetWidth;
+        void msgElement.offsetWidth; 
+
+        if (isSuccess) {
+            stampElement.textContent = 'สำเร็จ';
+            stampElement.className = 'stamp success';
+            msgElement.className = 'result-msg success';
+            msgElement.innerHTML = `
+                <div class="msg-header">
+                    <i class="fas fa-check-circle"></i> AI SMART CONTRACT
+                </div>
+                <div class="msg-body">
+                    ระบบอ่านค่าสลิปเสร็จสิ้น
+                </div>
+            `;
+        } else {
+            stampElement.textContent = 'ไม่ผ่าน';
+            stampElement.className = 'stamp';
+            msgElement.className = 'result-msg';
+            msgElement.innerHTML = `
+                <div class="msg-header">
+                    <i class="fas fa-microchip"></i> AI SMART CONTRACT
+                </div>
+                <div class="msg-body">
+                    ระบบไม่สามารถอ่านค่าสลิปนี้ได้
+                </div>
+            `;
+        }
+        
+        stampOverlay.style.display = 'flex';
+        msgElement.style.display = 'block';
+        stampElement.style.animation = 'stampPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+        msgElement.style.animation = 'slideDown 0.4s ease forwards';
+    }
+
+    window.addEventListener('paste', e => {
+        const item = e.clipboardData.items[0];
+        if (item && item.type.startsWith('image')) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                slips[activeChannel] = e.target.result;
+                render(currentCount);
+            };
+            reader.readAsDataURL(item.getAsFile());
+        }
+    });
+
+    render(1);
+</script>
+
+</body>
+</html>
