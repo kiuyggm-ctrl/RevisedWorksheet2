@@ -3,294 +3,861 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#e63946">
+
     <title>FIRSTSIGHTKIDS - Main Menu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        rel="stylesheet"
+    >
+
     <style>
         :root {
-            --primary-color: #e63946;
-            --primary-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            --text-dark: #1d3557;
-            --text-main: #4a4a4a;
-            --text-light: #6c757d;
-            --bg-card: #ffffff;
+            --primary: #e63946;
+            --primary-dark: #c82032;
+            --primary-soft: #fff0f2;
+
+            --secondary: #ff7648;
+
+            --primary-gradient: linear-gradient(
+                135deg,
+                #e63946 0%,
+                #ff416c 50%,
+                #ff7648 100%
+            );
+
+            --text-dark: #172b4d;
+            --text-main: #49566c;
+            --text-light: #7a8599;
+
+            --white: #ffffff;
+            --border: rgba(230, 57, 70, 0.11);
+
+            --shadow-sm: 0 8px 24px rgba(23, 43, 77, 0.06);
+            --shadow-lg: 0 25px 55px rgba(230, 57, 70, 0.16);
         }
-        body {
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            font-family: 'Sarabun', sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            padding: 40px 20px;
+
+        * {
             box-sizing: border-box;
         }
-        /* --- Header Section --- */
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInDown 0.8s ease;
-        }
-        .logo-img {
-            width: 80px;
-            height: auto;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 4px 8px rgba(230, 57, 70, 0.2));
-            transition: transform 0.3s ease;
-        }
-        .logo-img:hover {
-            transform: scale(1.05);
-        }
-        .platform-name {
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin: 0;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .platform-sub {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-top: 5px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .header-divider {
-            width: 60px;
-            height: 4px;
-            background: var(--primary-gradient);
-            margin: 20px auto 0;
-            border-radius: 2px;
-        }
-        /* --- Grid & Cards --- */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 10px;
-        }
-        .menu-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: fadeInUp 0.8s ease backwards;
-        }
-        .menu-card:nth-child(1) { animation-delay: 0.1s; }
-        .menu-card:nth-child(2) { animation-delay: 0.2s; }
-        .menu-card:nth-child(3) { animation-delay: 0.3s; }
-        .menu-card:nth-child(4) { animation-delay: 0.4s; }
-        .menu-card:nth-child(5) { animation-delay: 0.5s; }
-        .menu-card:nth-child(6) { animation-delay: 0.6s; }
 
-        /* Top Line Accent */
-        .menu-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: var(--primary-gradient);
-            transition: height 0.3s ease;
+        html {
+            scroll-behavior: smooth;
         }
-        .menu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(230, 57, 70, 0.12);
-        }
-        .menu-card:hover::before {
-            height: 12px;
-        }
-        /* Icon Container */
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            background: #fff0f3;
-            border-radius: 50%;
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Sarabun", sans-serif;
+            color: var(--text-main);
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(255, 65, 108, 0.12),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(255, 118, 72, 0.12),
+                    transparent 34%
+                ),
+                linear-gradient(135deg, #fffafa 0%, #f5f7fb 52%, #fff8f8 100%);
+
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
-            transition: all 0.4s ease;
+            overflow-x: hidden;
         }
-        .card-icon i {
-            font-size: 32px;
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(4px);
+            pointer-events: none;
+        }
+
+        body::before {
+            width: 320px;
+            height: 320px;
+            top: -150px;
+            right: -100px;
+            background: rgba(255, 65, 108, 0.08);
+        }
+
+        body::after {
+            width: 280px;
+            height: 280px;
+            bottom: -130px;
+            left: -100px;
+            background: rgba(255, 118, 72, 0.09);
+        }
+
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            padding: 60px 24px 35px;
+        }
+
+        /* =========================
+           Header
+        ========================= */
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.75s ease both;
+        }
+
+        .logo-wrap {
+            position: relative;
+            width: 104px;
+            height: 104px;
+            margin: 0 auto 18px;
+            padding: 11px;
+            border-radius: 30px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+
+            box-shadow:
+                0 18px 45px rgba(230, 57, 70, 0.13),
+                inset 0 0 0 1px rgba(230, 57, 70, 0.05);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .logo-wrap::after {
+            content: "";
+            position: absolute;
+            inset: -5px;
+            z-index: -1;
+            border-radius: 34px;
             background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: all 0.4s ease;
+            opacity: 0.12;
+            filter: blur(7px);
         }
-        .menu-card:hover .card-icon {
-            background: var(--primary-gradient);
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.2);
+
+        .logo-img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.35s ease;
         }
-        .menu-card:hover .card-icon i {
-            background: #ffffff;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .logo-wrap:hover .logo-img {
+            transform: scale(1.06);
         }
-        /* Text Content */
-        .card-title {
-            font-size: 22px;
-            font-weight: 700;
+
+        .platform-name {
+            margin: 0;
             color: var(--text-dark);
-            margin: 0 0 10px 0;
-            transition: color 0.3s ease;
+            font-size: clamp(30px, 4vw, 43px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
         }
-        .card-desc {
-            font-size: 14.5px;
-            color: var(--text-light);
-            margin: 0 0 25px 0;
-            line-height: 1.5;
-        }
-        /* Action Button */
-        .card-btn {
-            background: #f8f9fa;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 14px;
-            padding: 10px 24px;
-            border-radius: 50px;
+
+        .platform-sub {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
+
+            margin-top: 10px;
+            padding: 7px 16px;
+
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(230, 57, 70, 0.1);
+            border-radius: 999px;
+
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+
+            box-shadow: 0 7px 20px rgba(23, 43, 77, 0.04);
         }
+
+        .platform-sub i {
+            font-size: 11px;
+        }
+
+        .header-divider {
+            position: relative;
+            width: 75px;
+            height: 5px;
+            margin: 22px auto 0;
+            overflow: hidden;
+
+            background: var(--primary-gradient);
+            border-radius: 999px;
+            box-shadow: 0 5px 14px rgba(230, 57, 70, 0.25);
+        }
+
+        .header-divider::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 35%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+
+        /* =========================
+           Menu Grid
+        ========================= */
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .menu-card {
+            --card-color: #e63946;
+            --card-color-2: #ff7648;
+
+            position: relative;
+            min-height: 310px;
+            padding: 34px 27px 28px;
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+
+            text-align: center;
+            text-decoration: none;
+
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 26px;
+
+            box-shadow:
+                var(--shadow-sm),
+                inset 0 0 0 1px rgba(23, 43, 77, 0.025);
+
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+
+            transition:
+                transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+
+            animation: fadeInUp 0.7s ease both;
+        }
+
+        .menu-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .menu-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .menu-card:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .menu-card:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        .menu-card:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .menu-card:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .menu-card:nth-child(7) {
+            animation-delay: 0.35s;
+        }
+
+        .menu-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 22px;
+            right: 22px;
+            height: 5px;
+
+            background: linear-gradient(
+                90deg,
+                var(--card-color),
+                var(--card-color-2)
+            );
+
+            border-radius: 0 0 999px 999px;
+            transition:
+                left 0.35s ease,
+                right 0.35s ease,
+                height 0.35s ease;
+        }
+
+        .menu-card::after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            width: 170px;
+            height: 170px;
+            right: -85px;
+            bottom: -100px;
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                var(--card-color),
+                var(--card-color-2)
+            );
+
+            opacity: 0.055;
+            transition:
+                transform 0.45s ease,
+                opacity 0.45s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(230, 57, 70, 0.12);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .menu-card:hover::before {
+            left: 0;
+            right: 0;
+            height: 7px;
+        }
+
+        .menu-card:hover::after {
+            opacity: 0.1;
+            transform: scale(1.35);
+        }
+
+        .card-icon,
+        .card-title,
+        .card-desc,
+        .card-btn {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            width: 82px;
+            height: 82px;
+            flex-shrink: 0;
+            margin-bottom: 23px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: var(--card-color);
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 1),
+                color-mix(in srgb, var(--card-color) 9%, white)
+            );
+
+            border: 1px solid color-mix(
+                in srgb,
+                var(--card-color) 12%,
+                white
+            );
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 12px 25px color-mix(
+                    in srgb,
+                    var(--card-color) 13%,
+                    transparent
+                ),
+                inset 0 0 0 5px rgba(255, 255, 255, 0.55);
+
+            transition:
+                transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                color 0.35s ease,
+                background 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .card-icon i {
+            font-size: 32px;
+            transition: transform 0.35s ease;
+        }
+
+        .menu-card:hover .card-icon {
+            color: #ffffff;
+            background: linear-gradient(
+                135deg,
+                var(--card-color),
+                var(--card-color-2)
+            );
+
+            transform: translateY(-3px) rotate(4deg) scale(1.07);
+
+            box-shadow:
+                0 16px 30px color-mix(
+                    in srgb,
+                    var(--card-color) 28%,
+                    transparent
+                ),
+                inset 0 0 0 5px rgba(255, 255, 255, 0.12);
+        }
+
+        .menu-card:hover .card-icon i {
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            margin: 0 0 9px;
+            color: var(--text-dark);
+            font-size: 21px;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        .card-desc {
+            min-height: 44px;
+            margin: 0 0 24px;
+
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.65;
+        }
+
+        .card-btn {
+            margin-top: auto;
+            padding: 10px 20px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            color: var(--text-dark);
+            background: #f7f8fb;
+            border: 1px solid rgba(23, 43, 77, 0.07);
+            border-radius: 999px;
+
+            font-size: 13.5px;
+            font-weight: 700;
+
+            transition:
+                color 0.3s ease,
+                background 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
         .card-btn i {
-            font-size: 12px;
+            font-size: 11px;
             transition: transform 0.3s ease;
         }
+
         .menu-card:hover .card-btn {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
+            color: #ffffff;
+
+            background: linear-gradient(
+                135deg,
+                var(--card-color),
+                var(--card-color-2)
+            );
+
+            border-color: transparent;
+
+            box-shadow: 0 8px 18px color-mix(
+                in srgb,
+                var(--card-color) 20%,
+                transparent
+            );
         }
+
         .menu-card:hover .card-btn i {
             transform: translateX(4px);
         }
-        /* --- Footer --- */
+
+        .menu-card:focus-visible {
+            outline: 4px solid rgba(230, 57, 70, 0.2);
+            outline-offset: 4px;
+        }
+
+        /* สีประจำแต่ละเมนู */
+
+        .card-percent {
+            --card-color: #e63946;
+            --card-color-2: #ff6b6b;
+        }
+
+        .card-memo {
+            --card-color: #7b61ff;
+            --card-color-2: #a98bff;
+        }
+
+        .card-notice {
+            --card-color: #f59e0b;
+            --card-color-2: #fbc45e;
+        }
+
+        .card-slip {
+            --card-color: #0ea5e9;
+            --card-color-2: #38c5f3;
+        }
+
+        .card-note {
+            --card-color: #10b981;
+            --card-color-2: #4ade80;
+        }
+
+        .card-bank {
+            --card-color: #16a34a;
+            --card-color-2: #65c466;
+        }
+
+        .card-business {
+            --card-color: #e63946;
+            --card-color-2: #ff8a5c;
+        }
+
+        /* จัดการ์ดสุดท้ายให้อยู่กึ่งกลางเมื่อมี 7 เมนู */
+
+        .menu-card:last-child:nth-child(3n + 1) {
+            grid-column: 2;
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
         .footer {
-            margin-top: 60px;
+            margin-top: 52px;
             text-align: center;
             color: var(--text-light);
             font-size: 13px;
             font-weight: 500;
         }
-        /* --- Animations --- */
+
+        .footer strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        /* =========================
+           Animations
+        ========================= */
+
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        /* --- Responsive --- */
-        @media (max-width: 768px) {
-            .platform-name { font-size: 28px; }
-            .menu-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+
+        @keyframes shine {
+            0% {
+                left: -55%;
+            }
+
+            55%,
+            100% {
+                left: 130%;
+            }
+        }
+
+        /* =========================
+           Responsive
+        ========================= */
+
+        @media (max-width: 1000px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .menu-card:last-child:nth-child(3n + 1) {
+                grid-column: auto;
+            }
+
+            .menu-card:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+                width: calc(50% - 12px);
+                justify-self: center;
+            }
+        }
+
+        @media (max-width: 680px) {
+            body {
+                align-items: flex-start;
+            }
+
+            .container {
+                padding: 38px 16px 25px;
+            }
+
+            .header {
+                margin-bottom: 35px;
+            }
+
+            .logo-wrap {
+                width: 88px;
+                height: 88px;
+                border-radius: 25px;
+            }
+
+            .platform-name {
+                font-size: 29px;
+                letter-spacing: 1px;
+            }
+
+            .platform-sub {
+                padding: 6px 12px;
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 17px;
+                max-width: 430px;
+                margin: 0 auto;
+            }
+
+            .menu-card {
+                min-height: auto;
+                padding: 27px 22px 23px;
+                border-radius: 23px;
+            }
+
+            .menu-card:last-child:nth-child(odd) {
+                grid-column: auto;
+                width: 100%;
+            }
+
+            .card-icon {
+                width: 72px;
+                height: 72px;
+                margin-bottom: 18px;
+                border-radius: 22px;
+            }
+
+            .card-icon i {
+                font-size: 28px;
+            }
+
+            .card-title {
+                font-size: 20px;
+            }
+
+            .card-desc {
+                min-height: auto;
+                margin-bottom: 20px;
+            }
+
+            .footer {
+                margin-top: 38px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
+    <main class="container">
+
         <!-- Header -->
-        <div class="header">
-            <img src="Logo.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
+        <header class="header">
+            <div class="logo-wrap">
+                <img
+                    src="Logo.png"
+                    alt="FIRSTSIGHTKIDS Logo"
+                    class="logo-img"
+                    onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png';"
+                >
+            </div>
+
             <h1 class="platform-name">FIRSTSIGHTKIDS</h1>
-            <div class="platform-sub">Standard Digital Compliance</div>
+
+            <div class="platform-sub">
+                <i class="fa-solid fa-shield-halved"></i>
+                Standard Digital Compliance
+            </div>
+
             <div class="header-divider"></div>
-        </div>
+        </header>
 
         <!-- Menu Cards -->
-        <div class="menu-grid">
-            
+        <section class="menu-grid" aria-label="เมนูระบบ">
+
             <!-- Card 1: 3% -->
-            <a href="threerounds.html" class="menu-card">
+            <a href="threerounds.html" class="menu-card card-percent">
                 <div class="card-icon">
-                    <i class="fas fa-sync-alt"></i>
+                    <i class="fa-solid fa-percent"></i>
                 </div>
+
                 <h2 class="card-title">หัก 3%</h2>
-                <p class="card-desc">แบบฟอร์ม 3% (Three Rounds)</p>
-                <div class="card-btn">สร้างเอกสาร <i class="fas fa-arrow-right"></i></div>
+                <p class="card-desc">แบบฟอร์มหัก 3% สำหรับการดำเนินการสามรอบ</p>
+
+                <div class="card-btn">
+                    สร้างเอกสาร
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </a>
 
             <!-- Card 2: Memo -->
-            <a href="memo.html" class="menu-card">
+            <a href="memo.html" class="menu-card card-memo">
                 <div class="card-icon">
-                    <i class="fas fa-clipboard-list"></i>
+                    <i class="fa-solid fa-clipboard-list"></i>
                 </div>
+
                 <h2 class="card-title">บันทึกข้อความ</h2>
-                <p class="card-desc">แบบฟอร์มบันทึกข้อความ (Memo)</p>
-                <div class="card-btn">สร้างเอกสาร <i class="fas fa-arrow-right"></i></div>
+                <p class="card-desc">จัดทำแบบฟอร์มบันทึกข้อความและรายละเอียดต่าง ๆ</p>
+
+                <div class="card-btn">
+                    สร้างเอกสาร
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </a>
 
-            <!-- Card 3: Note -->
-            <a href="note.html" class="menu-card">
+            <!-- Card 3: Notice -->
+            <a href="note.html" class="menu-card card-notice">
                 <div class="card-icon">
-                    <i class="fas fa-comment-dots"></i>
+                    <i class="fa-solid fa-bell"></i>
                 </div>
+
                 <h2 class="card-title">ใบแจ้งเตือน</h2>
-                <p class="card-desc">แบบฟอร์มแจ้งเตือน (System Notice)</p>
-                <div class="card-btn">สร้างเอกสาร <i class="fas fa-arrow-right"></i></div>
+                <p class="card-desc">จัดทำแบบฟอร์มใบแจ้งเตือนจากระบบ</p>
+
+                <div class="card-btn">
+                    สร้างเอกสาร
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </a>
 
             <!-- Card 4: Scan Slip -->
-            <a href="scanslip.html" class="menu-card">
+            <a href="scanslip.html" class="menu-card card-slip">
                 <div class="card-icon">
-                    <i class="fas fa-receipt"></i>
+                    <i class="fa-solid fa-receipt"></i>
                 </div>
-                <h2 class="card-title">แสกนสลิป</h2>
-                <p class="card-desc">ระบบตรวจสอบสลิปโอนเงิน</p>
-                <div class="card-btn">ตรวจสอบ <i class="fas fa-arrow-right"></i></div>
+
+                <h2 class="card-title">สแกนสลิป</h2>
+                <p class="card-desc">ระบบตรวจสอบข้อมูลและรายละเอียดสลิปโอนเงิน</p>
+
+                <div class="card-btn">
+                    ตรวจสอบ
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </a>
 
             <!-- Card 5: Scan Note -->
-            <a href="scannote.html" class="menu-card">
+            <a href="scannote.html" class="menu-card card-note">
                 <div class="card-icon">
-                    <i class="fas fa-file-signature"></i>
+                    <i class="fa-solid fa-file-signature"></i>
                 </div>
-                <h2 class="card-title">แสกนหมายเหตุ</h2>
-                <p class="card-desc">ระบบตรวจสอบหมายเหตุ</p>
-                <div class="card-btn">ตรวจสอบ <i class="fas fa-arrow-right"></i></div>
+
+                <h2 class="card-title">สแกนหมายเหตุ</h2>
+                <p class="card-desc">ระบบตรวจสอบข้อความและข้อมูลในหมายเหตุ</p>
+
+                <div class="card-btn">
+                    ตรวจสอบ
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </a>
 
             <!-- Card 6: KBANK -->
-            <a href="KBANK.html" class="menu-card">
+            <a href="KBANK.html" class="menu-card card-bank">
                 <div class="card-icon">
-                    <i class="fas fa-university"></i>
+                    <i class="fa-solid fa-building-columns"></i>
                 </div>
+
                 <h2 class="card-title">สั่งจ่ายไม่ได้กสิกร</h2>
-                <p class="card-desc">ระบบเอกสารสั่งจ่ายกสิกรไทย</p>
-                <div class="card-btn">สร้างเอกสาร <i class="fas fa-arrow-right"></i></div>
+                <p class="card-desc">จัดทำเอกสารสำหรับรายการสั่งจ่ายธนาคารกสิกรไทย</p>
+
+                <div class="card-btn">
+                    สร้างเอกสาร
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
             </a>
 
-        </div>
+            <!-- Card 7: Scan Business Card -->
+            <a href="scancard.html" class="menu-card card-business">
+                <div class="card-icon">
+                    <i class="fa-solid fa-address-card"></i>
+                </div>
+
+                <h2 class="card-title">สแกนนามบัตร</h2>
+                <p class="card-desc">ระบบตรวจสอบและอ่านข้อมูลจากนามบัตร</p>
+
+                <div class="card-btn">
+                    สแกนนามบัตร
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </a>
+
+        </section>
 
         <!-- Footer -->
-        <div class="footer">
-            &copy; 2026 FIRSTSIGHTKIDS. All rights reserved.
-        </div>
-    </div>
+        <footer class="footer">
+            &copy; 2026 <strong>FIRSTSIGHTKIDS</strong>. All rights reserved.
+        </footer>
+
+    </main>
 </body>
 </html>

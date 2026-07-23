@@ -2,466 +2,1267 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>ใบแจ้งสถานะและแผนงานแก้ไข</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- เพิ่ม html2canvas สำหรับแปลง HTML เป็นรูปภาพ -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        rel="stylesheet"
+    >
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
-        /* =========================================
-           Modern, Clean & Colorful Redesign (A4 Fit & Bug Fixed)
-           ========================================= */
         :root {
-            --primary-color: #e63946;
-            --secondary-color: #a81c2a;
-            --primary-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            --bg-page: #f0f2f5;
-            --bg-doc: #ffffff;
-            --text-dark: #1d3557;
-            --text-main: #4a4a4a;
-            --text-light: #6c757d;
-            --accent-yellow: #ffb703;
-            --light-red: #fff0f3;
-            --border-color: #e9ecef;
+            --primary: #dc2638;
+            --primary-dark: #991b2b;
+            --primary-deep: #701322;
+            --primary-light: #fff1f3;
+            --primary-soft: #ffe4e8;
+
+            --orange: #f59e0b;
+            --orange-light: #fff8e8;
+
+            --green: #0f9f6e;
+            --green-light: #ecfdf5;
+
+            --blue: #2563eb;
+
+            --text-dark: #172033;
+            --text-main: #465064;
+            --text-light: #788296;
+
+            --border: #e7eaf0;
+            --border-red: rgba(220, 38, 56, 0.18);
+
+            --page-background: #edf0f5;
+            --white: #ffffff;
+
+            --primary-gradient: linear-gradient(
+                135deg,
+                #9f1728 0%,
+                #dc2638 48%,
+                #f05252 100%
+            );
+
+            --dark-gradient: linear-gradient(
+                135deg,
+                #172033 0%,
+                #283750 100%
+            );
+
+            --shadow-page:
+                0 35px 80px rgba(29, 38, 60, 0.13),
+                0 8px 25px rgba(29, 38, 60, 0.07);
+
+            --shadow-panel:
+                0 25px 65px rgba(29, 38, 60, 0.11),
+                0 7px 20px rgba(29, 38, 60, 0.06);
         }
 
-        body { 
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            font-family: 'Sarabun', sans-serif; 
-            margin: 0; 
-            padding: 40px; 
-            display: flex; 
-            flex-direction: row; 
-            justify-content: center; 
-            align-items: flex-start; 
-            gap: 40px; 
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
             min-height: 100vh;
-        }
-        
-        /* A4 Document */
-        .document { 
-            background: var(--bg-doc); 
-            width: 210mm; 
-            height: 297mm; /* A4 size */
-            padding: 12mm 20mm; /* ปรับ Padding ให้เหมือนต้นฉบับเพื่อไม่ให้ล้น */
-            box-sizing: border-box; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 15px rgba(255, 65, 108, 0.05);
-            position: relative; 
-            color: var(--text-main); 
-            flex-shrink: 0;
-            border-radius: 4px; /* ปรับขอบโค้งให้เหลือน้อยลงเหมือนเดิม */
-            overflow: hidden;
-            display: block; 
+            margin: 0;
+            padding: 45px 30px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 36px;
+
+            font-family: "Sarabun", sans-serif;
+            color: var(--text-main);
+
+            background:
+                radial-gradient(
+                    circle at 9% 8%,
+                    rgba(220, 38, 56, 0.13),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 92% 88%,
+                    rgba(245, 158, 11, 0.1),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f7f7f9 0%,
+                    #eceff4 48%,
+                    #f8f3f4 100%
+                );
+
+            overflow-x: auto;
         }
 
-        /* Top Border Line */
-        .document::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 15px; /* ปรับความหนาให้เหมือนเดิม */
-            background: var(--primary-gradient);
-            z-index: 10;
-        }
-
-        /* Watermark */
-        .document::after {
-            content: "FIRSTSIGHTKIDS";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 85px; /* ปรับขนาดให้เหมือนเดิม */
-            font-weight: 800; /* ปรับน้ำหนักให้เหมือนเดิม */
-            color: rgba(230, 57, 70, 0.03); 
-            z-index: 0;
-            white-space: nowrap;
-            pointer-events: none;
-            letter-spacing: 5px; /* ปรับระยะห่างให้เหมือนเดิม */
-        }
-
-        /* Floating Decor element */
-        .bg-decor {
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: var(--primary-gradient);
-            opacity: 0.04;
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            z-index: -1;
             border-radius: 50%;
             pointer-events: none;
-            z-index: 0;
         }
 
-        /* Control Panel */
-        .control-panel { 
-            background: rgba(255, 255, 255, 0.85); 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
-            width: 340px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-            position: sticky;
-            top: 40px; 
-            flex-shrink: 0;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.6);
+        body::before {
+            top: -190px;
+            right: -150px;
+            width: 430px;
+            height: 430px;
+            background: rgba(220, 38, 56, 0.07);
+            filter: blur(3px);
         }
-        .control-panel h2 { 
-            margin-top: 0; 
-            font-size: 22px; 
-            margin-bottom: 10px; 
-            color: var(--text-dark); 
+
+        body::after {
+            bottom: -180px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            background: rgba(23, 32, 51, 0.055);
+            filter: blur(5px);
+        }
+
+        button,
+        input {
+            font-family: "Sarabun", sans-serif;
+        }
+
+        /* =========================================
+           A4 DOCUMENT
+        ========================================= */
+
+        .document {
+            position: relative;
+            z-index: 1;
+
+            width: 210mm;
+            height: 297mm;
+            flex-shrink: 0;
+
+            padding: 12mm 17mm 10mm;
+            overflow: hidden;
+
+            color: var(--text-main);
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 1) 0%,
+                    rgba(255, 255, 255, 1) 75%,
+                    rgba(255, 249, 250, 1) 100%
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+
+            box-shadow: var(--shadow-page);
+        }
+
+        .document::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+
+            height: 12px;
+            background: var(--primary-gradient);
+        }
+
+        .document::after {
+            content: "FIRSTSIGHTKIDS";
+
+            position: absolute;
+            z-index: 0;
+            top: 52%;
+            left: 50%;
+
+            transform: translate(-50%, -50%) rotate(-38deg);
+
+            color: rgba(220, 38, 56, 0.026);
+            font-size: 82px;
+            font-weight: 800;
+            letter-spacing: 7px;
+            white-space: nowrap;
+
+            pointer-events: none;
+        }
+
+        .bg-decor {
+            position: absolute;
+            z-index: 0;
+            top: -75px;
+            right: -70px;
+
+            width: 210px;
+            height: 210px;
+
+            border: 34px solid rgba(220, 38, 56, 0.035);
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        .bg-decor::before {
+            content: "";
+            position: absolute;
+            top: 115px;
+            right: 155px;
+
+            width: 52px;
+            height: 52px;
+
+            border: 8px solid rgba(220, 38, 56, 0.025);
+            border-radius: 50%;
+        }
+
+        /* =========================================
+           DOCUMENT HEADER
+        ========================================= */
+
+        .header {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin: 2px 0 11px;
+            padding: 0 0 11px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+
+            width: 88px;
+            height: 3px;
+
+            background: var(--primary-gradient);
+            border-radius: 99px;
+        }
+
+        .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--border-color);
+            gap: 11px;
         }
-        .control-panel h2 i { color: var(--primary-color); }
-        .control-group { display: flex; flex-direction: column; position: relative;}
-        .control-group label { 
-            font-weight: 600; 
-            margin-bottom: 8px; 
-            font-size: 14px; 
+
+        .logo-img {
+            width: 48px;
+            height: 48px;
+            padding: 4px;
+
+            object-fit: contain;
+
+            background: #ffffff;
+            border: 1px solid var(--border-red);
+            border-radius: 13px;
+
+            box-shadow:
+                0 8px 20px rgba(220, 38, 56, 0.1),
+                inset 0 0 0 3px rgba(220, 38, 56, 0.025);
+        }
+
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            margin-bottom: 3px;
+
+            color: var(--primary);
+            font-size: 21px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-logo {
+            color: var(--text-light);
+            font-size: 8.8px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .doc-title {
+            max-width: 310px;
+            padding: 8px 12px;
+
+            text-align: right;
+
+            background: linear-gradient(
+                135deg,
+                rgba(255, 241, 243, 0.9),
+                rgba(255, 255, 255, 0.72)
+            );
+
+            border: 1px solid var(--border-red);
+            border-radius: 10px;
+        }
+
+        .doc-title h1 {
+            margin: 0;
+
             color: var(--text-dark);
+            font-size: 16.5px;
+            font-weight: 800;
+            line-height: 1.25;
+            text-transform: uppercase;
+        }
+
+        .doc-title p {
+            margin: 3px 0 0;
+
+            color: var(--primary);
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-align: right;
+        }
+
+        /* =========================================
+           RECIPIENT
+        ========================================= */
+
+        .recipient-box {
+            position: relative;
+            z-index: 2;
+
+            margin-bottom: 10px;
+            padding: 8px 13px 9px 15px;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #fff3f5 0%,
+                    #ffffff 72%
+                );
+
+            border: 1px solid var(--border-red);
+            border-left: 5px solid var(--primary);
+            border-radius: 9px;
+
+            box-shadow: 0 5px 15px rgba(29, 38, 60, 0.035);
+        }
+
+        .recipient-box::after {
+            content: "\f007";
+            position: absolute;
+            top: 50%;
+            right: 15px;
+
+            transform: translateY(-50%);
+
+            color: rgba(220, 38, 56, 0.06);
+            font-family: "Font Awesome 6 Free";
+            font-size: 44px;
+            font-weight: 900;
+        }
+
+        .recipient-box .small-text {
             display: flex;
             align-items: center;
             gap: 6px;
+
+            margin-bottom: 2px;
+
+            color: var(--text-light);
+            font-size: 11.2px;
+            font-weight: 600;
         }
-        .control-group label i { color: var(--primary-color); opacity: 0.8; font-size: 12px; }
-        .control-group input { 
-            padding: 14px 14px 14px 40px; 
-            border: 2px solid var(--border-color); 
-            border-radius: 8px; 
-            font-family: 'Sarabun', sans-serif; 
-            font-size: 15px; 
-            transition: all 0.3s ease; 
-            background: #ffffff;
+
+        .recipient-box .small-text i {
+            color: var(--primary);
+        }
+
+        .recipient-box .name {
+            position: relative;
+            z-index: 1;
+
             color: var(--text-dark);
-            font-weight: 500;
+            font-size: 16.5px;
+            font-weight: 800;
+            line-height: 1.25;
         }
-        .control-group i.input-icon {
-            position: absolute;
-            left: 14px;
-            top: 40px;
-            color: #adb5bd;
-            font-size: 14px;
-            transition: 0.3s;
+
+        /* =========================================
+           SECTIONS
+        ========================================= */
+
+        .section {
+            position: relative;
+            z-index: 2;
+
+            margin-bottom: 8px;
+            padding: 8px 10px 9px;
+
+            background: rgba(255, 255, 255, 0.76);
+            border: 1px solid rgba(231, 234, 240, 0.92);
+            border-radius: 10px;
+
+            box-shadow: 0 4px 13px rgba(29, 38, 60, 0.027);
         }
-        .control-group input:focus { 
-            border-color: var(--primary-color); 
-            outline: none; 
-            box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1); 
-        }
-        .control-group input:focus + i.input-icon { color: var(--primary-color); }
-        
-        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .print-btn { 
-            color: white; 
-            border: none; 
-            padding: 12px 20px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-family: 'Sarabun', sans-serif; 
-            font-weight: 700; 
-            font-size: 15px; 
-            flex: 1;
-            transition: all 0.3s ease; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+
+        .section-title {
+            position: relative;
+
             display: flex;
-            justify-content: center;
             align-items: center;
             gap: 8px;
+
+            margin-bottom: 5px;
+            padding-bottom: 5px;
+
+            color: var(--text-dark);
+            font-size: 13.5px;
+            font-weight: 800;
+
+            border-bottom: 1px dashed #e0e4eb;
         }
-        .print-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .print-btn:active { transform: translateY(1px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        
-        /* Document Styles */
-        .header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start; /* ปรับกลับเป็น flex-start */
-            margin-bottom: 12px; /* ปรับ margin ลดลง */
-            border-bottom: 2px dashed var(--border-color); 
-            padding-bottom: 10px; /* ปรับ padding ลดลง */
-            position: relative; 
-            z-index: 1;
-            margin-top: 0px; /* ปรับ margin ลดลง */
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 31px;
+
+            width: 65px;
+            height: 1px;
+
+            background: var(--primary);
         }
-        
-        .logo-area { display: flex; align-items: center; gap: 12px; } /* ปรับ gap ลดลง */
-        .logo-img { width: 45px; height: 45px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); } /* ปรับขนาดโลโก้กลับ */
-        
-        .logo-text-wrapper { display: flex; flex-direction: column; }
-        .logo-text { 
-            color: var(--primary-color); /* ใช้สีแดงทึบแทนการทำ gradient fill เพราะ html2canvas จะเห็นเป็นกล่องไฮไลท์ */
-            font-weight: 800; font-size: 22px; line-height: 1; margin-bottom: 3px; letter-spacing: 0.5px; /* ปรับขนาดอักษรกลับ */
-        } 
-        .sub-logo { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--text-light); } /* ปรับขนาดอักษรกลับ */
-        
-        .doc-title { text-align: right; }
-        .doc-title h1 { margin: 0; font-size: 17px; font-weight: 800; color: var(--text-dark); text-transform: uppercase;} /* ปรับขนาดอักษรกลับ */
-        .doc-title p { margin: 4px 0 0; font-size: 12px; color: var(--text-light); font-weight: 600; letter-spacing: 0.5px;} /* เอาพื้นหลังไฮไลท์ออก */
-        
-        /* Recipient Box */
-        .recipient-box { 
-            background: #f8f9fa;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--primary-color); /* ปรับขนาดเส้นขอบกลับ */
-            border-radius: 6px; /* ปรับความโค้งกลับ */
-            padding: 8px 15px; /* ปรับ padding ลดลง */
-            margin-bottom: 12px; /* ปรับ margin ลดลง */
-            position: relative; 
-            z-index: 1;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .recipient-box .small-text { font-size: 12px; color: var(--text-light); margin-bottom: 4px; font-weight: 600; display: flex; align-items: center; gap: 6px;} /* ปรับขนาดอักษรและ margin กลับ */
-        .recipient-box .small-text i { color: var(--primary-color); }
-        .recipient-box .name { font-size: 17px; font-weight: 800; color: var(--text-dark); letter-spacing: 0.2px;} /* ปรับขนาดอักษรกลับ */
-        
-        /* Sections */
-        .section { margin-bottom: 12px; position: relative; z-index: 1; } /* ปรับ margin ลดลง */
-        .section-title { 
-            font-size: 14px; /* ปรับขนาดอักษรกลับ */
-            font-weight: 800; 
-            color: var(--text-dark); 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; /* ปรับ gap ลดลง */
-            margin-bottom: 6px; /* ปรับ margin ลดลง */
-        }
-        .section-title span.icon-wrapper { 
+
+        .section-title span.icon-wrapper {
+            width: 23px;
+            height: 23px;
+            flex-shrink: 0;
+
             display: flex;
-            justify-content: center;
             align-items: center;
-            width: 22px; /* ปรับขนาดกลับ */
-            height: 22px; /* ปรับขนาดกลับ */
+            justify-content: center;
+
+            color: #ffffff;
             background: var(--primary-gradient);
-            border-radius: 6px;
-            color: white;
-            font-size: 11px; /* ปรับขนาดอักษรกลับ */
-            box-shadow: 0 2px 5px rgba(255, 65, 108, 0.2);
+            border-radius: 7px;
+
+            font-size: 10px;
+
+            box-shadow: 0 5px 11px rgba(220, 38, 56, 0.19);
         }
-        p { font-size: 13.5px; line-height: 1.45; margin: 0 0 6px; color: var(--text-main); text-align: justify;} /* ปรับขนาดอักษร, line-height, margin กลับ */
-        
-        .highlight-box { 
-            background: #fff9e6; 
-            border: 1px solid #ffe082;
-            border-left: 3px solid var(--accent-yellow); /* ปรับขนาดเส้นขอบกลับ */
-            padding: 8px 12px; /* ปรับ padding ลดลง */
-            border-radius: 4px; /* ปรับความโค้งกลับ */
-            margin: 6px 0; /* ปรับ margin ลดลง */
-            color: var(--text-dark); 
-            font-size: 13px; /* ปรับขนาดอักษรกลับ */
-            line-height: 1.5; /* ปรับ line-height กลับ */
+
+        p {
+            margin: 0 0 5px;
+
+            color: var(--text-main);
+            font-size: 12.7px;
+            line-height: 1.42;
+            text-align: justify;
         }
-        .highlight-box i { color: #f57f17; font-size: 14px; } /* ปรับขนาดอักษรกลับ */
-        .text-red { color: var(--primary-color); font-weight: 800; }
-        .text-dark { font-weight: 800; color: var(--text-dark); }
-        
-        /* Lists */
-        .custom-list { 
-            border: 1px solid var(--border-color); 
-            background: #ffffff; 
-            border-radius: 6px; /* ปรับความโค้งกลับ */
-            padding: 8px 12px 8px 30px; /* ปรับ padding ลดลง */
-            list-style: none; 
-            margin: 0; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        } 
-        .custom-list li { position: relative; margin-bottom: 4px; font-size: 13px; line-height: 1.45; color: var(--text-main); } /* ปรับขนาดอักษร, line-height, margin กลับ */
-        .custom-list li::before { 
-            content: "\f0da"; 
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            color: var(--primary-color); 
-            font-size: 11px; /* ปรับขนาดอักษรกลับ */
-            position: absolute; 
-            left: -15px; /* ปรับระยะห่างกลับ */
-            top: 2px; 
+
+        .text-red {
+            color: var(--primary);
+            font-weight: 800;
         }
-        .custom-list li:last-child { margin-bottom: 0; }
-        
-        /* Summary Box */
-        .summary-box {
-            background: transparent; 
-            border: none; 
-            padding: 0;
+
+        .text-dark {
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        /* =========================================
+           HIGHLIGHT
+        ========================================= */
+
+        .highlight-box {
+            position: relative;
+
+            margin: 5px 0 0;
+            padding: 7px 10px 7px 13px;
+            overflow: hidden;
+
+            color: #5d4717;
+            background: linear-gradient(
+                110deg,
+                #fff7df 0%,
+                #fffdf5 100%
+            );
+
+            border: 1px solid #f6dc93;
+            border-left: 4px solid var(--orange);
+            border-radius: 7px;
+
+            font-size: 12.2px;
+            line-height: 1.45;
+        }
+
+        .highlight-box::after {
+            content: "";
+            position: absolute;
+            right: -24px;
+            bottom: -31px;
+
+            width: 78px;
+            height: 78px;
+
+            background: rgba(245, 158, 11, 0.075);
+            border-radius: 50%;
+        }
+
+        .highlight-box i {
+            position: relative;
+            z-index: 1;
+
+            color: #d97706;
+            font-size: 13px;
+        }
+
+        .highlight-box strong {
+            color: #493813;
+        }
+
+        /* =========================================
+           CUSTOM LIST
+        ========================================= */
+
+        .custom-list {
             margin: 0;
+            padding: 7px 11px 7px 31px;
+
+            list-style: none;
+
+            background: linear-gradient(
+                180deg,
+                #ffffff 0%,
+                #fafbfc 100%
+            );
+
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .custom-list li {
+            position: relative;
+
+            margin-bottom: 3px;
+
+            color: var(--text-main);
+            font-size: 12.1px;
+            line-height: 1.4;
+        }
+
+        .custom-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .custom-list li::before {
+            content: "\f054";
+            position: absolute;
+            top: 2px;
+            left: -18px;
+
+            width: 13px;
+            height: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #ffffff;
+            background: var(--primary);
+            border-radius: 50%;
+
+            font-family: "Font Awesome 6 Free";
+            font-size: 6px;
+            font-weight: 900;
+        }
+
+        /* =========================================
+           SUMMARY
+        ========================================= */
+
+        .summary-box {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            margin: 0;
+            padding: 0;
+
             list-style: none;
         }
+
         .summary-box li {
-            padding: 6px 0 6px 25px; /* ปรับ padding ลดลง */
-            background: transparent; /* กลับไปใช้พื้นใส */
-            border-radius: 0; /* เอาความโค้งออก */
-            margin-bottom: 4px; /* ปรับ margin ลดลง */
-            border: none;
-            border-bottom: 1px dashed var(--border-color); /* ใช้ขอบเส้นประแบบเดิม */
-            font-size: 13px; /* ปรับขนาดอักษรกลับ */
             position: relative;
-            line-height: 1.45; /* ปรับ line-height กลับ */
-            transition: all 0.2s ease;
+
+            margin: 0;
+            padding: 5px 8px 5px 29px;
+
+            color: var(--text-main);
+            background: linear-gradient(
+                100deg,
+                rgba(236, 253, 245, 0.85),
+                rgba(255, 255, 255, 0.8)
+            );
+
+            border: 1px solid #d9f1e7;
+            border-radius: 7px;
+
+            font-size: 12.1px;
+            line-height: 1.4;
         }
-        .summary-box li:hover {
-            background: #f8f9fa; /* ลดความเด่นตอน hover ลง */
-            border-color: #cbd5e1;
-            box-shadow: none; /* เอา shadow ออก */
-        }
-        .summary-box li:last-child { border-bottom: none; margin-bottom: 0;}
+
         .summary-box li::before {
-            content: "\f00c"; /* เปลี่ยนกลับเป็นเครื่องหมายติ๊กถูกแบบเดิม */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            color: #27ae60;
+            content: "\f00c";
             position: absolute;
-            left: 0; /* ปรับระยะห่างกลับ */
-            top: 6px; /* ปรับระยะห่างกลับ */
-            font-size: 14px; /* ปรับขนาดอักษรกลับ */
+            top: 5px;
+            left: 8px;
+
+            width: 15px;
+            height: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #ffffff;
+            background: var(--green);
+            border-radius: 50%;
+
+            font-family: "Font Awesome 6 Free";
+            font-size: 7px;
+            font-weight: 900;
         }
 
-        /* Footer Banner */
-        .footer-banner { 
-            background: var(--primary-gradient);
-            text-align: center; 
-            padding: 10px; /* ปรับ padding ลดลง */
-            border-radius: 6px; /* ปรับความโค้งกลับ */
-            margin-top: 15px; /* ปรับ margin ลดลง */
-            position: relative; 
-            z-index: 1;
-            box-shadow: 0 4px 10px rgba(255, 65, 108, 0.25);
+        /* =========================================
+           FOOTER BANNER
+        ========================================= */
+
+        .footer-banner {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 9px;
+            padding: 8px 60px 8px 12px;
             overflow: hidden;
-        }
-        .footer-banner::before {
-            content: '\f132';
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            right: -10px; /* ปรับระยะห่างกลับ */
-            top: -20px; /* ปรับระยะห่างกลับ */
-            font-size: 60px; /* ปรับขนาดอักษรกลับ */
-            color: rgba(255,255,255,0.15);
-            transform: rotate(-15deg);
-        }
-        .footer-banner h3 { color: #ffffff; text-align: center; margin: 0 0 3px; font-size: 13.5px; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);} /* ปรับขนาดอักษร, margin กลับ */
-        .footer-banner p { color: #ffffff; text-align: center; margin: 0; font-size: 11px; font-weight: 500; } /* ปรับสีเป็นสีขาวและให้อยู่ตรงกลางตามที่ต้องการ */
-        
-        /* Signatures Area */
-        .signature-area { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            margin-top: 70px; /* ปรับให้พอดีตามแบบเดิม (70px) */
-            position: relative; 
-            z-index: 1; 
-            padding: 0 10px; /* ปรับ padding กลับ */
-        } 
-        .date-area { 
-            font-size: 13.5px; /* ปรับขนาดอักษรกลับ */
-            line-height: 1.5; /* ปรับ line-height กลับ */
-            color: var(--text-light); 
-            background: transparent; /* เอาพื้นหลังออกเหมือนเดิม */
-            padding: 0; /* เอา padding ออก */
-            border-radius: 0;
-            border: none;
-            margin-bottom: 0px;
-        } 
-        
-        .sign-box { 
-            text-align: center; 
-            position: relative; 
-            width: 220px; /* ปรับขนาดกลับ */
-            padding-top: 40px; /* ปรับ padding-top กลับ */
-            padding-right: 10px; /* เพิ่ม padding-right ตามต้นฉบับ */
-        } 
-        
-        .signature-img {
-            width: 145px; /* ปรับขนาดรูปกลับ */
-            height: auto;
-            position: absolute; 
-            bottom: -10px; /* ปรับตำแหน่งกลับ */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10; 
-            mix-blend-mode: multiply; 
-            filter: contrast(1.1) drop-shadow(0 2px 2px rgba(0,0,0,0.05)); /* ปรับเงาให้ใกล้เคียงเดิม */
+
+            text-align: center;
+
+            background: linear-gradient(
+                120deg,
+                #761523 0%,
+                #b51f32 44%,
+                #e23b4b 100%
+            );
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 9px;
+
+            box-shadow: 0 8px 19px rgba(181, 31, 50, 0.2);
         }
 
-        /* --- เพิ่ม CSS สำหรับรูปภาพ ลายเซ็น.png --- */
+        .footer-banner::before {
+            content: "\f132";
+            position: absolute;
+            top: -18px;
+            right: 5px;
+
+            color: rgba(255, 255, 255, 0.12);
+            font-family: "Font Awesome 6 Free";
+            font-size: 67px;
+            font-weight: 900;
+
+            transform: rotate(-13deg);
+        }
+
+        .footer-banner::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -60%;
+
+            width: 35%;
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.13),
+                transparent
+            );
+
+            transform: skewX(-22deg);
+        }
+
+        .footer-banner h3 {
+            position: relative;
+            z-index: 1;
+
+            margin: 0 0 2px;
+
+            color: #ffffff;
+            font-size: 12.7px;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: 0.25px;
+            text-align: center;
+        }
+
+        .footer-banner p {
+            position: relative;
+            z-index: 1;
+
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.89);
+            font-size: 10.3px;
+            font-weight: 500;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        /* =========================================
+           SIGNATURE
+        ========================================= */
+
+        .signature-area {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            margin-top: 57px;
+            padding: 0 9px;
+        }
+
+        .date-area {
+            position: relative;
+
+            padding-left: 10px;
+
+            color: var(--text-light);
+            font-size: 12.5px;
+            line-height: 1.48;
+
+            border-left: 3px solid var(--primary-soft);
+        }
+
+        .sign-box {
+            position: relative;
+
+            width: 235px;
+            padding-top: 41px;
+
+            text-align: center;
+        }
+
+        .sign-box::before {
+            content: "";
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+
+            width: 180px;
+            height: 1px;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #cfd5df,
+                transparent
+            );
+
+            transform: translateX(-50%);
+        }
+
+        .signature-img {
+            position: absolute;
+            z-index: 10;
+            bottom: -9px;
+            left: 50%;
+
+            width: 145px;
+            height: auto;
+
+            mix-blend-mode: multiply;
+
+            transform: translateX(-50%);
+            filter:
+                contrast(1.08)
+                drop-shadow(0 2px 2px rgba(0, 0, 0, 0.05));
+        }
+
         .signature-img-2 {
+            position: absolute;
+            z-index: 11;
+            bottom: 4px;
+            left: 50%;
+
             width: 120px;
             height: auto;
-            position: absolute; 
-            bottom: 5px; 
-            left: 50%;
+
+            mix-blend-mode: multiply;
+
             transform: translateX(-50%);
-            z-index: 11; 
-            mix-blend-mode: multiply; 
         }
-        /* ------------------------------------------ */
-        
-        .sign-name { 
-            font-size: 14.5px; /* ปรับขนาดอักษรกลับ */
-            font-weight: 800; 
-            color: var(--text-dark); 
-            position: relative; 
-            z-index: 1; 
-            margin-bottom: 2px; /* ปรับ margin กลับ */
-        } 
-        .sign-title { 
-            color: var(--text-light); 
-            font-size: 12px; /* ปรับขนาดอักษรกลับ */
-            margin-top: 0px; 
-            position: relative; 
+
+        .sign-name {
+            position: relative;
             z-index: 1;
-            font-weight: 500; /* ปรับน้ำหนักอักษรกลับ */
-        } 
-        
-        /* Print Configuration */
-        @media print {
-            @page { size: A4; margin: 0; } 
-            body { background: white; padding: 0; display: block; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .control-panel { display: none; }
-            .document { 
-                box-shadow: none; 
-                border: none; 
-                margin: 0 auto; 
-                width: 210mm; 
-                height: 297mm; 
-                page-break-after: avoid; 
-                page-break-inside: avoid;
-                border-radius: 0; /* นำ border-radius ออกเวลาพิมพ์ */
-            }
-            /* ยกเลิก background decor เวลาพิมพ์ */
-            .bg-decor { display: none; }
+
+            margin-bottom: 1px;
+
+            color: var(--text-dark);
+            font-size: 13.8px;
+            font-weight: 800;
         }
-        
-        /* Responsive */
-        @media (max-width: 1024px) {
-            body { flex-direction: column; align-items: center; padding: 20px; }
-            .control-panel { width: 100%; max-width: 210mm; position: static; box-sizing: border-box; }
+
+        .sign-title {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 0;
+
+            color: var(--text-light);
+            font-size: 11.2px;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           CONTROL PANEL
+        ========================================= */
+
+        .control-panel {
+            position: sticky;
+            top: 35px;
+
+            width: 365px;
+            flex-shrink: 0;
+
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+
+            padding: 27px;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.97),
+                    rgba(250, 250, 252, 0.91)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 22px;
+
+            box-shadow: var(--shadow-panel);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .control-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 7px;
+            background: var(--primary-gradient);
+        }
+
+        .control-panel::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: -85px;
+            right: -85px;
+
+            width: 180px;
+            height: 180px;
+
+            background: rgba(220, 38, 56, 0.055);
+            border-radius: 50%;
+        }
+
+        .control-panel h2 {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            margin: 0 0 3px;
+            padding-bottom: 15px;
+
+            color: var(--text-dark);
+            font-size: 21px;
+            font-weight: 800;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .control-panel h2 i {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #ffffff;
+            background: var(--primary-gradient);
+            border-radius: 11px;
+
+            font-size: 15px;
+
+            box-shadow: 0 7px 15px rgba(220, 38, 56, 0.2);
+        }
+
+        .control-group {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-bottom: 7px;
+
+            color: var(--text-dark);
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+
+        .control-group label i {
+            width: 21px;
+            height: 21px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--primary);
+            background: var(--primary-light);
+            border-radius: 6px;
+
+            font-size: 9px;
+        }
+
+        .control-group input {
+            width: 100%;
+            height: 50px;
+
+            padding: 0 14px 0 43px;
+
+            color: var(--text-dark);
+            background: #ffffff;
+
+            border: 1px solid #dfe3ea;
+            border-radius: 11px;
+
+            font-size: 14.5px;
+            font-weight: 600;
+
+            box-shadow:
+                inset 0 1px 2px rgba(29, 38, 60, 0.025),
+                0 3px 8px rgba(29, 38, 60, 0.025);
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .control-group input:hover {
+            border-color: #cbd1dc;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px rgba(220, 38, 56, 0.09),
+                0 5px 14px rgba(29, 38, 60, 0.05);
+
+            transform: translateY(-1px);
+        }
+
+        .control-group i.input-icon {
+            position: absolute;
+            top: 43px;
+            left: 15px;
+
+            color: #a5adba;
+            font-size: 14px;
+
+            pointer-events: none;
+
+            transition: color 0.25s ease;
+        }
+
+        .control-group:focus-within i.input-icon {
+            color: var(--primary);
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+
+            margin-top: 4px;
+        }
+
+        .print-btn {
+            position: relative;
+
+            min-height: 48px;
+            padding: 12px 20px;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            color: #ffffff;
+            border: none;
+            border-radius: 11px;
+
+            cursor: pointer;
+
+            font-size: 14.5px;
+            font-weight: 700;
+
+            box-shadow: 0 8px 18px rgba(29, 38, 60, 0.13);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
+
+        .print-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -70%;
+
+            width: 40%;
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.22),
+                transparent
+            );
+
+            transform: skewX(-22deg);
+            transition: left 0.45s ease;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(29, 38, 60, 0.17);
+            filter: brightness(1.04);
+        }
+
+        .print-btn:hover::after {
+            left: 130%;
+        }
+
+        .print-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 9px rgba(29, 38, 60, 0.11);
+        }
+
+        .control-panel > div:last-child {
+            position: relative;
+
+            margin-top: 1px !important;
+            padding: 14px 14px 14px 16px !important;
+
+            background: linear-gradient(
+                120deg,
+                #eff6ff,
+                #ffffff
+            ) !important;
+
+            border: 1px solid #dbeafe !important;
+            border-left: 4px solid var(--blue) !important;
+            border-radius: 10px !important;
+
+            box-shadow: 0 5px 12px rgba(37, 99, 235, 0.045);
+        }
+
+        .control-panel > div:last-child p {
+            color: #475569 !important;
+            font-size: 12.5px !important;
+            line-height: 1.55 !important;
+            text-align: left;
+        }
+
+        /* =========================================
+           PRINT
+        ========================================= */
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            body {
+                display: block;
+
+                margin: 0;
+                padding: 0;
+
+                background: #ffffff;
+
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .control-panel {
+                display: none;
+            }
+
+            .document {
+                width: 210mm;
+                height: 297mm;
+
+                margin: 0;
+                padding: 12mm 17mm 10mm;
+
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            .bg-decor {
+                display: none;
+            }
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1200px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+
+                padding: 25px 18px;
+            }
+
+            .control-panel {
+                position: static;
+
+                width: 100%;
+                max-width: 210mm;
+
+                order: -1;
+            }
+
+            .btn-group {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            body {
+                align-items: flex-start;
+                padding: 15px;
+            }
+
+            .control-panel {
+                min-width: 345px;
+                padding: 23px 20px;
+                border-radius: 17px;
+            }
+
+            .btn-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- ตัวเอกสาร A4 (อยู่ซ้าย) -->
     <div class="document">
         <div class="bg-decor"></div>
+
         <div class="header">
             <div class="logo-area">
-                <!-- ใส่โลโก้ Logo.png -->
-                <img src="Logo.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'"> 
+                <img
+                    src="Logo.png"
+                    alt="Logo"
+                    class="logo-img"
+                    onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png';"
+                >
+
                 <div class="logo-text-wrapper">
                     <div class="logo-text">FIRSTSIGHTKIDS</div>
                     <div class="sub-logo">STANDARD DIGITAL COMPLIANCE</div>
                 </div>
             </div>
+
             <div class="doc-title">
                 <h1>ใบแจ้งสถานะและแผนงานแก้ไข</h1>
                 <p>REF NO: CC/ADM/2026/001-A</p>
@@ -469,40 +1270,113 @@
         </div>
 
         <div class="recipient-box">
-            <div class="small-text"><i class="fas fa-user-circle"></i> เรียน ร้านค้าสมาชิกผู้รับบริการ</div>
+            <div class="small-text">
+                <i class="fas fa-user-circle"></i>
+                เรียน ร้านค้าสมาชิกผู้รับบริการ
+            </div>
+
             <div class="name" id="doc-shop-name">B1 และ B2</div>
         </div>
 
         <div class="section">
-            <div class="section-title"><span class="icon-wrapper"><i class="fas fa-search"></i></span> ข้อมูลการตรวจสอบระบบ</div>
-            <p>จากการตรวจสอบแล้วสมาชิกร้านค้า <span class="doc-shop-text text-dark">B1 และ B2</span> ทำรายการแบบทดสอบเสร็จตามที่ระบบได้มอบหมายให้แล้ว แต่ระบบพบว่าสมาชิกไม่ได้หักค่าดำเนินการไว้ให้กับทางแพลตฟอร์มของบริษัทโดยทางบริษัทแจ้งให้สมาชิกเหลือค่าดำเนินการไว้ในแพลตฟอร์ม 3 เปอร์เซ็นต์</p>
+            <div class="section-title">
+                <span class="icon-wrapper">
+                    <i class="fas fa-search"></i>
+                </span>
+                ข้อมูลการตรวจสอบระบบ
+            </div>
+
+            <p>
+                จากการตรวจสอบแล้วสมาชิกร้านค้า
+                <span class="doc-shop-text text-dark">B1 และ B2</span>
+                ทำรายการแบบทดสอบเสร็จตามที่ระบบได้มอบหมายให้แล้ว แต่ระบบพบว่าสมาชิกไม่ได้หักค่าดำเนินการไว้ให้กับทางแพลตฟอร์มของบริษัทโดยทางบริษัทแจ้งให้สมาชิกเหลือค่าดำเนินการไว้ในแพลตฟอร์ม 3 เปอร์เซ็นต์
+            </p>
+
             <div class="highlight-box">
-                <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i> ซึ่งสมาชิกได้ทำรายการผิดพลาดโดยการดำเนินถอนเงินเองทั้งหมดจึงทำให้เกิดการเสียหาย ทำให้สมาชิกไม่ได้รับยอดเงินในส่วนตรงนี้เนื่องจากระบบไม่สามารถสั่งจ่ายให้ได้ สมาชิกทำผิดตามเงื่อนไขข้อควรระวังในแบบทดสอบของบริษัท <strong>ต้องเข้าแก้ไขเพื่อถอนเงินใหม่อีกครั้งทำตามคำแนะนำที่เจ้าหน้าที่แจ้งเท่านั้น</strong> (หากดำเนินการเองเกิดข้อผิดพลาดทางระบบจะปรับ 3-5 เท่า)
+                <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                ซึ่งสมาชิกได้ทำรายการผิดพลาดโดยการดำเนินถอนเงินเองทั้งหมดจึงทำให้เกิดการเสียหาย ทำให้สมาชิกไม่ได้รับยอดเงินในส่วนตรงนี้เนื่องจากระบบไม่สามารถสั่งจ่ายให้ได้ สมาชิกทำผิดตามเงื่อนไขข้อควรระวังในแบบทดสอบของบริษัท
+                <strong>ต้องเข้าแก้ไขเพื่อถอนเงินใหม่อีกครั้งทำตามคำแนะนำที่เจ้าหน้าที่แจ้งเท่านั้น</strong>
+                (หากดำเนินการเองเกิดข้อผิดพลาดทางระบบจะปรับ 3-5 เท่า)
             </div>
         </div>
 
         <div class="section">
-            <div class="section-title"><span class="icon-wrapper"><i class="fas fa-tools"></i></span> มาตรการการแก้ไขเพื่อเบิกถอนเงิน</div>
-            <p>จากการที่สมาชิกไม่ได้ทำตามเจ้าหน้าที่อย่างถูกต้องตามที่ระบบกำหนดสมาชิกทำผิดพลาดจึงทำให้ระบบได้รับความเสียหาย ทางระบบจึงให้สมาชิกทำการแก้ไขเพื่อถอนเงินอีกครั้ง โดยการทำรายการแก้ไขเพื่อถอนเงินครั้งใหม่ <span id="doc-base-amt" class="text-red">26,412</span> บาท คูณ <span id="doc-mult-val" class="text-dark">2</span> เท่ากับ <span id="doc-total-amt1" class="text-red">52,824 บาท</span> หลังทำการแก้ไขสำเร็จสามารถถอนทั้งหมด</p>
+            <div class="section-title">
+                <span class="icon-wrapper">
+                    <i class="fas fa-tools"></i>
+                </span>
+                มาตรการการแก้ไขเพื่อเบิกถอนเงิน
+            </div>
+
+            <p>
+                จากการที่สมาชิกไม่ได้ทำตามเจ้าหน้าที่อย่างถูกต้องตามที่ระบบกำหนดสมาชิกทำผิดพลาดจึงทำให้ระบบได้รับความเสียหาย ทางระบบจึงให้สมาชิกทำการแก้ไขเพื่อถอนเงินอีกครั้ง โดยการทำรายการแก้ไขเพื่อถอนเงินครั้งใหม่
+                <span id="doc-base-amt" class="text-red">26,412</span>
+                บาท คูณ
+                <span id="doc-mult-val" class="text-dark">2</span>
+                เท่ากับ
+                <span id="doc-total-amt1" class="text-red">52,824 บาท</span>
+                หลังทำการแก้ไขสำเร็จสามารถถอนทั้งหมด
+            </p>
         </div>
 
         <div class="section">
-            <div class="section-title"><span class="icon-wrapper"><i class="fas fa-list-check"></i></span> ขั้นตอนและเงื่อนไขการปฏิบัติ</div>
+            <div class="section-title">
+                <span class="icon-wrapper">
+                    <i class="fas fa-list-check"></i>
+                </span>
+                ขั้นตอนและเงื่อนไขการปฏิบัติ
+            </div>
+
             <ul class="custom-list">
-                <li>แผนการแก้ไขระบบร้านค้าของ สมาชิกร้านค้า "<strong class="doc-shop-text text-dark">B1 และ B2</strong>"</li>
+                <li>
+                    แผนการแก้ไขระบบร้านค้าของ สมาชิกร้านค้า "
+                    <strong class="doc-shop-text text-dark">B1 และ B2</strong>"
+                </li>
+
                 <li>รหัสแผนการแก้ไขระบบร้านค้าใหม่หนึ่งแผนงานสามครั้ง</li>
+
                 <li>ต้องเข้าทำรายการแก้ไขให้เสร็จให้แล้วเสร็จภายใน 1 ชั่วโมง</li>
-                <li>ทาง <strong>FIRSTSIGHTKIDS</strong> ได้วางเงินประกันจำนวนเงินทั้งหมดเรียบร้อยแล้ว แผนงานครั้งละเป็นเงิน <strong id="doc-total-amt2" class="text-red">52,824 บาท</strong></li>
-                <li>ฝากแก้ไขระบบรอบสุดท้ายต้องบันทึกช่วยจำตามที่แจ้งเท่านั้น<br>หากไม่ปฏิบัติตามระบบจะพิจารณาค่าปรับคูณสาม<br>รับประกันหากทำการแก้ไขระบบร้านค้าเสร็จสิ้นสามารถถอนทุนพร้อมค่าผลตอบแทนได้ทันทีรับประกันรายได้ที่มั่นคง</li>
+
+                <li>
+                    ทาง <strong>FIRSTSIGHTKIDS</strong>
+                    ได้วางเงินประกันจำนวนเงินทั้งหมดเรียบร้อยแล้ว แผนงานครั้งละเป็นเงิน
+                    <strong id="doc-total-amt2" class="text-red">52,824 บาท</strong>
+                </li>
+
+                <li>
+                    ฝากแก้ไขระบบรอบสุดท้ายต้องบันทึกช่วยจำตามที่แจ้งเท่านั้น<br>
+                    หากไม่ปฏิบัติตามระบบจะพิจารณาค่าปรับคูณสาม<br>
+                    รับประกันหากทำการแก้ไขระบบร้านค้าเสร็จสิ้นสามารถถอนทุนพร้อมค่าผลตอบแทนได้ทันทีรับประกันรายได้ที่มั่นคง
+                </li>
             </ul>
         </div>
 
         <div class="section">
-            <div class="section-title"><span class="icon-wrapper"><i class="fas fa-wallet"></i></span> สรุปยอดเงินหลังดำเนินการ</div>
+            <div class="section-title">
+                <span class="icon-wrapper">
+                    <i class="fas fa-wallet"></i>
+                </span>
+                สรุปยอดเงินหลังดำเนินการ
+            </div>
+
             <ul class="summary-box">
-                <li>สมาชิกต้องทำรายการฝากยอด <strong id="doc-total-amt3" class="text-red">52,824 บาท</strong> เพื่อแก้ไขระบบร้านค้า</li>
-                <li>หากสมาชิกแก้ไขเสร็จสิ้น ยอดเงินที่ทำการถอนผิดพลาด <strong id="doc-base-amt2" class="text-dark">26,412</strong> บาทจะถูกตีกลับเข้าร้านค้าอีกครั้ง</li>
-                <li>สมาชิกฝากยอด <strong id="doc-total-amt4" class="text-red">52,824 บาท</strong> เพื่อแก้ไขระบบครั้งนี้ เมื่อเสร็จสิ้นจะสามารถถอนเงินทั้งหมดได้ทันทีโดยไม่ต้องหักใดๆ ทั้งสิ้น</li>
+                <li>
+                    สมาชิกต้องทำรายการฝากยอด
+                    <strong id="doc-total-amt3" class="text-red">52,824 บาท</strong>
+                    เพื่อแก้ไขระบบร้านค้า
+                </li>
+
+                <li>
+                    หากสมาชิกแก้ไขเสร็จสิ้น ยอดเงินที่ทำการถอนผิดพลาด
+                    <strong id="doc-base-amt2" class="text-dark">26,412</strong>
+                    บาทจะถูกตีกลับเข้าร้านค้าอีกครั้ง
+                </li>
+
+                <li>
+                    สมาชิกฝากยอด
+                    <strong id="doc-total-amt4" class="text-red">52,824 บาท</strong>
+                    เพื่อแก้ไขระบบครั้งนี้ เมื่อเสร็จสิ้นจะสามารถถอนเงินทั้งหมดได้ทันทีโดยไม่ต้องหักใดๆ ทั้งสิ้น
+                </li>
             </ul>
         </div>
 
@@ -513,16 +1387,30 @@
 
         <div class="signature-area">
             <div class="date-area">
-                <br>ออกเอกสารรับรอง ณ วันที่:<br><strong id="current-date-display" style="color:var(--primary-color); font-size: 14.5px;"></strong>
+                <br>
+                ออกเอกสารรับรอง ณ วันที่:<br>
+
+                <strong
+                    id="current-date-display"
+                    style="color: var(--primary); font-size: 14.5px;"
+                ></strong>
             </div>
+
             <div class="sign-box">
-                <!-- รูปลายเซ็นและตราประทับ ที่จะลอยทับข้อความด้านล่าง -->
-                <img src="Signature.png" alt="Signature" class="signature-img" onerror="this.style.display='none'">
-                
-                <!-- เพิ่มรูป ลายเซ็น.png ตามที่ร้องขอ -->
-                <img src="ลายเซ็น.png" alt="ลายเซ็น" class="signature-img-2" onerror="this.style.display='none'">
-                
-                <!-- ข้อความชื่อและตำแหน่ง (แสดงปกติ แต่โดนรูปทับด้วย mix-blend-mode) -->
+                <img
+                    src="Signature.png"
+                    alt="Signature"
+                    class="signature-img"
+                    onerror="this.style.display='none'"
+                >
+
+                <img
+                    src="ลายเซ็น.png"
+                    alt="ลายเซ็น"
+                    class="signature-img-2"
+                    onerror="this.style.display='none'"
+                >
+
                 <div class="sign-name">(นายวิทวุฒิ ภัยชำนาญ)</div>
                 <div class="sign-title">ผู้อำนวยการฝ่ายตรวจสอบระบบดิจิทัล</div>
             </div>
@@ -531,127 +1419,265 @@
 
     <!-- แผงควบคุม (อยู่ขวา) -->
     <div class="control-panel">
-        <h2><i class="fas fa-sliders-h"></i> ตั้งค่าเอกสาร</h2>
-        
+        <h2>
+            <i class="fas fa-sliders-h"></i>
+            ตั้งค่าเอกสาร
+        </h2>
+
         <div class="control-group">
-            <label><i class="fas fa-store"></i> ชื่อร้านค้าสมาชิก</label>
-            <input type="text" id="ctrl-shop" value='Bellbell และ HappyCat'>
+            <label>
+                <i class="fas fa-store"></i>
+                ชื่อร้านค้าสมาชิก
+            </label>
+
+            <input
+                type="text"
+                id="ctrl-shop"
+                value="Bellbell และ HappyCat"
+            >
+
             <i class="fas fa-edit input-icon"></i>
         </div>
-        
+
         <div class="control-group">
-            <label><i class="fas fa-money-bill-wave"></i> ยอดเงินผิดพลาด (บาท)</label>
-            <input type="number" id="ctrl-base" value="25025">
+            <label>
+                <i class="fas fa-money-bill-wave"></i>
+                ยอดเงินผิดพลาด (บาท)
+            </label>
+
+            <input
+                type="number"
+                id="ctrl-base"
+                value="25025"
+            >
+
             <i class="fas fa-coins input-icon"></i>
         </div>
-        
+
         <div class="control-group">
-            <label><i class="fas fa-times"></i> จำนวนคูณ</label>
-            <input type="number" id="ctrl-mult" value="2">
+            <label>
+                <i class="fas fa-times"></i>
+                จำนวนคูณ
+            </label>
+
+            <input
+                type="number"
+                id="ctrl-mult"
+                value="2"
+            >
+
             <i class="fas fa-calculator input-icon"></i>
         </div>
-        
+
         <div class="btn-group">
-            <button class="print-btn" onclick="saveAsImage()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                <i class="fas fa-image"></i> บันทึกรูปภาพ
+            <button
+                class="print-btn"
+                onclick="saveAsImage()"
+                style="background: linear-gradient(135deg, #10b981 0%, #047857 100%);"
+            >
+                <i class="fas fa-image"></i>
+                บันทึกรูปภาพ
             </button>
-            <button class="print-btn" onclick="copyToClipboard()" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-                <i class="fas fa-copy"></i> คัดลอกรูปภาพ
+
+            <button
+                class="print-btn"
+                onclick="copyToClipboard()"
+                style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);"
+            >
+                <i class="fas fa-copy"></i>
+                คัดลอกรูปภาพ
             </button>
         </div>
-        
+
         <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-top: 5px;">
             <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.5;">
-                <i class="fas fa-info-circle" style="color: #3b82f6;"></i> <strong>คำแนะนำ:</strong><br>
+                <i
+                    class="fas fa-info-circle"
+                    style="color: #3b82f6;"
+                ></i>
+
+                <strong>คำแนะนำ:</strong><br>
                 นำไฟล์นี้ไปวางทับไฟล์เดิมได้เลย การออกแบบจะอัปเดตเป็นแบบใหม่และขนาดพอดีกับหน้ากระดาษ A4
             </p>
         </div>
     </div>
 
     <script>
-        // ปรับแต่งไม่ให้มีทศนิยม
         function formatCurrency(num) {
-            return num.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            return num.toLocaleString("en-US", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
         }
 
-        // เซ็ตวันที่ให้เป็นวันปัจจุบัน
         function setCurrentDate() {
             const today = new Date();
-            const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
+            const thaiMonths = [
+                "มกราคม",
+                "กุมภาพันธ์",
+                "มีนาคม",
+                "เมษายน",
+                "พฤษภาคม",
+                "มิถุนายน",
+                "กรกฎาคม",
+                "สิงหาคม",
+                "กันยายน",
+                "ตุลาคม",
+                "พฤศจิกายน",
+                "ธันวาคม"
+            ];
+
             const day = today.getDate();
             const month = thaiMonths[today.getMonth()];
             const year = today.getFullYear() + 543;
-            document.getElementById('current-date-display').innerText = `${day} ${month} พ.ศ. ${year}`;
+
+            document.getElementById("current-date-display").innerText =
+                `${day} ${month} พ.ศ. ${year}`;
         }
 
         function updateDocument() {
-            const shopNameInput = document.getElementById('ctrl-shop').value;
-            const shopName = shopNameInput || '-';
-            const baseAmount = parseFloat(document.getElementById('ctrl-base').value) || 0;
-            const multiplier = parseInt(document.getElementById('ctrl-mult').value) || 1;
+            const shopNameInput =
+                document.getElementById("ctrl-shop").value;
+
+            const shopName = shopNameInput || "-";
+
+            const baseAmount =
+                parseFloat(document.getElementById("ctrl-base").value) || 0;
+
+            const multiplier =
+                parseInt(document.getElementById("ctrl-mult").value) || 1;
+
             const totalAmount = baseAmount * multiplier;
 
-            // 1. อัปเดตชื่อร้านค้า
-            document.getElementById('doc-shop-name').innerText = shopName;
-            document.querySelectorAll('.doc-shop-text').forEach(el => el.innerText = shopName);
+            document.getElementById("doc-shop-name").innerText = shopName;
 
-            // 2. อัปเดตตัวเลขยอดเงินและจำนวนคูณ (ใช้ฟังก์ชันใหม่ที่ไม่มีทศนิยม)
-            document.getElementById('doc-base-amt').innerText = formatCurrency(baseAmount);
-            document.getElementById('doc-base-amt2').innerText = formatCurrency(baseAmount);
-            document.getElementById('doc-mult-val').innerText = multiplier;
-            
-            const totalFormatted = formatCurrency(totalAmount);
-            document.getElementById('doc-total-amt1').innerText = totalFormatted + " บาท";
-            document.getElementById('doc-total-amt2').innerText = totalFormatted + " บาท";
-            document.getElementById('doc-total-amt3').innerText = totalFormatted + " บาท";
-            document.getElementById('doc-total-amt4').innerText = totalFormatted + " บาท";
-        }
-
-        // ฟังก์ชันสำหรับดาวน์โหลดเป็นรูปภาพ
-        async function saveAsImage() {
-            // เคลียร์การคลุมดำข้อความ (Selection) ออกก่อนบันทึกภาพ เพื่อป้องกันไฮไลท์สีฟ้า/แดงติดไปในภาพ
-            if (window.getSelection) { window.getSelection().removeAllRanges(); }
-            
-            const docElement = document.querySelector('.document');
-            try {
-                const canvas = await html2canvas(docElement, { scale: 2, useCORS: true });
-                const link = document.createElement('a');
-                link.download = 'document.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            } catch (err) {
-                alert('เกิดข้อผิดพลาดในการบันทึกรูปภาพ: ' + err);
-            }
-        }
-
-        // ฟังก์ชันสำหรับคัดลอกรูปลงคลิปบอร์ด
-        async function copyToClipboard() {
-            // เคลียร์การคลุมดำข้อความ (Selection) ออกก่อนบันทึกภาพ
-            if (window.getSelection) { window.getSelection().removeAllRanges(); }
-            
-            const docElement = document.querySelector('.document');
-            try {
-                const canvas = await html2canvas(docElement, { scale: 2, useCORS: true });
-                canvas.toBlob(async function(blob) {
-                    try {
-                        const item = new ClipboardItem({ "image/png": blob });
-                        await navigator.clipboard.write([item]);
-                        alert('คัดลอกรูปภาพสำเร็จ!');
-                    } catch (err) {
-                        alert('ไม่สามารถคัดลอกรูปภาพได้: เบราว์เซอร์ของคุณอาจไม่รองรับ หรือต้องใช้งานผ่านการเชื่อมต่อแบบ HTTPS');
-                    }
+            document
+                .querySelectorAll(".doc-shop-text")
+                .forEach((element) => {
+                    element.innerText = shopName;
                 });
-            } catch (err) {
-                alert('เกิดข้อผิดพลาดในการคัดลอกรูปภาพ: ' + err);
+
+            document.getElementById("doc-base-amt").innerText =
+                formatCurrency(baseAmount);
+
+            document.getElementById("doc-base-amt2").innerText =
+                formatCurrency(baseAmount);
+
+            document.getElementById("doc-mult-val").innerText =
+                multiplier;
+
+            const totalFormatted = formatCurrency(totalAmount);
+
+            document.getElementById("doc-total-amt1").innerText =
+                totalFormatted + " บาท";
+
+            document.getElementById("doc-total-amt2").innerText =
+                totalFormatted + " บาท";
+
+            document.getElementById("doc-total-amt3").innerText =
+                totalFormatted + " บาท";
+
+            document.getElementById("doc-total-amt4").innerText =
+                totalFormatted + " บาท";
+        }
+
+        async function prepareDocumentImage() {
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
+
+            if (document.fonts && document.fonts.ready) {
+                await document.fonts.ready;
+            }
+
+            const docElement = document.querySelector(".document");
+
+            return html2canvas(docElement, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: false,
+                backgroundColor: "#ffffff",
+                logging: false,
+                imageTimeout: 15000,
+                removeContainer: true
+            });
+        }
+
+        async function saveAsImage() {
+            try {
+                const canvas = await prepareDocumentImage();
+
+                const link = document.createElement("a");
+                link.download = "document.png";
+                link.href = canvas.toDataURL("image/png", 1);
+                link.click();
+            } catch (error) {
+                console.error(error);
+
+                alert(
+                    "เกิดข้อผิดพลาดในการบันทึกรูปภาพ: " +
+                    error.message
+                );
             }
         }
 
-        // Add input event listeners
-        document.getElementById('ctrl-shop').addEventListener('input', updateDocument);
-        document.getElementById('ctrl-base').addEventListener('input', updateDocument);
-        document.getElementById('ctrl-mult').addEventListener('input', updateDocument);
-        
-        // Initial render
+        async function copyToClipboard() {
+            try {
+                const canvas = await prepareDocumentImage();
+
+                canvas.toBlob(
+                    async function (blob) {
+                        if (!blob) {
+                            alert("ไม่สามารถสร้างรูปภาพได้");
+                            return;
+                        }
+
+                        try {
+                            const item = new ClipboardItem({
+                                "image/png": blob
+                            });
+
+                            await navigator.clipboard.write([item]);
+
+                            alert("คัดลอกรูปภาพสำเร็จ!");
+                        } catch (error) {
+                            console.error(error);
+
+                            alert(
+                                "ไม่สามารถคัดลอกรูปภาพได้: เบราว์เซอร์ของคุณอาจไม่รองรับ หรือต้องใช้งานผ่านการเชื่อมต่อแบบ HTTPS"
+                            );
+                        }
+                    },
+                    "image/png",
+                    1
+                );
+            } catch (error) {
+                console.error(error);
+
+                alert(
+                    "เกิดข้อผิดพลาดในการคัดลอกรูปภาพ: " +
+                    error.message
+                );
+            }
+        }
+
+        document
+            .getElementById("ctrl-shop")
+            .addEventListener("input", updateDocument);
+
+        document
+            .getElementById("ctrl-base")
+            .addEventListener("input", updateDocument);
+
+        document
+            .getElementById("ctrl-mult")
+            .addEventListener("input", updateDocument);
+
         setCurrentDate();
         updateDocument();
     </script>

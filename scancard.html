@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a71929">
+  <title>FIRSTSIGHTKIDS — สแกนนามบัตร</title>
+  <style>
+    :root{
+      --red-950:#5f0d16;--red-900:#80131f;--red-800:#a71929;--red-700:#c52b3b;
+      --red-600:#e34857;--red-500:#f16a77;--red-100:#ffe9ec;--red-050:#fff5f7;
+      --cream:#fff8f5;--paper:#fff;--ink:#2b191d;--muted:#79696d;--line:#ecdde0;
+      --green:#17865f;--shadow:0 28px 85px rgba(99,15,28,.18)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;min-height:100vh;color:var(--ink);
+      font-family:Tahoma,"Noto Sans Thai","Leelawadee UI",sans-serif;
+      background:
+        radial-gradient(circle at 9% 7%,#fff 0 6rem,transparent 25rem),
+        radial-gradient(circle at 91% 16%,rgba(255,211,217,.92),transparent 29rem),
+        linear-gradient(145deg,#fffdfb 0%,#fff5f2 48%,#fbe6e9 100%);
+      overflow-x:hidden
+    }
+    body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:999px;pointer-events:none}
+    body::before{width:440px;height:440px;left:-210px;bottom:-235px;background:rgba(173,22,39,.1)}
+    body::after{width:310px;height:310px;right:-105px;top:35%;border:52px solid rgba(255,255,255,.43)}
+    button,input{font:inherit}
+    .page{width:min(1280px,calc(100% - 32px));margin:auto;padding:24px 0 44px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:50px;height:50px;display:grid;place-items:center;border-radius:17px;background:#fff;box-shadow:0 13px 26px rgba(166,22,38,.18);position:relative;overflow:hidden;padding:4px;border:1px solid rgba(167,25,41,.08)}
+    .logo img{width:100%;height:100%;object-fit:contain;display:block}
+    .brand strong{display:block;font-size:17px;letter-spacing:.3px}
+    .brand span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .demo-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:999px;color:var(--red-900);background:rgba(255,255,255,.78);border:1px solid rgba(170,31,47,.15);font-size:12px;font-weight:900;box-shadow:0 8px 25px rgba(82,29,36,.08);backdrop-filter:blur(10px)}
+    .demo-pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red-600);box-shadow:0 0 0 5px rgba(227,72,87,.12)}
+
+    .panel{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(430px,.9fr);min-height:730px;border-radius:34px;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.96);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+    .panel::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.55),transparent 35%)}
+
+    .visual-side{position:relative;display:flex;flex-direction:column;justify-content:center;padding:52px;background:linear-gradient(160deg,rgba(91,11,22,.98),rgba(185,27,43,.97));color:#fff;isolation:isolate}
+    .visual-side::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.17;background-image:linear-gradient(rgba(255,255,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom right,#000,transparent 76%)}
+    .eyebrow{font-size:12px;font-weight:900;letter-spacing:2.4px;color:#ffd3d9;text-transform:uppercase}
+    h1{font-size:clamp(34px,4vw,54px);line-height:1.08;margin:10px 0 12px;letter-spacing:-1.3px}
+    .lead{max-width:650px;margin:0;color:#ffecef;font-size:15px;line-height:1.75}
+    .scanner-wrap{margin-top:31px}
+    .scanner-label{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px;color:#ffe4e8;font-size:12px}
+    .scanner-label strong{color:#fff;font-size:13px}
+    .card-stage{position:relative;width:min(100%,760px);aspect-ratio:85.6/54;padding:13px;border-radius:25px;background:linear-gradient(145deg,rgba(255,255,255,.25),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.32);box-shadow:0 28px 68px rgba(42,0,7,.36);overflow:hidden}
+    .dropzone{position:relative;width:100%;height:100%;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#fff9f7,#f7eaec);border:1.5px dashed rgba(132,18,32,.32);overflow:hidden;cursor:pointer;transition:.2s ease}
+    .dropzone:hover,.dropzone.dragover{background:#fff;border-color:#fff;box-shadow:inset 0 0 0 3px rgba(255,255,255,.4)}
+    .empty-state{text-align:center;color:#7f2632;padding:25px;pointer-events:none}
+    .upload-icon{width:54px;height:54px;margin:0 auto 12px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(145deg,var(--red-600),var(--red-900));color:#fff;font-size:25px;box-shadow:0 14px 25px rgba(164,22,38,.24)}
+    .empty-state strong{display:block;font-size:16px}
+    .empty-state span{display:block;margin-top:7px;color:#957078;font-size:12px;line-height:1.55}
+    #cardImage{display:none;width:100%;height:100%;object-fit:contain;background:#fff;border-radius:15px}
+    .dropzone.has-image #cardImage{display:block}
+    .dropzone.has-image .empty-state{display:none}
+    .scan-glow{position:absolute;inset:13px;border-radius:15px;overflow:hidden;pointer-events:none}
+    .scan-glow::before{content:"";position:absolute;left:0;right:0;top:-18%;height:18%;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.42),rgba(255,98,116,.92),rgba(255,255,255,.4),transparent);filter:drop-shadow(0 0 12px rgba(255,74,96,.9));opacity:0}
+    .card-stage.scanning .scan-glow::before{opacity:1;animation:scan 1.25s cubic-bezier(.42,0,.18,1) infinite}
+    @keyframes scan{from{top:-20%}to{top:105%}}
+    .corner{position:absolute;width:27px;height:27px;border-color:#fff;border-style:solid;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25));pointer-events:none}
+    .corner.tl{left:4px;top:4px;border-width:3px 0 0 3px;border-radius:12px 0 0}
+    .corner.tr{right:4px;top:4px;border-width:3px 3px 0 0}
+    .corner.bl{left:4px;bottom:4px;border-width:0 0 3px 3px}
+    .corner.br{right:4px;bottom:4px;border-width:0 3px 3px 0}
+    .card-tools{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:15px}
+    .tool-btn,.scan-btn{border:1px solid rgba(255,255,255,.23);color:#fff;border-radius:13px;padding:11px 14px;cursor:pointer;font-weight:900;font-size:13px;transition:.2s}
+    .tool-btn{background:rgba(255,255,255,.11)}
+    .tool-btn:hover{background:rgba(255,255,255,.19);transform:translateY(-1px)}
+    .scan-btn{min-width:160px;border-color:#fff;background:#fff;color:var(--red-900);box-shadow:0 10px 24px rgba(50,0,6,.2)}
+    .scan-btn:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(50,0,6,.27)}
+    .tool-btn:disabled,.scan-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+    .progress-box{display:none;margin-top:14px;padding:14px 15px;border:1px solid rgba(255,255,255,.24);border-radius:16px;background:rgba(255,255,255,.11)}
+    .progress-box.show{display:block}
+    .progress-row{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#ffe7eb;font-size:12px;margin-bottom:8px}
+    .progress-row strong{color:#fff}
+    .progress-track{height:10px;border-radius:999px;background:rgba(255,255,255,.19);overflow:hidden}
+    .progress-bar{height:100%;width:0;background:linear-gradient(90deg,#fff,#ffd4d9);transition:width .18s ease;border-radius:999px}
+
+    .action-side{position:relative;padding:46px 44px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,#fff 0%,#fffafa 100%)}
+    .action-side::before{content:"";position:absolute;right:-70px;bottom:-70px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(225,64,85,.12),rgba(225,64,85,0) 68%);pointer-events:none}
+    .section-kicker{display:inline-flex;align-items:center;gap:10px;color:var(--red-700);font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+    .section-kicker::before{content:"";width:28px;height:3px;background:linear-gradient(90deg,var(--red-500),var(--red-800));border-radius:999px}
+    h2{font-size:clamp(30px,3.2vw,58px);line-height:1.1;margin:18px 0 12px;letter-spacing:-1px}
+    .action-copy{color:var(--muted);font-size:14px;line-height:1.8;margin:0 0 28px;max-width:560px}
+
+    .summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:22px}
+    .summary-card{min-height:78px;padding:16px 18px;border-radius:18px;background:linear-gradient(180deg,#fff,#fff9f9);border:1px solid #efd5d9;box-shadow:0 10px 24px rgba(167,25,41,.05)}
+    .summary-card label{display:block;color:#947c81;font-size:12px;font-weight:700;margin-bottom:6px}
+    .summary-card input{width:100%;border:0;outline:0;background:transparent;padding:0;color:var(--ink);font-size:15px;font-weight:900}
+    .summary-card input::placeholder{color:#ccb4b9;font-weight:700}
+    .summary-card input[readonly]{color:var(--ink)}
+    .status-readonly{display:inline-flex;align-items:center;gap:9px;color:var(--red-900);font-size:15px;font-weight:900}
+    .status-readonly::before{content:"";width:12px;height:12px;border-radius:50%;background:#ef4254;box-shadow:0 0 0 5px rgba(239,66,84,.13)}
+
+    .approve-wrap{display:grid;gap:18px}
+    .approve-btn{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:58px;border:0;border-radius:19px;cursor:pointer;color:#fff;background:linear-gradient(120deg,#d72838,#9f1021);box-shadow:0 18px 34px rgba(176,29,47,.28);font-size:16px;font-weight:900;transition:.22s}
+    .approve-btn:hover{transform:translateY(-2px);box-shadow:0 22px 38px rgba(176,29,47,.34)}
+    .approve-btn:disabled{opacity:.48;cursor:not-allowed;transform:none}
+    .approve-btn::before{content:"";position:absolute;inset:0;transform:translateX(-110%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent)}
+    .approve-btn:hover::before{animation:shine .8s ease}
+    .approve-btn .btn-mark{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:18px;line-height:1}
+    @keyframes shine{to{transform:translateX(110%)}}
+
+    .result{display:none;position:relative;padding:18px 18px 16px;border-radius:22px;background:linear-gradient(180deg,#fff6f7 0%,#fffdfd 100%);border:1px solid #f2d2d7;box-shadow:0 16px 36px rgba(132,18,32,.08)}
+    .result.show{display:block;animation:reveal .38s ease both}
+    @keyframes reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    .result-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .result-title{display:flex;align-items:center;gap:12px;color:var(--red-900);font-weight:900;font-size:16px}
+    .result-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:#fff1f3;border:1px solid #f3d4d8;color:var(--red-800);font-size:19px;font-weight:900}
+    .result-badge{padding:7px 12px;border-radius:999px;border:1px solid #f1ccd2;background:#fffafb;color:var(--red-800);font-size:12px;font-weight:900}
+    .result p{margin:0;color:#633842;font-size:16px;line-height:1.75;font-weight:800}
+    .result p strong{color:var(--red-900)}
+    .checked-at{margin-top:13px;padding-top:12px;border-top:1px dashed #efd4d8;color:#a18389;font-size:11px}
+    .note-card{margin-top:16px;padding:15px 16px;border-radius:18px;background:#f7f0f0;border:1px solid #eadedf;color:#8d7479;font-size:11px;line-height:1.7}
+    .note-card strong{color:#6f565b}
+
+    .footer{text-align:center;color:#9a7f84;font-size:11px;margin-top:17px}
+
+    @media(max-width:940px){
+      .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:680px){
+      .summary-grid{grid-template-columns:1fr}
+    }
+
+    @media(max-width:940px){
+      .panel{grid-template-columns:1fr}
+      .visual-side,.action-side{padding:38px}
+      .panel{min-height:0}
+    }
+    @media(max-width:560px){
+      .page{width:min(100% - 20px,1280px);padding-top:13px}
+      .topbar{align-items:flex-start}
+      .brand span{display:none}
+      .demo-pill{font-size:10px;padding:8px 10px}
+      .visual-side,.action-side{padding:27px 20px}
+      .panel{border-radius:25px}
+      .card-tools{grid-template-columns:1fr}
+      .scan-btn,.tool-btn{width:100%}
+      h1{font-size:35px}
+      h2{font-size:28px}
+      .data-head{align-items:flex-start}
+      .result p{font-size:15px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo"><img src="Logo.png" alt="FIRSTSIGHTKIDS"></div>
+        <div><strong>FIRSTSIGHTKIDS CENTER</strong><span>ระบบตรวจสอบข้อมูลร้านค้า</span></div>
+      </div>
+      <div class="demo-pill">ระบบสาธิต</div>
+    </header>
+
+    <section class="panel">
+      <div class="visual-side">
+        <div class="eyebrow">BUSINESS CARD SCANNER</div>
+        <h1>สแกนนามบัตร</h1>
+        <p class="lead">ตรวจสอบข้อมูลร้านค้า</p>
+
+        <div class="scanner-wrap">
+          <div class="scanner-label"><strong>ช่องวางนามบัตร</strong><span id="imageStatus">ยังไม่ได้เลือกรูป</span></div>
+          <div class="card-stage" id="cardStage">
+            <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="เลือกภาพนามบัตร">
+              <div class="empty-state">
+                <div class="upload-icon">＋</div>
+                <strong>วางรูปนามบัตรที่นี่</strong>
+                <span>คลิกเพื่อเลือกรูป ลากมาวาง หรือกด Ctrl + V</span>
+              </div>
+              <img id="cardImage" alt="ตัวอย่างนามบัตร">
+            </div>
+            <div class="scan-glow"></div>
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" hidden>
+
+          <div class="card-tools">
+            <button class="tool-btn" id="chooseBtn" type="button">เปลี่ยนรูปนามบัตร</button>
+            <button class="scan-btn" id="scanBtn" type="button" disabled>สแกนนามบัตร</button>
+          </div>
+
+          <div class="progress-box" id="progressBox">
+            <div class="progress-row"><strong id="progressLabel">กำลังสแกนภาพนามบัตร</strong><span id="progressPercent">0%</span></div>
+            <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+          </div>
+        </div>
+      </div>
+
+            <div class="action-side">
+        <div class="section-kicker">APPROVAL CENTER</div>
+        <h2>ตรวจสอบและอนุมัติ<br>ค่าสินค้า</h2>
+        <p class="action-copy">ตรวจทานข้อมูลหน้าบัตรก่อนกดปุ่ม ระบบจะแสดงขั้นตอนสแกนและสถานะด้านล่างโดยการส่งข้อมูลออกจากอุปกรณ์</p>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <label for="nameField">ชื่อผู้ใช้งาน</label>
+            <input id="nameField" type="text" placeholder="กรอกชื่อผู้ใช้งาน" autocomplete="off">
+          </div>
+          <div class="summary-card">
+            <label for="storeField">STORE CODE</label>
+            <input id="storeField" type="text" placeholder="กรอก STORE CODE" autocomplete="off">
+          </div>
+          <div class="summary-card">
+            <label for="phoneField">เบอร์โทรศัพท์</label>
+            <input id="phoneField" type="tel" value="XXX-XXX-" placeholder="XXX-XXX-    " autocomplete="off">
+          </div>
+          <div class="summary-card">
+            <label>สถานะก่อนตรวจสอบ</label>
+            <div class="status-readonly">ยังไม่ได้สร้างเครดิต</div>
+          </div>
+        </div>
+
+        <div class="approve-wrap">
+          <button class="approve-btn" id="approveBtn" type="button" disabled><span class="btn-mark">✓</span>ตรวจสอบอีกครั้ง</button>
+
+          <div class="result" id="result" aria-live="polite">
+            <div class="result-head">
+              <div class="result-title"><span class="result-icon">!</span>ผลการตรวจสอบ</div>
+              <div class="result-badge">สถานะล่าสุด</div>
+            </div>
+            <p id="resultMessage"></p>
+            <div class="checked-at" id="checkedAt"></div>
+          </div>
+        </div>
+
+        <div class="note-card"><strong>หมายเหตุสำคัญ:</strong> เนื่องจากร้านค้ายังไม่ได้ทำการสร้างเครดิตต้องทำการสร้างเครดิตก่อนเพื่อสั่งจ่ายยอด</div>
+      </div>
+    </section>
+    <div class="footer">FIRSTSIGHTKIDS UI Prototype</div>
+  </main>
+
+  <script>
+    const el=id=>document.getElementById(id);
+    const dropzone=el('dropzone'),fileInput=el('fileInput'),cardImage=el('cardImage'),cardStage=el('cardStage');
+    const chooseBtn=el('chooseBtn'),scanBtn=el('scanBtn'),approveBtn=el('approveBtn');
+    const progressBox=el('progressBox'),progressBar=el('progressBar'),progressLabel=el('progressLabel'),progressPercent=el('progressPercent');
+    const result=el('result'),resultMessage=el('resultMessage'),checkedAt=el('checkedAt');
+    const nameField=el('nameField'),storeField=el('storeField'),phoneField=el('phoneField');
+    let currentUrl='',scanned=false,scanning=false;
+
+    function openPicker(){if(!scanning)fileInput.click()}
+    dropzone.addEventListener('click',openPicker);
+    chooseBtn.addEventListener('click',openPicker);
+    dropzone.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!scanning){e.preventDefault();openPicker()}});
+    fileInput.addEventListener('change',e=>loadFile(e.target.files[0]));
+    ['dragenter','dragover'].forEach(type=>dropzone.addEventListener(type,e=>{e.preventDefault();if(!scanning)dropzone.classList.add('dragover')}));
+    ['dragleave','drop'].forEach(type=>dropzone.addEventListener(type,e=>{e.preventDefault();dropzone.classList.remove('dragover')}));
+    dropzone.addEventListener('drop',e=>{if(!scanning)loadFile(e.dataTransfer.files[0])});
+    window.addEventListener('paste',e=>{if(scanning)return;const item=[...e.clipboardData.items].find(x=>x.type.startsWith('image/'));if(item)loadFile(item.getAsFile())});
+
+    function loadFile(file){
+      if(!file||!file.type.startsWith('image/')){alert('กรุณาเลือกไฟล์รูปภาพ');return}
+      if(currentUrl)URL.revokeObjectURL(currentUrl);
+      currentUrl=URL.createObjectURL(file);
+      cardImage.src=currentUrl;
+      dropzone.classList.add('has-image');
+      el('imageStatus').textContent=file.name||'พร้อมสแกน';
+      scanBtn.disabled=false;
+      scanned=false;
+      approveBtn.disabled=true;
+      progressBox.classList.remove('show');
+      progressBar.style.width='0%';
+      progressPercent.textContent='0%';
+      result.classList.remove('show');
+    }
+
+    scanBtn.addEventListener('click',()=>{
+      if(!currentUrl||scanning)return;
+      scanning=true;scanned=false;scanBtn.disabled=true;chooseBtn.disabled=true;approveBtn.disabled=true;
+      cardStage.classList.add('scanning');progressBox.classList.add('show');progressLabel.textContent='กำลังสแกนภาพนามบัตร';
+      let value=0;progressBar.style.width='0%';progressPercent.textContent='0%';
+      const timer=setInterval(()=>{
+        value+=Math.max(2,Math.round((100-value)/8));if(value>=100)value=100;
+        progressBar.style.width=value+'%';progressPercent.textContent=value+'%';
+        if(value===100){
+          clearInterval(timer);setTimeout(()=>{
+            scanning=false;scanned=true;cardStage.classList.remove('scanning');scanBtn.disabled=false;chooseBtn.disabled=false;approveBtn.disabled=false;
+            progressLabel.textContent='สแกนนามบัตรสำเร็จ';el('imageStatus').textContent='สแกนแล้ว 100%';
+          },350)
+        }
+      },95)
+    });
+
+    approveBtn.addEventListener('click',()=>{
+      if(!scanned)return;
+      const name=nameField.value.trim()||'ร้านค้านี้';
+      const store=storeField.value.trim()||'-';
+      const phone=phoneField.value.trim()||'-';
+      resultMessage.innerHTML=`การตรวจสอบตอนนี้ <strong>${escapeHtml(name)}</strong> ได้เบิกถอนแล้วแต่ยังไม่สั่งจ่าย เนื่องจากสถานะของร้านค้ายังไม่ได้ทำการสร้างเครดิต 🔴`;
+      checkedAt.textContent='ตรวจสอบเมื่อ '+new Intl.DateTimeFormat('th-TH',{dateStyle:'medium',timeStyle:'short'}).format(new Date());
+      result.classList.add('show');
+      result.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+
+    function escapeHtml(value){
+      return value.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    }
+  </script>
+</body>
+</html>
