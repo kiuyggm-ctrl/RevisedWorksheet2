@@ -2,619 +2,1974 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>การแจ้งเตือนและการแก้ไข</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        rel="stylesheet"
+    >
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
-        /* =========================================
-           Modern, Clean & Colorful Redesign (A4 Fit)
-           Theme: Red (matching index.html)
-           ========================================= */
         :root {
-            --primary-color: #e63946;
-            --secondary-color: #a81c2a;
-            --primary-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            --bg-page: #f0f2f5;
-            --text-dark: #1d3557;
-            --text-main: #4a4a4a;
-            --text-light: #6c757d;
-            --border-color: #e9ecef;
-            --light-red: #fff0f3;
+            --primary: #d72d43;
+            --primary-dark: #941b2f;
+            --primary-deep: #641120;
+            --primary-soft: #fff0f3;
+            --primary-muted: #ffdce3;
+
+            --warning: #d97706;
+            --warning-soft: #fff8e7;
+
+            --blue: #2563eb;
+            --blue-soft: #eff6ff;
+
+            --green: #059669;
+            --green-soft: #ecfdf5;
+
+            --text-dark: #172033;
+            --text-main: #485267;
+            --text-light: #7a8498;
+
+            --border: #e5e9f0;
+            --border-strong: #d7dce5;
+
+            --white: #ffffff;
+            --surface: #f7f8fb;
+
+            --primary-gradient: linear-gradient(
+                135deg,
+                #8d1729 0%,
+                #d72d43 52%,
+                #f05a67 100%
+            );
+
+            --dark-gradient: linear-gradient(
+                135deg,
+                #172033 0%,
+                #2c3b56 100%
+            );
+
+            --page-shadow:
+                0 35px 80px rgba(26, 35, 55, 0.15),
+                0 10px 25px rgba(26, 35, 55, 0.07);
+
+            --panel-shadow:
+                0 25px 65px rgba(26, 35, 55, 0.11),
+                0 8px 20px rgba(26, 35, 55, 0.06);
         }
 
-        body { 
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            font-family: 'Sarabun', sans-serif; 
-            margin: 0; 
-            padding: 40px; 
-            display: flex; 
-            flex-direction: row; 
-            justify-content: center; 
-            align-items: flex-start; 
-            gap: 40px; 
-            min-height: 100vh;
+        * {
+            box-sizing: border-box;
         }
-        
-        /* A4 Document */
-        .document { 
-            background: #ffffff; 
-            width: 210mm; 
-            height: 297mm; /* A4 size */
-            padding: 20mm 20mm; 
-            box-sizing: border-box; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 15px rgba(255, 65, 108, 0.05);
-            position: relative; 
-            color: var(--text-main); 
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 42px 28px;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 34px;
+
+            font-family: "Sarabun", sans-serif;
+            color: var(--text-main);
+
+            background:
+                radial-gradient(
+                    circle at 10% 8%,
+                    rgba(215, 45, 67, 0.13),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 92% 88%,
+                    rgba(37, 99, 235, 0.08),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f6f6f8 0%,
+                    #eceff4 50%,
+                    #f8f2f3 100%
+                );
+
+            overflow-x: auto;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -190px;
+            right: -150px;
+            width: 430px;
+            height: 430px;
+            background: rgba(215, 45, 67, 0.065);
+        }
+
+        body::after {
+            bottom: -180px;
+            left: -140px;
+            width: 390px;
+            height: 390px;
+            background: rgba(23, 32, 51, 0.05);
+        }
+
+        button,
+        input,
+        textarea {
+            font-family: "Sarabun", sans-serif;
+        }
+
+        /* =========================================
+           A4 DOCUMENT
+        ========================================= */
+
+        .document {
+            position: relative;
+            width: 210mm;
+            height: 297mm;
             flex-shrink: 0;
-            border-radius: 4px;
             overflow: hidden;
+
+            padding: 11mm 16mm 10mm;
+
+            display: flex;
+            flex-direction: column;
+
+            color: var(--text-main);
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #ffffff 74%,
+                    #fffafb 100%
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+
+            box-shadow: var(--page-shadow);
+        }
+
+        .document::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+
+            height: 11px;
+            background: var(--primary-gradient);
+        }
+
+        .document::after {
+            content: "FIRSTSIGHTKIDS";
+
+            position: absolute;
+            z-index: 0;
+            top: 53%;
+            left: 50%;
+
+            transform: translate(-50%, -50%) rotate(-38deg);
+
+            color: rgba(215, 45, 67, 0.035);
+            font-size: 66px;
+            font-weight: 800;
+            letter-spacing: 7px;
+            white-space: nowrap;
+
+            pointer-events: none;
+        }
+
+        .page-decoration {
+            position: absolute;
+            z-index: 0;
+            top: -75px;
+            right: -80px;
+
+            width: 220px;
+            height: 220px;
+
+            border: 35px solid rgba(215, 45, 67, 0.035);
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        .page-decoration::before {
+            content: "";
+            position: absolute;
+            top: 135px;
+            right: 165px;
+
+            width: 48px;
+            height: 48px;
+
+            border: 8px solid rgba(215, 45, 67, 0.025);
+            border-radius: 50%;
+        }
+
+        /* =========================================
+           EVIDENCE NOTICE
+        ========================================= */
+
+        .evidence-notice {
+            position: relative;
+            z-index: 3;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            margin: 2px 0 9px;
+            padding: 5px 12px;
+
+            color: #7f1d1d;
+            background: linear-gradient(
+                90deg,
+                #fff1f2,
+                #fff7f8,
+                #fff1f2
+            );
+
+            border: 1px solid #fecdd3;
+            border-radius: 999px;
+
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 0.25px;
+            text-align: center;
+        }
+
+        .evidence-notice i {
+            color: var(--primary);
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 0 11px;
+            margin-bottom: 11px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+
+            width: 92px;
+            height: 3px;
+
+            background: var(--primary-gradient);
+            border-radius: 99px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .logo-frame {
+            width: 50px;
+            height: 50px;
+            padding: 5px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #ffffff;
+            border: 1px solid rgba(215, 45, 67, 0.17);
+            border-radius: 14px;
+
+            box-shadow:
+                0 8px 18px rgba(215, 45, 67, 0.11),
+                inset 0 0 0 3px rgba(215, 45, 67, 0.025);
+        }
+
+        .logo-img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text-wrapper {
             display: flex;
             flex-direction: column;
         }
 
-        /* Top Border Line */
-        .document::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 15px; 
-            background: var(--primary-gradient);
-            z-index: 10;
+        .logo-text {
+            margin-bottom: 3px;
+
+            color: var(--primary);
+            font-size: 20.5px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.5px;
         }
 
-        /* Watermark */
-        .document::after {
-            content: "FIRSTSIGHTKIDS";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 85px; 
-            font-weight: 800; 
-            color: rgba(230, 57, 70, 0.03); /* Light red watermark */
-            z-index: 0;
-            white-space: nowrap;
-            pointer-events: none;
-            letter-spacing: 5px;
+        .sub-logo {
+            color: var(--text-light);
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: 1.45px;
         }
 
-        /* Floating Decor element */
-        .bg-decor {
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: var(--primary-gradient);
-            opacity: 0.04;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
+        .doc-meta {
+            min-width: 215px;
+            padding: 8px 11px;
+
+            text-align: right;
+
+            background: linear-gradient(
+                130deg,
+                rgba(255, 240, 243, 0.92),
+                rgba(255, 255, 255, 0.82)
+            );
+
+            border: 1px solid rgba(215, 45, 67, 0.16);
+            border-radius: 10px;
         }
 
-        /* Header */
-        .header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start; 
-            margin-bottom: 30px; 
-            position: relative; 
-            z-index: 1;
-            margin-top: 10px;
-            border-bottom: 2px dashed var(--border-color);
-            padding-bottom: 15px;
+        .doc-meta p {
+            margin: 0;
+
+            color: var(--text-light);
+            font-size: 10.7px;
+            font-weight: 700;
+            letter-spacing: 0.35px;
+            text-align: right;
         }
-        
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo-img { width: 45px; height: 45px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); } 
-        
-        .logo-text-wrapper { display: flex; flex-direction: column; }
-        .logo-text { 
-            color: #e63946; /* var(--primary-color) equivalent for sure display */
-            font-weight: 800; font-size: 22px; line-height: 1; margin-bottom: 3px; letter-spacing: 0.5px;
-        } 
-        .sub-logo { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--text-light); }
-        
-        .doc-meta { text-align: right; color: var(--text-light); font-size: 12px; font-weight: 600;}
-        .doc-meta p { margin: 4px 0 0; letter-spacing: 0.5px;}
-        
-        /* Info Boxes */
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            margin-top: 4px;
+            padding: 3px 8px;
+
+            color: var(--primary);
+            background: var(--primary-soft);
+            border-radius: 999px;
+
+            font-size: 9.3px;
+            font-weight: 800;
+        }
+
+        /* =========================================
+           INFORMATION CARDS
+        ========================================= */
+
         .info-container {
+            position: relative;
+            z-index: 2;
+
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 10px;
+
+            margin-bottom: 12px;
+        }
+
+        .info-box {
+            position: relative;
+            min-height: 77px;
+            padding: 10px 13px 10px 15px;
+            overflow: hidden;
+
+            background: linear-gradient(
+                120deg,
+                #fff4f6 0%,
+                #ffffff 78%
+            );
+
+            border: 1px solid rgba(215, 45, 67, 0.16);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+
+            box-shadow: 0 5px 15px rgba(26, 35, 55, 0.035);
+        }
+
+        .info-box.secondary {
+            background: linear-gradient(
+                120deg,
+                #f4f7ff 0%,
+                #ffffff 78%
+            );
+
+            border-color: #dbe5ff;
+            border-left-color: var(--blue);
+        }
+
+        .info-box::after {
+            content: "";
+            position: absolute;
+            right: -22px;
+            bottom: -32px;
+
+            width: 80px;
+            height: 80px;
+
+            background: rgba(215, 45, 67, 0.045);
+            border-radius: 50%;
+        }
+
+        .info-box.secondary::after {
+            background: rgba(37, 99, 235, 0.045);
+        }
+
+        .info-box-label {
             display: flex;
-            gap: 20px;
-            margin-bottom: 40px;
+            align-items: center;
+            gap: 6px;
+
+            margin-bottom: 4px;
+
+            color: var(--text-light);
+            font-size: 10.7px;
+            font-weight: 700;
+        }
+
+        .info-box-label i {
+            width: 20px;
+            height: 20px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #ffffff;
+            background: var(--primary);
+            border-radius: 6px;
+
+            font-size: 8px;
+        }
+
+        .secondary .info-box-label i {
+            background: var(--blue);
+        }
+
+        .info-box-value {
             position: relative;
             z-index: 1;
+
+            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.35;
+            letter-spacing: 0.15px;
+        }
+
+        /* =========================================
+           MAIN CONTENT
+        ========================================= */
+
+        .main-content {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            flex-direction: column;
+
+            text-align: center;
+        }
+
+        .main-title {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            margin: 1px auto 11px;
+            padding: 8px 19px;
+
+            color: #ffffff;
+            background: var(--dark-gradient);
+            border-radius: 11px;
+
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: 0.25px;
+
+            box-shadow: 0 8px 18px rgba(23, 32, 51, 0.16);
+        }
+
+        .main-title::before {
+            content: "\f071";
+
+            color: #ffffff;
+            font-family: "Font Awesome 6 Free";
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .desc-card {
+            margin-bottom: 10px;
+            padding: 10px 18px;
+
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            box-shadow: 0 4px 13px rgba(26, 35, 55, 0.03);
+        }
+
+        .desc-text {
+            margin: 0;
+
+            color: var(--text-main);
+            font-size: 13.2px;
+            font-weight: 500;
+            line-height: 1.55;
+            text-align: center;
+        }
+
+        /* =========================================
+           AMOUNT CARD
+        ========================================= */
+
+        .amount-box {
+            position: relative;
+
+            width: 84%;
+            margin: 0 auto 10px;
+            padding: 12px 18px;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    125deg,
+                    #fff7df 0%,
+                    #fffdf7 100%
+                );
+
+            border: 1px solid #f7db8c;
+            border-left: 5px solid var(--warning);
+            border-radius: 12px;
+
+            box-shadow: 0 7px 18px rgba(217, 119, 6, 0.08);
+        }
+
+        .amount-box::after {
+            content: "\f555";
+            position: absolute;
+            top: -11px;
+            right: 12px;
+
+            color: rgba(217, 119, 6, 0.08);
+            font-family: "Font Awesome 6 Free";
+            font-size: 68px;
+            font-weight: 900;
+
+            transform: rotate(-8deg);
+        }
+
+        .amount-label {
+            position: relative;
+            z-index: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            margin-bottom: 3px;
+
+            color: #614a1e;
+            font-size: 12.5px;
+            font-weight: 700;
+        }
+
+        .amount-label i {
+            color: var(--warning);
+        }
+
+        .amount-value {
+            position: relative;
+            z-index: 1;
+
+            margin-bottom: 4px;
+
+            color: var(--primary);
+            font-size: 27px;
+            font-weight: 800;
+            line-height: 1.2;
+
+            text-shadow: 1px 1px 0 rgba(215, 45, 67, 0.06);
+        }
+
+        .amount-note {
+            position: relative;
+            z-index: 1;
+
+            color: var(--text-main);
+            font-size: 11.7px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* =========================================
+           INSTRUCTION CARD
+        ========================================= */
+
+        .instruction-card {
+            position: relative;
+
+            margin-bottom: 9px;
+            padding: 10px 18px;
+
+            background:
+                linear-gradient(
+                    125deg,
+                    #f8fafc 0%,
+                    #ffffff 100%
+                );
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            box-shadow: 0 4px 13px rgba(26, 35, 55, 0.03);
+        }
+
+        .instruction-card::before {
+            content: "";
+            position: absolute;
+            top: 9px;
+            bottom: 9px;
+            left: 8px;
+
+            width: 3px;
+
+            background: var(--primary-gradient);
+            border-radius: 99px;
+        }
+
+        .instruction-text {
+            margin: 0;
+            padding: 0 15px;
+
+            color: var(--text-main);
+            font-size: 12.5px;
+            line-height: 1.58;
+            text-align: center;
+        }
+
+        .instruction-text strong {
+            display: inline-block;
+
+            margin: 3px 0;
+
+            color: var(--text-dark) !important;
+            font-size: 14px !important;
+            font-weight: 800;
+        }
+
+        /* =========================================
+           FOOTER NOTE
+        ========================================= */
+
+        .footer-note {
+            position: relative;
+            z-index: 2;
+
+            margin-top: auto;
+            margin-bottom: 10px;
+            padding: 8px 12px 8px 14px;
+
+            background: linear-gradient(
+                115deg,
+                #fff0f3,
+                #ffffff
+            );
+
+            border: 1px solid #fecdd3;
+            border-left: 4px solid var(--primary);
+            border-radius: 9px;
+        }
+
+        .footer-note p {
+            margin: 0;
+
+            color: var(--text-dark);
+            font-size: 11.8px;
+            line-height: 1.45;
+            text-align: left;
+        }
+
+        /* =========================================
+           SIGNATURE
+        ========================================= */
+
+        .signature-area {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            padding: 0 8px;
+            margin-top: 49px;
+        }
+
+        .date-area {
+            padding-left: 10px;
+
+            color: var(--text-light);
+            font-size: 11.8px;
+            line-height: 1.45;
+
+            border-left: 3px solid var(--primary-muted);
+        }
+
+        .date-area p {
+            margin: 0;
+        }
+
+        .sign-box {
+            position: relative;
+
+            width: 230px;
+            padding-top: 34px;
+
+            text-align: center;
+        }
+
+        .sign-line {
+            position: relative;
+            z-index: 1;
+
+            width: 180px;
+            margin: 0 auto 4px;
+
+            border-top: 1px solid #cfd5df;
+        }
+
+        .signature-img {
+            position: absolute;
+            z-index: 10;
+            bottom: -12px;
+            left: 50%;
+
+            width: 145px;
+            height: auto;
+
+            mix-blend-mode: multiply;
+
+            transform: translateX(-50%);
+            filter:
+                contrast(1.08)
+                drop-shadow(0 2px 2px rgba(0, 0, 0, 0.05));
+        }
+
+        .signature-img-2 {
+            position: absolute;
+            z-index: 11;
+            bottom: 4px;
+            left: 50%;
+
+            width: 120px;
+            height: auto;
+
+            mix-blend-mode: multiply;
+
+            transform: translateX(-50%);
+        }
+
+        .sign-name {
+            position: relative;
+            z-index: 1;
+
+            margin-bottom: 1px;
+
+            color: var(--text-dark);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .sign-title {
+            position: relative;
+            z-index: 1;
+
+            color: var(--text-light);
+            font-size: 10.8px;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           BOTTOM EVIDENCE LABEL
+        ========================================= */
+
+        .bottom-evidence-label {
+            position: absolute;
+            z-index: 5;
+            right: 16mm;
+            bottom: 4mm;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            padding: 3px 8px;
+
+            color: #991b1b;
+            background: rgba(255, 241, 242, 0.96);
+            border: 1px solid #fecdd3;
+            border-radius: 999px;
+
+            font-size: 8.3px;
+            font-weight: 800;
+        }
+
+        /* =========================================
+           CONTROL PANEL
+        ========================================= */
+
+        .control-panel {
+            position: sticky;
+            top: 35px;
+
+            width: 365px;
+            flex-shrink: 0;
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            padding: 27px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.97),
+                    rgba(249, 250, 252, 0.92)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 22px;
+
+            box-shadow: var(--panel-shadow);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .control-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 7px;
+            background: var(--primary-gradient);
+        }
+
+        .control-panel::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: -95px;
+            right: -95px;
+
+            width: 190px;
+            height: 190px;
+
+            background: rgba(215, 45, 67, 0.055);
+            border-radius: 50%;
+        }
+
+        .control-panel h2 {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            margin: 0;
+            padding-bottom: 14px;
+
+            color: var(--text-dark);
+            font-size: 20px;
+            font-weight: 800;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .control-panel h2 i {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #ffffff;
+            background: var(--primary-gradient);
+            border-radius: 11px;
+
+            font-size: 15px;
+
+            box-shadow: 0 7px 15px rgba(215, 45, 67, 0.2);
+        }
+
+        .control-group {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-bottom: 7px;
+
+            color: var(--text-dark);
+            font-size: 13.2px;
+            font-weight: 700;
+        }
+
+        .control-group label i {
+            width: 21px;
+            height: 21px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--primary);
+            background: var(--primary-soft);
+            border-radius: 6px;
+
+            font-size: 9px;
+        }
+
+        .control-group input,
+        .control-group textarea {
+            width: 100%;
+
+            color: var(--text-dark);
+            background: #ffffff;
+
+            border: 1px solid #dfe3ea;
+            border-radius: 11px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            box-shadow:
+                inset 0 1px 2px rgba(26, 35, 55, 0.025),
+                0 3px 8px rgba(26, 35, 55, 0.025);
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .control-group input {
+            height: 49px;
+            padding: 0 14px 0 43px;
+        }
+
+        .control-group textarea {
+            min-height: 75px;
+            padding: 12px 14px;
+            resize: vertical;
+            line-height: 1.45;
+        }
+
+        .control-group input:hover,
+        .control-group textarea:hover {
+            border-color: #cbd1dc;
+        }
+
+        .control-group input:focus,
+        .control-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px rgba(215, 45, 67, 0.09),
+                0 5px 14px rgba(26, 35, 55, 0.05);
+
+            transform: translateY(-1px);
+        }
+
+        .control-group i.input-icon {
+            position: absolute;
+            top: 42px;
+            left: 15px;
+
+            color: #a5adba;
+            font-size: 14px;
+
+            pointer-events: none;
+
+            transition: color 0.25s ease;
+        }
+
+        .control-group:focus-within i.input-icon {
+            color: var(--primary);
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+
+            margin-top: 3px;
+        }
+
+        .print-btn {
+            position: relative;
+
+            min-height: 48px;
+            padding: 12px 20px;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            color: #ffffff;
+            border: none;
+            border-radius: 11px;
+
+            cursor: pointer;
+
+            font-size: 14.2px;
+            font-weight: 700;
+
+            box-shadow: 0 8px 18px rgba(26, 35, 55, 0.13);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
+
+        .print-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -70%;
+
+            width: 40%;
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.22),
+                transparent
+            );
+
+            transform: skewX(-22deg);
+            transition: left 0.45s ease;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(26, 35, 55, 0.17);
+            filter: brightness(1.04);
+        }
+
+        .print-btn:hover::after {
+            left: 130%;
+        }
+
+        .print-btn:active {
+            transform: translateY(1px);
+        }
+
+        .panel-note {
+            padding: 13px 14px;
+
+            background: linear-gradient(
+                120deg,
+                #fff1f2,
+                #ffffff
+            );
+
+            border: 1px solid #fecdd3;
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+
+            box-shadow: 0 5px 12px rgba(215, 45, 67, 0.04);
+        }
+
+        .panel-note p {
+            margin: 0;
+
+            color: #5c2630;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        .panel-note i {
+            color: var(--primary);
+        }
+
+        /* =========================================
+           PRINT
+        ========================================= */
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            body {
+                display: block;
+
+                margin: 0;
+                padding: 0;
+
+                background: #ffffff;
+
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .control-panel {
+                display: none;
+            }
+
+            .document {
+                width: 210mm;
+                height: 297mm;
+
+                margin: 0;
+                padding: 11mm 16mm 10mm;
+
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            .page-decoration {
+                display: none;
+            }
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1200px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+
+                padding: 24px 18px;
+            }
+
+            .control-panel {
+                position: static;
+
+                width: 100%;
+                max-width: 210mm;
+
+                order: -1;
+            }
+
+            .btn-group {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            body {
+                align-items: flex-start;
+                padding: 14px;
+            }
+
+            .control-panel {
+                min-width: 345px;
+                padding: 22px 20px;
+                border-radius: 17px;
+            }
+
+            .btn-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+
+
+        
+
+        /* ==================================================
+           ORIGINAL-POSITION LAYOUT OVERRIDE
+           คืนตำแหน่งให้ใกล้ไฟล์เดิมและใช้พื้นที่ A4 ให้เต็มขึ้น
+        ================================================== */
+
+        .document {
+            width: 210mm;
+            height: 297mm;
+            padding: 20mm 20mm 16mm;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ป้ายหลักฐานเป็นแบบลอย จึงไม่ดันตำแหน่งเอกสาร */
+        .evidence-notice {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+            width: max-content;
+            max-width: calc(100% - 40mm);
+            margin: 0;
+            padding: 4px 11px;
+            font-size: 9px;
+            line-height: 1.25;
+        }
+
+        .header {
+            align-items: flex-start;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+        }
+
+        .logo-frame {
+            width: 45px;
+            height: 45px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+        }
+
+        .logo-text {
+            font-size: 22px;
+        }
+
+        .sub-logo {
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .doc-meta {
+            min-width: auto;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
+
+        .doc-meta p {
+            font-size: 12px;
+        }
+
+        .security-badge {
+            margin-top: 4px;
+            padding: 2px 8px;
+            font-size: 10px;
+        }
+
+        .info-container {
+            display: flex;
+            grid-template-columns: none;
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
         .info-box {
             flex: 1;
-            background: #f8f9fa;
-            border-radius: 6px;
-            padding: 15px 20px;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid #e63946; /* primary-color */
             min-height: 80px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            padding: 15px 20px;
+            border-radius: 6px;
         }
 
         .info-box-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-light);
             margin-bottom: 8px;
-            display: flex; 
-            align-items: center; 
-            gap: 6px;
+            font-size: 13px;
         }
-        .info-box-label i { color: #e63946; }
+
+        .info-box-label i,
+        .secondary .info-box-label i {
+            width: auto;
+            height: auto;
+            color: var(--primary);
+            background: transparent;
+            border-radius: 0;
+            font-size: 12px;
+        }
+
+        .secondary .info-box-label i {
+            color: var(--blue);
+        }
 
         .info-box-value {
             font-size: 16px;
-            font-weight: 800;
-            color: var(--text-dark);
             line-height: 1.4;
-            letter-spacing: 0.2px;
         }
 
-        /* Main Content */
         .main-content {
-            text-align: center;
-            position: relative;
-            z-index: 1;
             flex-grow: 1;
         }
 
         .main-title {
-            font-size: 24px;
-            font-weight: 800;
+            margin: 0 auto 25px;
+            padding: 0 0 5px;
             color: var(--text-dark);
-            margin-bottom: 25px;
-            display: inline-block;
-            border-bottom: 3px solid #e63946;
-            padding-bottom: 5px;
+            background: transparent;
+            border-radius: 0;
+            border-bottom: 3px solid var(--primary);
+            box-shadow: none;
+            font-size: 24px;
+        }
+
+        .main-title::before {
+            display: none;
+        }
+
+        .desc-card {
+            margin-bottom: 30px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .desc-text {
             font-size: 15px;
             line-height: 1.6;
-            color: var(--text-main);
-            margin-bottom: 30px;
         }
 
-        /* Amount Box */
         .amount-box {
-            background: #fff9e6; /* subtle yellow bg */
-            border: 1px solid #ffe082;
-            border-left: 4px solid #ffb703; /* accent-yellow */
-            border-radius: 6px;
-            padding: 20px;
-            margin: 0 auto 30px;
             width: 80%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            margin: 0 auto 30px;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .amount-box::after {
+            top: -5px;
+            right: 18px;
+            font-size: 75px;
         }
 
         .amount-label {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-dark);
             margin-bottom: 10px;
+            font-size: 15px;
         }
 
         .amount-value {
-            font-size: 34px;
-            font-weight: 900;
-            color: #e63946; /* primary-color */
             margin-bottom: 10px;
-            text-shadow: 1px 1px 0px rgba(230,57,70,0.1);
+            font-size: 34px;
+            line-height: 1.25;
         }
 
         .amount-note {
             font-size: 14px;
-            color: var(--text-main);
-            font-weight: 500;
+        }
+
+        .instruction-card {
+            margin-bottom: 20px;
+            padding: 0 30px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .instruction-card::before {
+            display: none;
         }
 
         .instruction-text {
+            padding: 0;
             font-size: 14.5px;
             line-height: 1.8;
-            color: var(--text-main);
-            margin-bottom: 20px;
-            padding: 0 30px;
         }
 
-        /* Footer Note */
+        .instruction-text strong {
+            margin: 4px 0;
+            font-size: 16px !important;
+        }
+
         .footer-note {
-            background: var(--light-red);
-            border-left: 4px solid #e63946;
-            padding: 12px 20px;
-            border-radius: 6px;
             margin-top: auto;
             margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
+            padding: 12px 20px;
+            border-radius: 6px;
         }
 
         .footer-note p {
-            margin: 0;
             font-size: 13.5px;
-            color: var(--text-dark);
             line-height: 1.5;
         }
 
-        /* Signatures Area */
-        .signature-area { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            position: relative; 
-            z-index: 1; 
+        .signature-area {
             margin-top: 20px;
-        } 
-        
-        .date-area { 
-            font-size: 13.5px; 
-            line-height: 1.5;
-            color: var(--text-light); 
-            margin-bottom: 0;
-        } 
-        .date-area p { margin: 0; }
-        
-        .sign-box { 
-            text-align: center; 
-            position: relative; 
-            width: 220px; 
-            padding-top: 20px;
-        } 
-        
-        .signature-img {
-            width: 145px; 
-            height: auto;
-            position: absolute; 
-            bottom: -15px; 
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10; 
-            mix-blend-mode: multiply; 
-            filter: contrast(1.1) drop-shadow(0 2px 2px rgba(0,0,0,0.05));
+            padding: 0;
+            align-items: flex-end;
         }
 
-        /* --- เพิ่ม CSS สำหรับรูปภาพ ลายเซ็น.png --- */
-        .signature-img-2 {
-            width: 120px;
-            height: auto;
-            position: absolute; 
-            bottom: 5px; 
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 11; 
-            mix-blend-mode: multiply; 
+        .date-area {
+            padding-left: 0;
+            border-left: none;
+            font-size: 13.5px;
+            line-height: 1.5;
         }
-        /* ------------------------------------------ */
-        
-        .sign-name { 
-            font-size: 14.5px;
-            font-weight: 800; 
-            color: var(--text-dark); 
-            margin-bottom: 2px;
-            position: relative;
-            z-index: 1;
-        } 
-        .sign-title { 
-            color: var(--text-light); 
-            font-size: 12px; 
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-        } 
+
+        .sign-box {
+            width: 220px;
+            padding-top: 20px;
+        }
 
         .sign-line {
-            border-top: 1px solid var(--text-dark);
-            margin-bottom: 5px;
             width: 100%;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 5px;
+            border-top: 1px solid var(--text-dark);
         }
 
-        /* Control Panel */
-        .control-panel { 
-            background: rgba(255, 255, 255, 0.85); 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
-            width: 340px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-            position: sticky;
-            top: 40px; 
-            flex-shrink: 0;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.6);
+        .signature-img {
+            width: 145px;
+            bottom: -15px;
         }
-        .control-panel h2 { 
-            margin-top: 0; 
-            font-size: 22px; 
-            margin-bottom: 10px; 
-            color: var(--text-dark); 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--border-color);
+
+        .signature-img-2 {
+            width: 120px;
+            bottom: 5px;
         }
-        .control-panel h2 i { color: #e63946; }
-        .control-group { display: flex; flex-direction: column; position: relative;}
-        .control-group label { 
-            font-weight: 600; 
-            margin-bottom: 8px; 
-            font-size: 14px; 
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+
+        .sign-name {
+            margin-bottom: 2px;
+            font-size: 14.5px;
         }
-        .control-group label i { color: #e63946; opacity: 0.8; font-size: 12px; }
-        .control-group input, .control-group textarea { 
-            padding: 14px 14px 14px 40px; 
-            border: 2px solid var(--border-color); 
-            border-radius: 8px; 
-            font-family: 'Sarabun', sans-serif; 
-            font-size: 15px; 
-            transition: all 0.3s ease; 
-            background: #ffffff;
-            color: var(--text-dark);
-            font-weight: 500;
+
+        .sign-title {
+            font-size: 12px;
         }
-        .control-group textarea { 
-            padding-left: 14px; /* Textarea doesn't need left padding for icon */
-            resize: vertical; 
-            min-height: 60px; 
+
+        .bottom-evidence-label {
+            right: 20mm;
+            bottom: 4mm;
         }
-        .control-group i.input-icon {
-            position: absolute;
-            left: 14px;
-            top: 40px;
-            color: #adb5bd;
-            font-size: 14px;
-            transition: 0.3s;
+
+        .document::after {
+            top: 50%;
+            font-size: 70px;
         }
-        .control-group input:focus, .control-group textarea:focus { 
-            border-color: #e63946; 
-            outline: none; 
-            box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1); 
-        }
-        .control-group input:focus + i.input-icon { color: #e63946; }
-        
-        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .print-btn { 
-            color: white; 
-            border: none; 
-            padding: 12px 20px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-family: 'Sarabun', sans-serif; 
-            font-weight: 700; 
-            font-size: 15px; 
-            flex: 1;
-            transition: all 0.3s ease; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
-        .print-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .print-btn:active { transform: translateY(1px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
         @media print {
-            @page { size: A4; margin: 0; } 
-            body { background: white; padding: 0; display: block; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .control-panel { display: none; }
-            .document { 
-                box-shadow: none; 
-                border: none; 
-                margin: 0 auto; 
-                width: 210mm; 
-                height: 297mm; 
-                page-break-after: avoid; 
-                page-break-inside: avoid;
+            .document {
+                width: 210mm;
+                height: 297mm;
+                padding: 20mm 20mm 16mm;
                 border-radius: 0;
             }
-            .bg-decor { display: none; }
+
+            .evidence-notice {
+                top: 22px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
+
     </style>
 </head>
+
 <body>
 
     <!-- A4 Document -->
     <div class="document">
-        <div class="bg-decor"></div>
+        <div class="page-decoration"></div>
+
+        <div class="evidence-notice">
+            <i class="fa-solid fa-shield-halved"></i>
+            เอกสารประกอบหลักฐานเพื่อการตรวจสอบเท่านั้น
+        </div>
+
         <div class="header">
             <div class="logo-area">
-                <img src="Logo.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'"> 
+                <div class="logo-frame">
+                    <img
+                        src="Logo.png"
+                        alt="Logo"
+                        class="logo-img"
+                        onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png';"
+                    >
+                </div>
+
                 <div class="logo-text-wrapper">
                     <div class="logo-text">FIRSTSIGHTKIDS</div>
                     <div class="sub-logo">STANDARD DIGITAL COMPLIANCE</div>
                 </div>
             </div>
+
             <div class="doc-meta">
                 <p>REF NO: CC/NOTI/2026/084</p>
-                <p style="color: #e63946; background: #fff0f3; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 4px;">มาตรฐานความปลอดภัยดิจิทัล</p>
+
+                <div class="security-badge">
+                    <i class="fa-solid fa-lock"></i>
+                    มาตรฐานความปลอดภัยดิจิทัล
+                </div>
             </div>
         </div>
 
         <div class="info-container">
             <div class="info-box">
-                <div class="info-box-label"><i class="fas fa-store"></i> ร้านค้าสมาชิก</div>
-                <div class="info-box-value" id="doc-shop-name">"ParePare" และ "จริงใจขาย" และ<br>"Mint"</div>
+                <div class="info-box-label">
+                    <i class="fas fa-store"></i>
+                    ร้านค้าสมาชิก
+                </div>
+
+                <div class="info-box-value" id="doc-shop-name">
+                    "ParePare" และ "จริงใจขาย" และ<br>"Mint"
+                </div>
             </div>
-            <div class="info-box">
-                <div class="info-box-label"><i class="fas fa-user-circle"></i> ผู้ยื่นรับผิดชอบ</div>
-                <div class="info-box-value" id="doc-resp-name">เฌอพร ปนัดดาวัฒนากูล</div>
+
+            <div class="info-box secondary">
+                <div class="info-box-label">
+                    <i class="fas fa-user-circle"></i>
+                    ผู้ยื่นรับผิดชอบ
+                </div>
+
+                <div class="info-box-value" id="doc-resp-name">
+                    เฌอพร ปนัดดาวัฒนากูล
+                </div>
             </div>
         </div>
 
         <div class="main-content">
-            <div class="main-title">การแจ้งเตือนและการแก้ไข</div>
-            
-            <div class="desc-text">
-                เนื่องจากสมาชิกไม่ได้ทำการบันทึกช่วยจำตามที่ทางระบบได้แจ้งมาให้<br>
-                จึงทำให้ไม่สามารถยื่นเรื่องทำการเบิกถอนเงินได้ในขณะนี้
+            <div class="main-title">
+                การแจ้งเตือนและการแก้ไข
+            </div>
+
+            <div class="desc-card">
+                <div class="desc-text">
+                    เนื่องจากสมาชิกไม่ได้ทำการบันทึกช่วยจำตามที่ทางระบบได้แจ้งมาให้<br>
+                    จึงทำให้ไม่สามารถยื่นเรื่องทำการเบิกถอนเงินได้ในขณะนี้
+                </div>
             </div>
 
             <div class="amount-box">
-                <div class="amount-label"><i class="fas fa-exclamation-circle" style="color: #e63946; margin-right: 5px;"></i> กรุณาทำรายการเข้ามาใหม่จำนวน</div>
-                <div class="amount-value" id="doc-amount">105,648.00 บาท</div>
-                <div class="amount-note">พร้อมบันทึกช่วยจำให้ถูกต้อง จากนั้นเข้าทำการถอนเงินทั้งหมดอีกครั้ง</div>
+                <div class="amount-label">
+                    <i class="fas fa-exclamation-circle"></i>
+                    กรุณาทำรายการเข้ามาใหม่จำนวน
+                </div>
+
+                <div class="amount-value" id="doc-amount">
+                    105,648.00 บาท
+                </div>
+
+                <div class="amount-note">
+                    พร้อมบันทึกช่วยจำให้ถูกต้อง จากนั้นเข้าทำการถอนเงินทั้งหมดอีกครั้ง
+                </div>
             </div>
 
-            <div class="instruction-text">
-                ยอดที่สมาชิกได้ทำรายการเข้ามาไม่ถูกต้องตอนนี้ได้เข้าระบบร้านค้าของ<br>
-                สมาชิกเป็นที่เรียบร้อยแล้ว หลังจากที่สมาชิกทำรายการถูกต้องเสร็จสิ้น<br>
-                <strong style="color: #1d3557; font-size: 16px;">สามารถทำการถอนเงินทั้งหมดได้ในทันที</strong><br><br>
-                เพียงสมาชิกทำรายการเข้ามาใหม่พร้อมทำการบันทึกช่วยจำ<br>
-                ให้ถูกต้องก็สามารถทำการเบิกถอนเงินทั้งหมดได้ทันที
+            <div class="instruction-card">
+                <div class="instruction-text">
+                    ยอดที่สมาชิกได้ทำรายการเข้ามาไม่ถูกต้องตอนนี้ได้เข้าระบบร้านค้าของ<br>
+                    สมาชิกเป็นที่เรียบร้อยแล้ว หลังจากที่สมาชิกทำรายการถูกต้องเสร็จสิ้น<br>
+
+                    <strong>
+                        สามารถทำการถอนเงินทั้งหมดได้ในทันที
+                    </strong><br><br>
+
+                    เพียงสมาชิกทำรายการเข้ามาใหม่พร้อมทำการบันทึกช่วยจำ<br>
+                    ให้ถูกต้องก็สามารถทำการเบิกถอนเงินทั้งหมดได้ทันที
+                </div>
             </div>
         </div>
 
         <div class="footer-note">
-            <p><strong style="color: #e63946;">หมายเหตุ :</strong> เกิดข้อผิดพลาด ไม่ได้บันทึกช่วยจำตามที่ระบบกำหนด</p>
+            <p>
+                <strong style="color: var(--primary);">
+                    หมายเหตุ :
+                </strong>
+
+                เกิดข้อผิดพลาด ไม่ได้บันทึกช่วยจำตามที่ระบบกำหนด
+            </p>
         </div>
 
         <div class="signature-area">
             <div class="date-area">
                 <p>วันที่ออกเอกสาร:</p>
-                <p><strong id="current-date-display" style="color: #e63946; font-size: 14.5px;">21 เมษายน พ.ศ. 2569</strong></p>
+
+                <p>
+                    <strong
+                        id="current-date-display"
+                        style="color: var(--primary); font-size: 13.5px;"
+                    >
+                        21 เมษายน พ.ศ. 2569
+                    </strong>
+                </p>
             </div>
+
             <div class="sign-box">
-                <img src="Signature.png" alt="Signature" class="signature-img" onerror="this.style.display='none'">
-                
-                <!-- เพิ่มรูป ลายเซ็น.png ไว้ใต้ Signature.png -->
-                <img src="ลายเซ็น.png" alt="ลายเซ็น" class="signature-img-2" onerror="this.style.display='none'">
-                
+                <img
+                    src="Signature.png"
+                    alt="Signature"
+                    class="signature-img"
+                    onerror="this.style.display='none'"
+                >
+
+                <img
+                    src="ลายเซ็น.png"
+                    alt="ลายเซ็น"
+                    class="signature-img-2"
+                    onerror="this.style.display='none'"
+                >
+
                 <div class="sign-line"></div>
-                <div class="sign-name" id="doc-sign-name">(นายวิทวุฒิ ภัยชำนาญ)</div>
-                <div class="sign-title">ผู้อำนวยการฝ่ายตรวจสอบระบบดิจิทัล</div>
+
+                <div class="sign-name" id="doc-sign-name">
+                    (นายวิทวุฒิ ภัยชำนาญ)
+                </div>
+
+                <div class="sign-title">
+                    ผู้อำนวยการฝ่ายตรวจสอบระบบดิจิทัล
+                </div>
             </div>
+        </div>
+
         </div>
     </div>
 
     <!-- Control Panel -->
     <div class="control-panel">
-        <h2><i class="fas fa-sliders-h"></i> ตั้งค่าเอกสาร</h2>
-        
+        <h2>
+            <i class="fas fa-sliders-h"></i>
+            ตั้งค่าเอกสาร
+        </h2>
+
         <div class="control-group">
-            <label><i class="fas fa-store"></i> ร้านค้าสมาชิก</label>
+            <label>
+                <i class="fas fa-store"></i>
+                ร้านค้าสมาชิก
+            </label>
+
             <textarea id="ctrl-shop" rows="2">"ParePare" และ "จริงใจขาย" และ&#13;&#10;"Mint"</textarea>
         </div>
-        
+
         <div class="control-group">
-            <label><i class="fas fa-user-circle"></i> ผู้ยื่นรับผิดชอบ</label>
-            <input type="text" id="ctrl-resp" value="เฌอพร ปนัดดาวัฒนากูล">
+            <label>
+                <i class="fas fa-user-circle"></i>
+                ผู้ยื่นรับผิดชอบ
+            </label>
+
+            <input
+                type="text"
+                id="ctrl-resp"
+                value="เฌอพร ปนัดดาวัฒนากูล"
+            >
+
             <i class="fas fa-edit input-icon"></i>
         </div>
 
         <div class="control-group">
-            <label><i class="fas fa-money-bill-wave"></i> จำนวนเงิน (บาท)</label>
-            <input type="number" id="ctrl-amount" value="105648">
+            <label>
+                <i class="fas fa-money-bill-wave"></i>
+                จำนวนเงิน (บาท)
+            </label>
+
+            <input
+                type="number"
+                id="ctrl-amount"
+                value="105648"
+            >
+
             <i class="fas fa-coins input-icon"></i>
         </div>
 
         <div class="control-group">
-            <label><i class="fas fa-signature"></i> ชื่อผู้ลงนาม</label>
-            <input type="text" id="ctrl-sign-name" value="(นายวิทวุฒิ ภัยชำนาญ)">
+            <label>
+                <i class="fas fa-signature"></i>
+                ชื่อผู้ลงนาม
+            </label>
+
+            <input
+                type="text"
+                id="ctrl-sign-name"
+                value="(นายวิทวุฒิ ภัยชำนาญ)"
+            >
+
             <i class="fas fa-pen input-icon"></i>
         </div>
-        
+
         <div class="btn-group">
-            <button class="print-btn" onclick="saveAsImage()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                <i class="fas fa-image"></i> บันทึกรูปภาพ
+            <button
+                class="print-btn"
+                onclick="saveAsImage()"
+                style="background: linear-gradient(135deg, #10b981 0%, #047857 100%);"
+            >
+                <i class="fas fa-image"></i>
+                บันทึกรูปภาพ
             </button>
-            <button class="print-btn btn-blue" onclick="copyToClipboard()" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-                <i class="fas fa-copy"></i> คัดลอกรูปภาพ
+
+            <button
+                class="print-btn"
+                onclick="copyToClipboard()"
+                style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);"
+            >
+                <i class="fas fa-copy"></i>
+                คัดลอกรูปภาพ
             </button>
         </div>
-        
-        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-top: 5px;">
-            <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.5;">
-                <i class="fas fa-info-circle" style="color: #3b82f6;"></i> <strong>คำแนะนำ:</strong><br>
-                ดีไซน์ปรับเป็นธีมสีแดง เข้ากับ index.html ตามที่ร้องขอ
+
+        <div class="panel-note">
+            <p>
+                <i class="fas fa-shield-halved"></i>
+                <strong>คำแนะนำ:</strong><br>
+                เวอร์ชันนี้ออกแบบเป็นเอกสารประกอบหลักฐาน โดยคงข้อความเดิมและเพิ่มป้ายกำกับเพื่อป้องกันการนำไปใช้เรียกเก็บเงินจริง
             </p>
         </div>
     </div>
 
     <script>
         function formatCurrency(num) {
-            return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            return num.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
         }
 
         function setCurrentDate() {
             const today = new Date();
-            const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
+            const thaiMonths = [
+                "มกราคม",
+                "กุมภาพันธ์",
+                "มีนาคม",
+                "เมษายน",
+                "พฤษภาคม",
+                "มิถุนายน",
+                "กรกฎาคม",
+                "สิงหาคม",
+                "กันยายน",
+                "ตุลาคม",
+                "พฤศจิกายน",
+                "ธันวาคม"
+            ];
+
             const day = today.getDate();
             const month = thaiMonths[today.getMonth()];
             const year = today.getFullYear() + 543;
-            document.getElementById('current-date-display').innerText = `${day} ${month} พ.ศ. ${year}`;
+
+            document.getElementById("current-date-display").innerText =
+                `${day} ${month} พ.ศ. ${year}`;
         }
 
         function updateDocument() {
-            // Update Shop Name
-            const shopText = document.getElementById('ctrl-shop').value;
-            document.getElementById('doc-shop-name').innerHTML = shopText.replace(/\n/g, '<br>');
+            const shopText =
+                document.getElementById("ctrl-shop").value || "-";
 
-            // Update Responsible Person
-            document.getElementById('doc-resp-name').innerText = document.getElementById('ctrl-resp').value;
+            document.getElementById("doc-shop-name").innerHTML =
+                escapeHtml(shopText).replace(/\n/g, "<br>");
 
-            // Update Amount
-            const amount = parseFloat(document.getElementById('ctrl-amount').value) || 0;
-            document.getElementById('doc-amount').innerText = formatCurrency(amount) + " บาท";
+            document.getElementById("doc-resp-name").innerText =
+                document.getElementById("ctrl-resp").value || "-";
 
-            // Update Sign Name
-            document.getElementById('doc-sign-name').innerText = document.getElementById('ctrl-sign-name').value;
+            const amount =
+                parseFloat(
+                    document.getElementById("ctrl-amount").value
+                ) || 0;
+
+            document.getElementById("doc-amount").innerText =
+                formatCurrency(amount) + " บาท";
+
+            document.getElementById("doc-sign-name").innerText =
+                document.getElementById("ctrl-sign-name").value || "-";
+        }
+
+        function escapeHtml(value) {
+            return value
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        async function createDocumentCanvas() {
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
+
+            if (document.fonts && document.fonts.ready) {
+                await document.fonts.ready;
+            }
+
+            const docElement =
+                document.querySelector(".document");
+
+            return html2canvas(docElement, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: false,
+                backgroundColor: "#ffffff",
+                logging: false,
+                imageTimeout: 15000,
+                removeContainer: true
+            });
         }
 
         async function saveAsImage() {
-            if (window.getSelection) { window.getSelection().removeAllRanges(); }
-            const docElement = document.querySelector('.document');
             try {
-                const canvas = await html2canvas(docElement, { scale: 2, useCORS: true });
-                const link = document.createElement('a');
-                link.download = 'memo_document.png';
-                link.href = canvas.toDataURL('image/png');
+                const canvas = await createDocumentCanvas();
+
+                const link = document.createElement("a");
+
+                link.download =
+                    "evidence_notification_document.png";
+
+                link.href =
+                    canvas.toDataURL("image/png", 1);
+
                 link.click();
-            } catch (err) {
-                alert('เกิดข้อผิดพลาดในการบันทึกรูปภาพ: ' + err);
+            } catch (error) {
+                console.error(error);
+
+                alert(
+                    "เกิดข้อผิดพลาดในการบันทึกรูปภาพ: " +
+                    error.message
+                );
             }
         }
 
         async function copyToClipboard() {
-            if (window.getSelection) { window.getSelection().removeAllRanges(); }
-            const docElement = document.querySelector('.document');
             try {
-                const canvas = await html2canvas(docElement, { scale: 2, useCORS: true });
-                canvas.toBlob(async function(blob) {
-                    try {
-                        const item = new ClipboardItem({ "image/png": blob });
-                        await navigator.clipboard.write([item]);
-                        alert('คัดลอกรูปภาพสำเร็จ!');
-                    } catch (err) {
-                        alert('ไม่สามารถคัดลอกรูปภาพได้');
-                    }
-                });
-            } catch (err) {
-                alert('เกิดข้อผิดพลาดในการคัดลอกรูปภาพ: ' + err);
+                const canvas = await createDocumentCanvas();
+
+                canvas.toBlob(
+                    async function (blob) {
+                        if (!blob) {
+                            alert("ไม่สามารถสร้างรูปภาพได้");
+                            return;
+                        }
+
+                        try {
+                            const item = new ClipboardItem({
+                                "image/png": blob
+                            });
+
+                            await navigator.clipboard.write([item]);
+
+                            alert("คัดลอกรูปภาพสำเร็จ!");
+                        } catch (error) {
+                            console.error(error);
+
+                            alert(
+                                "ไม่สามารถคัดลอกรูปภาพได้ เบราว์เซอร์อาจไม่รองรับหรือต้องเปิดผ่าน HTTPS"
+                            );
+                        }
+                    },
+                    "image/png",
+                    1
+                );
+            } catch (error) {
+                console.error(error);
+
+                alert(
+                    "เกิดข้อผิดพลาดในการคัดลอกรูปภาพ: " +
+                    error.message
+                );
             }
         }
 
-        document.getElementById('ctrl-shop').addEventListener('input', updateDocument);
-        document.getElementById('ctrl-resp').addEventListener('input', updateDocument);
-        document.getElementById('ctrl-amount').addEventListener('input', updateDocument);
-        document.getElementById('ctrl-sign-name').addEventListener('input', updateDocument);
-        
+        document
+            .getElementById("ctrl-shop")
+            .addEventListener("input", updateDocument);
+
+        document
+            .getElementById("ctrl-resp")
+            .addEventListener("input", updateDocument);
+
+        document
+            .getElementById("ctrl-amount")
+            .addEventListener("input", updateDocument);
+
+        document
+            .getElementById("ctrl-sign-name")
+            .addEventListener("input", updateDocument);
+
         setCurrentDate();
         updateDocument();
     </script>
