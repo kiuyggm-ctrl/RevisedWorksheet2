@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เอกสารคำร้องแก้ไขหมายเลขบัญชี - หลักฐาน</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #d72d43;
+            --primary-dark: #941b2f;
+            --primary-soft: #fff1f3;
+            --primary-line: #fecdd3;
+            --navy: #172033;
+            --text: #475064;
+            --muted: #7b8497;
+            --line: #e3e7ef;
+            --blue: #2563eb;
+            --shadow-paper:
+                0 34px 80px rgba(23, 32, 51, 0.15),
+                0 9px 24px rgba(23, 32, 51, 0.07);
+            --shadow-panel:
+                0 24px 60px rgba(23, 32, 51, 0.11),
+                0 7px 18px rgba(23, 32, 51, 0.05);
+            --gradient: linear-gradient(135deg, #8f1728 0%, #d72d43 50%, #f05a67 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Sarabun", Tahoma, sans-serif;
+            font-variant-numeric: normal;
+            font-feature-settings: "tnum" 0, "lnum" 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 36px 24px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 32px;
+            overflow-x: auto;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 8% 8%, rgba(215,45,67,.13), transparent 29%),
+                radial-gradient(circle at 92% 90%, rgba(37,99,235,.08), transparent 28%),
+                linear-gradient(135deg, #f7f7f9 0%, #eceff4 50%, #f8f2f3 100%);
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        body::before {
+            width: 380px;
+            height: 380px;
+            top: -180px;
+            right: -120px;
+            background: rgba(215,45,67,.055);
+        }
+
+        body::after {
+            width: 340px;
+            height: 340px;
+            bottom: -170px;
+            left: -120px;
+            background: rgba(23,32,51,.045);
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        .document {
+            position: relative;
+            width: 210mm;
+            height: 297mm;
+            flex-shrink: 0;
+            overflow: hidden;
+            padding: 10mm 14mm 9mm;
+            display: flex;
+            flex-direction: column;
+            color: #3f4758;
+            background: linear-gradient(180deg, #ffffff 0%, #ffffff 78%, #fffafb 100%);
+            border: 1px solid rgba(255,255,255,.95);
+            border-radius: 15px;
+            box-shadow: var(--shadow-paper);
+        }
+
+        .document::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            height: 11px;
+            background: var(--gradient);
+        }
+
+        .document::after {
+            content: "หลักฐานเอกสารต้องสงสัย";
+            position: absolute;
+            z-index: 0;
+            top: 51%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-37deg);
+            color: rgba(215,45,67,.033);
+            font-size: 65px;
+            font-weight: 800;
+            letter-spacing: 6px;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .paper-decor {
+            position: absolute;
+            z-index: 0;
+            top: -78px;
+            right: -76px;
+            width: 215px;
+            height: 215px;
+            border: 34px solid rgba(215,45,67,.032);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .paper-decor::after {
+            content: "";
+            position: absolute;
+            top: 134px;
+            right: 160px;
+            width: 48px;
+            height: 48px;
+            border: 8px solid rgba(215,45,67,.023);
+            border-radius: 50%;
+        }
+
+        .evidence-banner {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            margin: 1px 0 8px;
+            padding: 5px 12px;
+            color: #851c2c;
+            background: linear-gradient(90deg, #fff1f3, #fffafa, #fff1f3);
+            border: 1px solid var(--primary-line);
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .15px;
+        }
+
+        .evidence-banner i { color: var(--primary); }
+
+        .brand-row {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1.12fr 1fr;
+            align-items: start;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding: 2px 0 11px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand-row::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 92px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 999px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: flex-start;
+            min-height: 84px;
+        }
+
+        .brand-logo.left { justify-content: flex-start; }
+        .brand-logo.center { justify-content: center; }
+        .brand-logo.right { justify-content: flex-end; }
+
+        .brand-logo img {
+            display: block;
+            object-fit: contain;
+            object-position: center top;
+            max-width: 100%;
+            height: auto;
+            flex: 0 0 auto;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            image-rendering: auto;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,.06));
+        }
+
+        /* ระหว่างบันทึกจะใช้ภาพโลโก้ที่จัดสัดส่วนไว้ล่วงหน้า */
+        .brand-logo img.logo-capture-snapshot {
+            object-fit: fill !important;
+            max-width: none !important;
+            max-height: none !important;
+        }
+
+        /* ป้องกัน html2canvas คำนวณขนาดโลโก้ใหม่จนเพี้ยน */
+        .document.is-capturing .brand-logo,
+        .document.is-capturing .brand-logo img {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        .brand-logo.left img {
+            width: 132px;
+            max-height: 76px;
+        }
+
+        .brand-logo.center img {
+            width: 188px;
+            max-height: 88px;
+        }
+
+        .brand-logo.right img {
+            width: 232px;
+            max-height: 70px;
+        }
+
+        .doc-title {
+            position: relative;
+            z-index: 2;
+            margin: 3px 0 14px;
+            text-align: center;
+        }
+
+        .doc-title h1 {
+            display: inline-block;
+            margin: 0;
+            padding: 0 20px 6px;
+            color: var(--navy);
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.3;
+            border-bottom: 2px solid #404855;
+        }
+
+        .intro-box {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 13px;
+            padding: 10px 14px;
+            background: linear-gradient(120deg, #f8fafc, #ffffff);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--primary);
+            border-radius: 9px;
+            box-shadow: 0 4px 12px rgba(23,32,51,.028);
+        }
+
+        .intro-box p,
+        .body-copy p {
+            margin: 0;
+            font-size: 13.8px;
+            line-height: 1.72;
+            text-align: left;
+            word-spacing: normal;
+        }
+
+        .dynamic {
+            color: var(--navy);
+            font-weight: 700;
+        }
+
+        .account-table {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 14px;
+            overflow: hidden;
+            border: 1px solid #cfd5df;
+            border-radius: 9px;
+            box-shadow: 0 5px 13px rgba(23,32,51,.035);
+        }
+
+        .table-title {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 12px;
+            color: var(--navy);
+            background: linear-gradient(90deg, #f5f7fa, #ffffff);
+            border-bottom: 1px solid var(--line);
+            font-size: 12.8px;
+            font-weight: 800;
+        }
+
+        .table-title i { color: var(--primary); }
+
+        .table-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1.05fr 1.4fr .72fr 1.35fr;
+        }
+
+        .table-cell {
+            min-height: 47px;
+            padding: 9px 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-right: 1px solid #cfd5df;
+            border-bottom: 1px solid #cfd5df;
+            font-size: 12.6px;
+            line-height: 1.4;
+            font-family: "Sarabun", Tahoma, sans-serif;
+        }
+
+        .table-cell:nth-child(5n) { border-right: none; }
+        .table-cell:nth-last-child(-n+5) { border-bottom: none; }
+
+        .table-cell.head {
+            min-height: 40px;
+            color: var(--navy);
+            background: #eef1f5;
+            font-weight: 800;
+        }
+
+        .table-cell.value {
+            color: #4d5566;
+            background: #ffffff;
+            font-weight: 600;
+        }
+
+        .table-cell.amount {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .body-copy {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .copy-card {
+            padding: 10px 13px;
+            background: rgba(255,255,255,.88);
+            border: 1px solid var(--line);
+            border-radius: 9px;
+        }
+
+        .copy-card.plan {
+            background: linear-gradient(120deg, #f7f9ff, #ffffff);
+            border-left: 4px solid var(--blue);
+        }
+
+        .consequence-box {
+            position: relative;
+            z-index: 2;
+            padding: 11px 14px 12px;
+            background: linear-gradient(125deg, #fff3f3, #ffffff);
+            border: 1px solid #ffd2d2;
+            border-left: 5px solid #e34848;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(227,72,72,.055);
+        }
+
+        .consequence-title {
+            margin-bottom: 7px;
+            color: #cf3a3a;
+            font-size: 14.6px;
+            font-weight: 800;
+            line-height: 1.35;
+            text-align: center;
+        }
+
+        .consequence-list {
+            margin: 0;
+            padding-left: 22px;
+            color: #cf3a3a;
+        }
+
+        .consequence-list li {
+            margin-bottom: 6px;
+            padding-left: 2px;
+            font-size: 13.1px;
+            font-weight: 600;
+            line-height: 1.64;
+        }
+
+        .consequence-list li:last-child { margin-bottom: 0; }
+
+        .signature-section {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: auto;
+            padding-top: 18px;
+            transform: translate(70px, 55px);
+        }
+
+        .signature-card {
+            position: relative;
+            width: 280px;
+            padding: 2px 8px 8px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            min-height: 176px;
+        }
+
+        .signature-card .evidence-small {
+            margin-bottom: 2px;
+            color: #9b5f64;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .signature-line {
+            width: 182px;
+            margin: 98px auto 4px;
+            border-top: 1px solid #7f8798;
+        }
+
+        .signature-img {
+            position: absolute;
+            left: 50%;
+            bottom: 58px;
+            transform: translateX(-50%);
+            width: 148px;
+            height: auto;
+            z-index: 4;
+            mix-blend-mode: multiply;
+            filter: contrast(1.08) drop-shadow(0 2px 2px rgba(0,0,0,.05));
+        }
+
+        .signature-img-2 {
+            position: absolute;
+            left: 50%;
+            bottom: 40px;
+            transform: translateX(-50%);
+            width: 118px;
+            height: auto;
+            z-index: 5;
+            mix-blend-mode: multiply;
+            filter: contrast(1.04);
+        }
+
+        .signature-name {
+            color: var(--navy);
+            font-size: 12px;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+        }
+
+        .signature-title,
+        .signature-date {
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bottom-label {
+            position: absolute;
+            z-index: 5;
+            left: 15mm;
+            bottom: 5mm;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 8px;
+            color: #8d1c2c;
+            background: rgba(255,241,243,.96);
+            border: 1px solid var(--primary-line);
+            border-radius: 999px;
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .control-panel {
+            position: sticky;
+            top: 28px;
+            width: 370px;
+            flex-shrink: 0;
+            overflow: hidden;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(249,250,252,.93));
+            border: 1px solid rgba(255,255,255,.95);
+            border-radius: 22px;
+            box-shadow: var(--shadow-panel);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .control-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 7px;
+            background: var(--gradient);
+        }
+
+        .control-panel::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: -90px;
+            right: -85px;
+            width: 180px;
+            height: 180px;
+            background: rgba(215,45,67,.05);
+            border-radius: 50%;
+        }
+
+        .control-header {
+            padding-bottom: 13px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .control-header h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+            color: var(--navy);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .control-header h2 i {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            background: var(--gradient);
+            border-radius: 11px;
+            font-size: 14px;
+            box-shadow: 0 7px 15px rgba(215,45,67,.2);
+        }
+
+        .control-header p {
+            margin: 7px 0 0 48px;
+            color: var(--muted);
+            font-size: 11.5px;
+            line-height: 1.45;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .control-group {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group.full { grid-column: 1 / -1; }
+
+        .control-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+            color: var(--navy);
+            font-size: 12.5px;
+            font-weight: 700;
+        }
+
+        .control-group label i {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            background: var(--primary-soft);
+            border-radius: 6px;
+            font-size: 8px;
+        }
+
+        .control-group input,
+        .control-group select {
+            width: 100%;
+            height: 46px;
+            padding: 0 12px;
+            color: var(--navy);
+            background: #ffffff;
+            border: 1px solid #dfe3ea;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 600;
+            box-shadow: inset 0 1px 2px rgba(23,32,51,.025), 0 3px 8px rgba(23,32,51,.02);
+            transition: .25s ease;
+        }
+
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(215,45,67,.085);
+            transform: translateY(-1px);
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 2px;
+        }
+
+        .action-btn {
+            min-height: 47px;
+            padding: 11px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #ffffff;
+            border: none;
+            border-radius: 11px;
+            cursor: pointer;
+            font-size: 13.5px;
+            font-weight: 800;
+            box-shadow: 0 8px 17px rgba(23,32,51,.13);
+            transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 11px 22px rgba(23,32,51,.17);
+            filter: brightness(1.04);
+        }
+
+        .action-btn:active { transform: translateY(1px); }
+        .save-btn { background: linear-gradient(135deg, #10b981, #047857); }
+        .copy-btn { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+
+        .panel-warning {
+            padding: 12px 13px;
+            color: #6e2933;
+            background: linear-gradient(120deg, #fff1f3, #ffffff);
+            border: 1px solid var(--primary-line);
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            font-size: 11.5px;
+            line-height: 1.5;
+        }
+
+        .panel-warning strong,
+        .panel-warning i { color: var(--primary); }
+
+        @media print {
+            @page { size: A4; margin: 0; }
+            html, body { width: 210mm; height: 297mm; }
+            body {
+                display: block;
+                margin: 0;
+                padding: 0;
+                background: #ffffff;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .control-panel { display: none; }
+            .document {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 10mm 14mm 9mm;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+            .paper-decor { display: none; }
+        }
+
+        @media (max-width: 1200px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+                padding: 22px 16px;
+            }
+            .control-panel {
+                position: static;
+                order: -1;
+                width: 100%;
+                max-width: 210mm;
+            }
+        }
+
+        @media (max-width: 620px) {
+            body {
+                align-items: flex-start;
+                padding: 12px;
+            }
+            .control-panel {
+                min-width: 350px;
+                padding: 21px 18px;
+            }
+            .field-grid,
+            .btn-group {
+                grid-template-columns: 1fr;
+            }
+            .control-group.full { grid-column: auto; }
+        }
+    </style>
+</head>
+<body>
+    <main class="document">
+        <div class="paper-decor"></div>
+
+
+        <section class="brand-row">
+            <div class="brand-logo left">
+                <img src="Logokbank.jpg" alt="Logokbank">
+            </div>
+            <div class="brand-logo center">
+                <img src="Logo.png" alt="Centricity Logo">
+            </div>
+            <div class="brand-logo right">
+                <img src="Logokbank2.jpg" alt="Logokbank2">
+            </div>
+        </section>
+
+        <header class="doc-title">
+            <h1>ยื่นคำร้องขอแก้ไขหมายเลขบัญชี</h1>
+        </header>
+
+        <section class="intro-box">
+            <p>
+                เนื่องด้วย วันที่
+                <span id="doc-date-inline" class="dynamic">18 เมษายน 2569</span>
+                ระบบไม่สามารถสั่งจ่ายยอดเงินได้เนื่องจากกรอกข้อมูลปลายทางผิดพลาดมีการขีดเขียนข้อมูลและตอนนี้ยอดเงินถูกอายัดไว้อยู่บนแพลตฟอร์มร้านค้า
+                <span class="doc-shop dynamic">วัน</span>
+                โดยรายละเอียดดังนี้
+            </p>
+        </section>
+
+        <section class="account-table">
+            <div class="table-title">
+                <i class="fa-solid fa-table-list"></i>
+                รายละเอียดบัญชีจากข้อความในเอกสารต้นฉบับ
+            </div>
+            <div class="table-grid">
+                <div class="table-cell head">ชื่อ - สกุล</div>
+                <div class="table-cell head">ธนาคาร</div>
+                <div class="table-cell head">หมายเลขบัญชี</div>
+                <div class="table-cell head">เวลา</div>
+                <div class="table-cell head">จำนวนยอด</div>
+
+                <div class="table-cell value" id="doc-fullname">มัรวัณย์ มูซอ</div>
+                <div class="table-cell value" id="doc-bank">ทหารไทยธนชาต</div>
+                <div class="table-cell value" id="doc-account">01149334005</div>
+                <div class="table-cell value" id="doc-time">-</div>
+                <div class="table-cell value amount"><span id="doc-amount-table">878,990.00</span>&nbsp;บาท</div>
+            </div>
+        </section>
+
+        <section class="body-copy">
+            <div class="copy-card">
+                <p>
+                    ยื่นคำร้องโดยเอกสารรูปธรรมหรือเอกสารอิเล็กทรอนิกส์ ระบบไม่รับรองให้ทางส่วนกลางสามารถทำการแก้ไขข้อมูลส่วนบุคคลในระบบให้ได้ก็ต่อเมื่อได้รับการยืนยันฐานข้อมูลบัญชีภายใต้ร้านค้า
+                    <span class="doc-shop dynamic">วัน</span>
+                    เท่านั้น
+                </p>
+            </div>
+
+            <div class="copy-card plan">
+                <p>
+                    แผนการยืนยันบัญชีของผู้ใช้งานร้านค้า
+                    <span class="doc-shop dynamic">วัน</span>
+                    ต้องเข้าทำการยืนยันบัญชีให้แล้วเสร็จภายใน 4 ชั่วโมง เข้าสู่กระบวนการปลดล็อคอายัดยอดเงินจุดประสงค์เพื่อยืนยันปลดอายัดยอดเงิน
+                    <span class="doc-percent dynamic">40</span>%
+                    และยืนยันอีกครั้งเพื่อแก้ไขหมายเลขที่บัญชีธนาคาร
+                    <span class="doc-percent dynamic">40</span>%
+                </p>
+            </div>
+        </section>
+
+        <section class="consequence-box">
+            <div class="consequence-title">
+                ผลเสียที่จะได้รับหากไม่มีการดำเนินการยืนยันตัวตนภายใต้ชื่อยอดวงเงินทั้งหมด
+            </div>
+            <ol class="consequence-list">
+                <li>
+                    สมาชิกทำให้ระบบเสียหาย รอฟ้องร้อง สมาชิกจะไม่ได้รับยอดวงเงินแต่ต้องชดใช้ค่าเสียหายเงิน จำนวน
+                    <span id="doc-amount-warning" class="dynamic">878,990.00</span>
+                    บาท
+                </li>
+                <li>หากไม่ยอมรับผลเสียถือว่าสมาชิกมีเจตนาฉ้อโกงบริษัท</li>
+                <li>
+                    ว่าด้วยกฎหมายมาตรา110 ผู้ใดกระทำด้วยประการโดยมิชอบ เพื่อให้การทำงานของระบบคอมพิวเตอร์ของผู้อื่นถูกระงับ ชะลอ ขัดขวาง หรือรบกวนจนไม่สามารถทำงานปกติได้ ต้องระวางโทษจำคุกไม่เกิน 5 ปี หรือปรับไม่เกิน 100,000 บาท หรือทั้งจำทั้งปรับ
+                </li>
+            </ol>
+        </section>
+
+        <section class="signature-section">
+            <div class="signature-card">
+                <img src="Signature.png" alt="Signature" class="signature-img" onerror="this.style.display='none'">
+                <img src="ลายเซ็น.png" alt="ลายเซ็น" class="signature-img-2" onerror="this.style.display='none'">
+                <div class="signature-line"></div>
+                <div class="signature-name">( นาย วิทวุฒิ ภัยชำนาญ )</div>
+                <div class="signature-title">ผู้จัดการ บริษัท ไซส์ รีเทล จำกัด</div>
+                <div class="signature-date">
+                    ออก ณ วันที่
+                    <span id="doc-date-footer">18 เมษายน 2569</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <aside class="control-panel">
+        <div class="control-header">
+            <h2>
+                <i class="fa-solid fa-sliders"></i>
+                ตั้งค่าเอกสาร
+            </h2>
+            <p>แก้ไขเฉพาะข้อมูลที่ระบุไว้ โดยข้อความส่วนอื่นจะคงเดิม</p>
+        </div>
+
+        <div class="field-grid">
+            <div class="control-group full">
+                <label for="ctrl-shop"><i class="fa-solid fa-store"></i>ร้านค้า</label>
+                <input type="text" id="ctrl-shop" value="HappyCat">
+            </div>
+
+            <div class="control-group full">
+                <label for="ctrl-fullname"><i class="fa-solid fa-user"></i>ชื่อ - สกุล</label>
+                <input type="text" id="ctrl-fullname" value="ไพลิน เปรมวิวัฒน์">
+            </div>
+
+            <div class="control-group">
+                <label for="ctrl-bank"><i class="fa-solid fa-building-columns"></i>ธนาคาร</label>
+                <input type="text" id="ctrl-bank" value="ทหารไทยธนชาต">
+            </div>
+
+            <div class="control-group">
+                <label for="ctrl-account"><i class="fa-solid fa-credit-card"></i>หมายเลขบัญชี</label>
+                <input type="text" id="ctrl-account" value="01149334005" inputmode="numeric">
+            </div>
+
+            <div class="control-group">
+                <label for="ctrl-time"><i class="fa-solid fa-clock"></i>เวลา</label>
+                <input type="text" id="ctrl-time" value="-">
+            </div>
+
+            <div class="control-group">
+                <label for="ctrl-amount"><i class="fa-solid fa-coins"></i>จำนวนยอด</label>
+                <input type="number" id="ctrl-amount" value="878990" min="0" step="0.01">
+            </div>
+
+            <div class="control-group full">
+                <label for="ctrl-percent"><i class="fa-solid fa-percent"></i>จำนวน %</label>
+                <input type="number" id="ctrl-percent" value="40" min="0" max="100" step="1">
+            </div>
+
+            <div class="control-group">
+                <label for="ctrl-day"><i class="fa-solid fa-calendar-day"></i>วันที่</label>
+                <input type="number" id="ctrl-day" value="18" min="1" max="31">
+            </div>
+
+            <div class="control-group">
+                <label for="ctrl-month"><i class="fa-solid fa-calendar"></i>เดือน</label>
+                <select id="ctrl-month">
+                    <option>มกราคม</option>
+                    <option>กุมภาพันธ์</option>
+                    <option>มีนาคม</option>
+                    <option selected>เมษายน</option>
+                    <option>พฤษภาคม</option>
+                    <option>มิถุนายน</option>
+                    <option>กรกฎาคม</option>
+                    <option>สิงหาคม</option>
+                    <option>กันยายน</option>
+                    <option>ตุลาคม</option>
+                    <option>พฤศจิกายน</option>
+                    <option>ธันวาคม</option>
+                </select>
+            </div>
+
+            <div class="control-group full">
+                <label for="ctrl-year"><i class="fa-solid fa-calendar-check"></i>พ.ศ.</label>
+                <input type="number" id="ctrl-year" value="2569" min="2400" max="3000">
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="action-btn save-btn" onclick="saveAsImage()">
+                <i class="fa-solid fa-image"></i>
+                บันทึกรูปภาพ
+            </button>
+            <button class="action-btn copy-btn" onclick="copyToClipboard()">
+                <i class="fa-solid fa-copy"></i>
+                คัดลอกรูปภาพ
+            </button>
+        </div>
+
+        <div class="panel-warning">
+            <i class="fa-solid fa-shield-halved"></i>
+            <strong>เอกสารประกอบหลักฐาน:</strong><br>
+            หน้าเอกสารมีป้ายและลายน้ำกำกับไว้ตลอด เพื่อแยกจากเอกสารธนาคารหรือเอกสารบริษัทจริง
+        </div>
+    </aside>
+
+    <script>
+        function safeText(value, fallback = "-") {
+            const text = String(value ?? "").trim();
+            return text || fallback;
+        }
+
+        function formatCurrency(value) {
+            const amount = Number.parseFloat(value);
+            const safeAmount = Number.isFinite(amount) ? amount : 0;
+            return safeAmount.toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function setCurrentDate() {
+            const today = new Date();
+            const thaiMonths = [
+                "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+                "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม",
+                "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+            ];
+
+            document.getElementById("ctrl-day").value = today.getDate();
+            document.getElementById("ctrl-month").value = thaiMonths[today.getMonth()];
+            document.getElementById("ctrl-year").value = today.getFullYear() + 543;
+        }
+
+        function getDateText() {
+            const day = safeText(document.getElementById("ctrl-day").value, "1");
+            const month = safeText(document.getElementById("ctrl-month").value, "มกราคม");
+            const year = safeText(document.getElementById("ctrl-year").value, "2569");
+            return `${day} ${month} ${year}`;
+        }
+
+        function updateDocument() {
+            const shop = safeText(document.getElementById("ctrl-shop").value);
+            const fullname = safeText(document.getElementById("ctrl-fullname").value);
+            const bank = safeText(document.getElementById("ctrl-bank").value);
+            const account = safeText(document.getElementById("ctrl-account").value);
+            const time = safeText(document.getElementById("ctrl-time").value);
+            const amount = formatCurrency(document.getElementById("ctrl-amount").value);
+            const percent = safeText(document.getElementById("ctrl-percent").value, "0");
+            const dateText = getDateText();
+
+            document.querySelectorAll(".doc-shop").forEach(element => {
+                element.textContent = shop;
+            });
+
+            document.querySelectorAll(".doc-percent").forEach(element => {
+                element.textContent = percent;
+            });
+
+            document.getElementById("doc-fullname").textContent = fullname;
+            document.getElementById("doc-bank").textContent = bank;
+            document.getElementById("doc-account").textContent = account;
+            document.getElementById("doc-time").textContent = time;
+            document.getElementById("doc-amount-table").textContent = amount;
+            document.getElementById("doc-amount-warning").textContent = amount;
+            document.getElementById("doc-date-inline").textContent = dateText;
+            document.getElementById("doc-date-footer").textContent = dateText;
+        }
+
+        function nextFrame() {
+            return new Promise(resolve => requestAnimationFrame(resolve));
+        }
+
+        async function waitForImages(root) {
+            const images = Array.from(root.querySelectorAll("img"));
+
+            await Promise.all(images.map(image => {
+                if (image.complete && image.naturalWidth > 0) {
+                    if (typeof image.decode === "function") {
+                        return image.decode().catch(() => undefined);
+                    }
+                    return Promise.resolve();
+                }
+
+                return new Promise(resolve => {
+                    const finish = () => resolve();
+                    image.addEventListener("load", finish, { once: true });
+                    image.addEventListener("error", finish, { once: true });
+                });
+            }));
+        }
+
+        function makeContainedSnapshot(image, cssWidth, cssHeight) {
+            const naturalWidth = image.naturalWidth;
+            const naturalHeight = image.naturalHeight;
+
+            if (!naturalWidth || !naturalHeight || cssWidth <= 0 || cssHeight <= 0) {
+                return null;
+            }
+
+            const pixelRatio = Math.max(2, window.devicePixelRatio || 1);
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(cssWidth * pixelRatio));
+            canvas.height = Math.max(1, Math.round(cssHeight * pixelRatio));
+
+            const context = canvas.getContext("2d");
+            if (!context) return null;
+
+            context.imageSmoothingEnabled = true;
+            context.imageSmoothingQuality = "high";
+
+            const scale = Math.min(
+                canvas.width / naturalWidth,
+                canvas.height / naturalHeight
+            );
+            const drawWidth = naturalWidth * scale;
+            const drawHeight = naturalHeight * scale;
+            const drawX = (canvas.width - drawWidth) / 2;
+            const drawY = 0;
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(image, drawX, drawY, drawWidth, drawHeight);
+
+            try {
+                return canvas.toDataURL("image/png", 1);
+            } catch (error) {
+                console.warn("ไม่สามารถสร้างภาพสำรองของโลโก้ได้", error);
+                return null;
+            }
+        }
+
+        async function prepareBrandLogosForCapture(source) {
+            const logos = Array.from(source.querySelectorAll(".brand-logo img"));
+            const restoreItems = [];
+
+            for (const logo of logos) {
+                const rect = logo.getBoundingClientRect();
+                const snapshot = makeContainedSnapshot(logo, rect.width, rect.height);
+
+                restoreItems.push({
+                    element: logo,
+                    src: logo.getAttribute("src"),
+                    srcset: logo.getAttribute("srcset"),
+                    sizes: logo.getAttribute("sizes"),
+                    style: logo.getAttribute("style"),
+                    hadSnapshotClass: logo.classList.contains("logo-capture-snapshot")
+                });
+
+                if (!snapshot) continue;
+
+                logo.removeAttribute("srcset");
+                logo.removeAttribute("sizes");
+                logo.src = snapshot;
+                logo.classList.add("logo-capture-snapshot");
+                logo.style.setProperty("width", `${rect.width}px`, "important");
+                logo.style.setProperty("height", `${rect.height}px`, "important");
+                logo.style.setProperty("min-width", `${rect.width}px`, "important");
+                logo.style.setProperty("max-width", `${rect.width}px`, "important");
+                logo.style.setProperty("min-height", `${rect.height}px`, "important");
+                logo.style.setProperty("max-height", `${rect.height}px`, "important");
+
+                if (typeof logo.decode === "function") {
+                    await logo.decode().catch(() => undefined);
+                }
+            }
+
+            return () => {
+                restoreItems.forEach(item => {
+                    const logo = item.element;
+
+                    if (item.src === null) logo.removeAttribute("src");
+                    else logo.setAttribute("src", item.src);
+
+                    if (item.srcset === null) logo.removeAttribute("srcset");
+                    else logo.setAttribute("srcset", item.srcset);
+
+                    if (item.sizes === null) logo.removeAttribute("sizes");
+                    else logo.setAttribute("sizes", item.sizes);
+
+                    if (item.style === null) logo.removeAttribute("style");
+                    else logo.setAttribute("style", item.style);
+
+                    if (!item.hadSnapshotClass) {
+                        logo.classList.remove("logo-capture-snapshot");
+                    }
+                });
+            };
+        }
+
+        async function createCanvas() {
+            const source = document.querySelector(".document");
+            let restoreBrandLogos = () => {};
+
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
+            if (document.fonts && document.fonts.ready) {
+                await document.fonts.ready;
+            }
+
+            await waitForImages(source);
+            await nextFrame();
+            await nextFrame();
+
+            source.classList.add("is-capturing");
+
+            try {
+                /*
+                 * แปลงเฉพาะโลโก้เป็นภาพ PNG ที่มีกรอบเท่ากับขนาดบนหน้าจอ
+                 * ก่อนส่งให้ html2canvas จึงไม่เกิดการยืดหรือบีบในเอกสารที่บันทึก
+                 */
+                restoreBrandLogos = await prepareBrandLogosForCapture(source);
+                await nextFrame();
+
+                const sourceRect = source.getBoundingClientRect();
+                const sourceImages = Array.from(source.querySelectorAll("img"));
+                const imageRects = sourceImages.map(image => {
+                    const rect = image.getBoundingClientRect();
+                    return {
+                        width: rect.width,
+                        height: rect.height,
+                        isBrandLogo: Boolean(image.closest(".brand-logo"))
+                    };
+                });
+
+                return await html2canvas(source, {
+                    scale: Math.max(2, window.devicePixelRatio || 1),
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: "#ffffff",
+                    logging: false,
+                    imageTimeout: 15000,
+                    removeContainer: true,
+                    width: Math.ceil(sourceRect.width),
+                    height: Math.ceil(sourceRect.height),
+                    scrollX: -window.scrollX,
+                    scrollY: -window.scrollY,
+                    windowWidth: Math.max(
+                        document.documentElement.clientWidth,
+                        Math.ceil(sourceRect.right)
+                    ),
+                    windowHeight: Math.max(
+                        document.documentElement.clientHeight,
+                        Math.ceil(sourceRect.bottom)
+                    ),
+                    onclone: clonedDocument => {
+                        const clonedSource = clonedDocument.querySelector(".document");
+                        const clonedImages = Array.from(clonedSource.querySelectorAll("img"));
+
+                        clonedSource.classList.add("is-capturing");
+                        clonedSource.style.width = `${sourceRect.width}px`;
+                        clonedSource.style.height = `${sourceRect.height}px`;
+                        clonedSource.style.minWidth = `${sourceRect.width}px`;
+                        clonedSource.style.maxWidth = `${sourceRect.width}px`;
+                        clonedSource.style.minHeight = `${sourceRect.height}px`;
+                        clonedSource.style.maxHeight = `${sourceRect.height}px`;
+
+                        clonedImages.forEach((image, index) => {
+                            const rect = imageRects[index];
+                            if (!rect || rect.width <= 0 || rect.height <= 0) return;
+
+                            image.style.setProperty("width", `${rect.width}px`, "important");
+                            image.style.setProperty("height", `${rect.height}px`, "important");
+                            image.style.setProperty("min-width", `${rect.width}px`, "important");
+                            image.style.setProperty("max-width", `${rect.width}px`, "important");
+                            image.style.setProperty("min-height", `${rect.height}px`, "important");
+                            image.style.setProperty("max-height", `${rect.height}px`, "important");
+                            image.style.setProperty(
+                                "object-fit",
+                                rect.isBrandLogo ? "fill" : "contain",
+                                "important"
+                            );
+                            image.style.setProperty("box-sizing", "border-box", "important");
+                        });
+                    }
+                });
+            } finally {
+                restoreBrandLogos();
+                source.classList.remove("is-capturing");
+            }
+        }
+
+        async function saveAsImage() {
+            try {
+                const canvas = await createCanvas();
+                const link = document.createElement("a");
+                link.download = "evidence_account_correction_document.png";
+                link.href = canvas.toDataURL("image/png", 1);
+                link.click();
+            } catch (error) {
+                console.error(error);
+                alert("เกิดข้อผิดพลาดในการบันทึกรูปภาพ: " + error.message);
+            }
+        }
+
+        async function copyToClipboard() {
+            try {
+                const canvas = await createCanvas();
+                canvas.toBlob(async blob => {
+                    if (!blob) {
+                        alert("ไม่สามารถสร้างรูปภาพได้");
+                        return;
+                    }
+                    try {
+                        await navigator.clipboard.write([
+                            new ClipboardItem({ "image/png": blob })
+                        ]);
+                        alert("คัดลอกรูปภาพสำเร็จ!");
+                    } catch (error) {
+                        console.error(error);
+                        alert("ไม่สามารถคัดลอกรูปภาพได้ เบราว์เซอร์อาจไม่รองรับหรือต้องเปิดผ่าน HTTPS");
+                    }
+                }, "image/png", 1);
+            } catch (error) {
+                console.error(error);
+                alert("เกิดข้อผิดพลาดในการคัดลอกรูปภาพ: " + error.message);
+            }
+        }
+
+        [
+            "ctrl-shop",
+            "ctrl-fullname",
+            "ctrl-bank",
+            "ctrl-account",
+            "ctrl-time",
+            "ctrl-amount",
+            "ctrl-percent",
+            "ctrl-day",
+            "ctrl-month",
+            "ctrl-year"
+        ].forEach(id => {
+            document.getElementById(id).addEventListener("input", updateDocument);
+            document.getElementById(id).addEventListener("change", updateDocument);
+        });
+
+        setCurrentDate();
+        updateDocument();
+    </script>
+</body>
+</html>

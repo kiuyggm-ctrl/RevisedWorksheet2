@@ -526,6 +526,440 @@
             body { flex-direction: column; align-items: center; padding: 20px; }
             .control-panel { width: 100%; max-width: 210mm; position: static; box-sizing: border-box; }
         }
+    
+        /* =========================================================
+           PREMIUM VISUAL OVERRIDE
+           ปรับเฉพาะงานภาพ โดยคงโครงสร้าง ขนาด และตำแหน่งเดิม
+           ========================================================= */
+
+        :root {
+            --primary-color: #c92f45;
+            --secondary-color: #7f1728;
+            --primary-gradient: linear-gradient(135deg, #8f1830 0%, #c92f45 52%, #ef6a72 100%);
+            --bg-page: #eef1f6;
+            --bg-doc: #ffffff;
+            --text-dark: #17233b;
+            --text-main: #465268;
+            --text-light: #7a8497;
+            --accent-yellow: #d89a12;
+            --light-red: #fff2f4;
+            --border-color: #e4e8ef;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 8% 8%, rgba(201, 47, 69, 0.13), transparent 29%),
+                radial-gradient(circle at 92% 88%, rgba(29, 53, 87, 0.09), transparent 31%),
+                linear-gradient(135deg, #f8f8fa 0%, #edf0f5 48%, #f8f2f3 100%);
+            background-attachment: fixed;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(2px);
+        }
+
+        body::before {
+            width: 380px;
+            height: 380px;
+            top: -170px;
+            right: -130px;
+            background: rgba(201, 47, 69, 0.065);
+        }
+
+        body::after {
+            width: 340px;
+            height: 340px;
+            bottom: -150px;
+            left: -120px;
+            background: rgba(23, 35, 59, 0.05);
+        }
+
+        .document {
+            background:
+                linear-gradient(rgba(255,255,255,0.985), rgba(255,255,255,0.985)),
+                radial-gradient(circle at 20% 20%, rgba(201,47,69,0.035) 0 1px, transparent 1px);
+            background-size: auto, 18px 18px;
+            border: 1px solid rgba(255,255,255,0.94);
+            border-radius: 12px;
+            box-shadow:
+                0 34px 80px rgba(23, 35, 59, 0.15),
+                0 10px 26px rgba(23, 35, 59, 0.075),
+                inset 0 0 0 1px rgba(201, 47, 69, 0.025);
+        }
+
+        .document::before {
+            height: 11px;
+            background:
+                linear-gradient(90deg, #751424 0%, #ba273d 40%, #ef6a72 74%, #ba273d 100%);
+            box-shadow: 0 4px 13px rgba(201, 47, 69, 0.19);
+        }
+
+        .document::after {
+            content: "ตัวอย่างประกอบหลักฐาน";
+            top: 53%;
+            font-size: 61px;
+            letter-spacing: 7px;
+            color: rgba(201, 47, 69, 0.028);
+        }
+
+        .bg-decor {
+            background: transparent;
+            border: 27px solid rgba(201, 47, 69, 0.038);
+            box-shadow:
+                0 0 0 16px rgba(201, 47, 69, 0.018),
+                inset 0 0 0 1px rgba(255,255,255,0.45);
+        }
+
+        .bg-decor::before {
+            content: "";
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            left: -38px;
+            bottom: -12px;
+            border-radius: 50%;
+            border: 8px solid rgba(201, 47, 69, 0.026);
+        }
+
+        .bg-decor::after {
+            content: "สำหรับตรวจสอบ";
+            position: absolute;
+            right: 38px;
+            bottom: -885px;
+            padding: 4px 11px;
+            color: #8f1830;
+            background: rgba(255, 242, 244, 0.94);
+            border: 1px solid rgba(201, 47, 69, 0.18);
+            border-radius: 999px;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .2px;
+            white-space: nowrap;
+            box-shadow: 0 5px 12px rgba(201, 47, 69, 0.07);
+        }
+
+        .header-note {
+            border-bottom: 1px solid #dde2ea;
+        }
+
+        .header-note::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 108px;
+            height: 3px;
+            border-radius: 999px;
+            background: var(--primary-gradient);
+        }
+
+        .header-icon {
+            background: var(--primary-gradient);
+            border-radius: 13px;
+            box-shadow:
+                0 10px 22px rgba(201, 47, 69, 0.22),
+                inset 0 0 0 1px rgba(255,255,255,0.18);
+        }
+
+        .header-title h1 {
+            color: var(--text-dark);
+            letter-spacing: -0.2px;
+        }
+
+        .header-title p {
+            color: var(--primary-color);
+            letter-spacing: 0.1px;
+        }
+
+        .header-meta {
+            padding: 9px 11px;
+            background: linear-gradient(135deg, rgba(255,242,244,0.92), rgba(255,255,255,0.94));
+            border: 1px solid rgba(201,47,69,0.14);
+            border-radius: 10px;
+            box-shadow: 0 7px 18px rgba(23,35,59,0.045);
+        }
+
+        .meta-label {
+            color: var(--primary-color);
+        }
+
+        .meta-value {
+            color: var(--text-dark);
+        }
+
+        .status-badge {
+            background: linear-gradient(135deg, #fff7de, #fffdf6);
+            color: #a86700;
+            border-color: #f2d886;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.55);
+        }
+
+        .alert-box {
+            background: linear-gradient(125deg, #fff8e6 0%, #fffdf7 100%);
+            border: 1px solid #f0d58a;
+            border-left: 5px solid #d89a12;
+            box-shadow:
+                0 8px 19px rgba(216,154,18,0.075),
+                inset 0 0 0 1px rgba(255,255,255,0.55);
+        }
+
+        .alert-box::after {
+            content: "\f071";
+            position: absolute;
+            right: 17px;
+            top: 10px;
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 38px;
+            color: rgba(216,154,18,0.075);
+        }
+
+        .content-text {
+            color: #4b566a;
+        }
+
+        .content-text p:first-child strong {
+            color: var(--text-dark);
+        }
+
+        .highlight-text {
+            background: linear-gradient(135deg, #fff3cf, #fff9e6);
+            color: #a66700;
+            border: 1px solid #f2d58a;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.45);
+        }
+
+        .highlight-text-blue {
+            background: linear-gradient(135deg, #eef6ff, #f7fbff);
+            color: #145d8b;
+            border: 1px solid #cfe5f7;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.55);
+        }
+
+        .details-container {
+            border-color: #dfe4ec;
+            border-radius: 11px;
+            box-shadow:
+                0 10px 24px rgba(23,35,59,0.055),
+                inset 0 0 0 1px rgba(255,255,255,.62);
+        }
+
+        .details-header {
+            background:
+                linear-gradient(90deg, #f7f8fb 0%, #ffffff 78%);
+            color: var(--text-dark);
+            border-bottom-color: #e0e5ec;
+            position: relative;
+        }
+
+        .details-header::after {
+            content: "";
+            position: absolute;
+            left: 20px;
+            bottom: -1px;
+            width: 92px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--primary-gradient);
+        }
+
+        .details-header i {
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            background: var(--primary-gradient);
+            border-radius: 8px;
+            box-shadow: 0 6px 13px rgba(201,47,69,.17);
+        }
+
+        .details-row {
+            background: rgba(255,255,255,.72);
+            transition: background .2s ease;
+        }
+
+        .details-row:nth-child(odd):not(.details-header) {
+            background: rgba(249,250,252,.72);
+        }
+
+        .details-row:last-child {
+            background: linear-gradient(110deg, #fff1f3 0%, #fff9fa 100%);
+            border-top: 1px solid rgba(201,47,69,.13);
+        }
+
+        .row-label {
+            color: #596477;
+        }
+
+        .row-value {
+            color: var(--text-dark);
+        }
+
+        .total-row .row-value {
+            color: var(--primary-color);
+            text-shadow: 1px 1px 0 rgba(201,47,69,.04);
+        }
+
+        .system-note {
+            background: linear-gradient(125deg, #f7f8fb 0%, #ffffff 100%);
+            border: 1px solid #e2e6ed;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 9px;
+            box-shadow: 0 8px 18px rgba(23,35,59,.045);
+        }
+
+        .system-note i {
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            background: var(--primary-gradient);
+            border-radius: 9px;
+            box-shadow: 0 6px 13px rgba(201,47,69,.17);
+            flex-shrink: 0;
+        }
+
+        .system-note-content h4 {
+            color: var(--text-dark);
+        }
+
+        .sign-line {
+            border-top-color: #cfd5df;
+        }
+
+        .sign-name {
+            color: var(--text-dark);
+        }
+
+        .control-panel {
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.97), rgba(248,249,252,.93));
+            border: 1px solid rgba(255,255,255,.95);
+            border-radius: 22px;
+            box-shadow:
+                0 28px 68px rgba(23,35,59,.12),
+                0 8px 20px rgba(23,35,59,.06);
+            overflow: hidden;
+        }
+
+        .control-panel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 7px;
+            background: var(--primary-gradient);
+        }
+
+        .control-panel h2 {
+            color: var(--text-dark);
+            border-bottom: 1px solid #e1e5ec;
+        }
+
+        .control-panel h2 i {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            background: var(--primary-gradient);
+            border-radius: 11px;
+            box-shadow: 0 7px 15px rgba(201,47,69,.2);
+        }
+
+        .control-group label {
+            color: var(--text-dark);
+        }
+
+        .control-group label i {
+            width: 21px;
+            height: 21px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            background: var(--light-red);
+            border-radius: 6px;
+            opacity: 1;
+            font-size: 9px;
+        }
+
+        .control-group input,
+        .control-group textarea {
+            border: 1px solid #dde2ea;
+            border-radius: 11px;
+            box-shadow:
+                inset 0 1px 2px rgba(23,35,59,.025),
+                0 3px 8px rgba(23,35,59,.025);
+        }
+
+        .control-group input:hover,
+        .control-group textarea:hover {
+            border-color: #c8ced8;
+        }
+
+        .control-group input:focus,
+        .control-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow:
+                0 0 0 4px rgba(201,47,69,.09),
+                0 6px 15px rgba(23,35,59,.05);
+        }
+
+        .print-btn {
+            border-radius: 11px;
+            box-shadow: 0 8px 18px rgba(23,35,59,.13);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .print-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -70%;
+            width: 42%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+            transform: skewX(-22deg);
+            transition: left .45s ease;
+        }
+
+        .print-btn:hover::after {
+            left: 130%;
+        }
+
+        .control-panel > div:last-child {
+            background: linear-gradient(125deg, #fff2f4, #ffffff) !important;
+            border: 1px solid #f4ccd3 !important;
+            border-left: 4px solid var(--primary-color) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 6px 14px rgba(201,47,69,.045);
+        }
+
+        @media print {
+            .document {
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .bg-decor::after {
+                display: inline-flex;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -619,8 +1053,8 @@
         <h2><i class="fas fa-sliders-h"></i> ตั้งค่าเอกสาร Note</h2>
         
         <div class="control-group">
-            <label><i class="fas fa-store"></i> ชื่อร้านค้า / บัญชี</label>
-            <input type="text" id="ctrl-shop" value='Nanunn / imjeeshop'>
+            <label><i class="fas fa-store"></i> บัญชีผู้ใช้งานระบบ</label>
+            <input type="text" id="ctrl-shop" value="Nanunn / imjeeshop">
             <i class="fas fa-edit input-icon"></i>
         </div>
         
@@ -634,6 +1068,12 @@
             <label><i class="fas fa-comment-slash"></i> ข้อความหมายเหตุเดิม (ที่ผิด)</label>
             <input type="text" id="ctrl-wrong-note" value="ไม่ได้ระบุหมายเหตุ">
             <i class="fas fa-times-circle input-icon"></i>
+        </div>
+
+        <div class="control-group">
+            <label><i class="fas fa-comment-check"></i> หมายเหตุใหม่ที่ถูกต้อง</label>
+            <input type="text" id="ctrl-correct-note" value="Nanunn / imjeeshop">
+            <i class="fas fa-check-circle input-icon"></i>
         </div>
 
         <div class="control-group">
@@ -687,8 +1127,10 @@
 
         function updateDocument() {
             const shopName = document.getElementById('ctrl-shop').value;
-            document.getElementById('doc-shop-name').innerText = shopName;
-            document.getElementById('doc-correct-note').innerText = shopName; 
+            const correctNote = document.getElementById('ctrl-correct-note').value;
+
+            document.getElementById('doc-shop-name').innerText = shopName || '-';
+            document.getElementById('doc-correct-note').innerText = correctNote || '-';
             
             document.getElementById('doc-resp-name').innerText = document.getElementById('ctrl-resp').value;
             document.getElementById('doc-wrong-note').innerText = document.getElementById('ctrl-wrong-note').value;
@@ -738,7 +1180,7 @@
             }
         }
 
-        const inputs = ['ctrl-shop', 'ctrl-resp', 'ctrl-wrong-note', 'ctrl-amount', 'ctrl-percent', 'ctrl-sign-name'];
+        const inputs = ['ctrl-shop', 'ctrl-resp', 'ctrl-wrong-note', 'ctrl-correct-note', 'ctrl-amount', 'ctrl-percent', 'ctrl-sign-name'];
         inputs.forEach(id => {
             document.getElementById(id).addEventListener('input', updateDocument);
         });

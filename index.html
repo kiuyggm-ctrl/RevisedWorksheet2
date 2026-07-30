@@ -304,6 +304,10 @@
             animation-delay: 0.35s;
         }
 
+        .menu-card:nth-child(8) {
+            animation-delay: 0.4s;
+        }
+
         .menu-card::before {
             content: "";
             position: absolute;
@@ -549,6 +553,11 @@
         .card-business {
             --card-color: #e63946;
             --card-color-2: #ff8a5c;
+        }
+
+        .card-wrong-account {
+            --card-color: #8b5cf6;
+            --card-color-2: #ec4899;
         }
 
         /* จัดการ์ดสุดท้ายให้อยู่กึ่งกลางเมื่อมี 7 เมนู */
@@ -836,7 +845,22 @@
                 </div>
             </a>
 
-            <!-- Card 7: Scan Business Card -->
+            <!-- Card 7: Wrong Account Correction -->
+            <a href="wrongaccount.html" class="menu-card card-wrong-account">
+                <div class="card-icon">
+                    <i class="fa-solid fa-user-pen"></i>
+                </div>
+
+                <h2 class="card-title">แก้ไขบัญชีผิด</h2>
+                <p class="card-desc">จัดทำเอกสารคำร้องสำหรับแก้ไขหมายเลขบัญชีที่กรอกผิด</p>
+
+                <div class="card-btn">
+                    สร้างเอกสาร
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Card 8: Scan Business Card -->
             <a href="scancard.html" class="menu-card card-business">
                 <div class="card-icon">
                     <i class="fa-solid fa-address-card"></i>
