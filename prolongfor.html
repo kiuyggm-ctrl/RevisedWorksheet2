@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หนังสือแจ้งอนุมัติขยายระยะเวลาดำเนินการ</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #d73c4f;
+      --primary-dark: #8f2131;
+      --primary-soft: #fff2f7;
+      --pink: #f58ab3;
+      --pink-soft: #fff4fa;
+      --pink-line: #f6d0e2;
+      --blue: #73c2ff;
+      --blue-soft: #eef8ff;
+      --blue-line: #d9ebfb;
+      --navy: #22324a;
+      --text: #4a5a71;
+      --muted: #7b89a0;
+      --line: #dfe7f1;
+      --paper-shadow: 0 30px 75px rgba(35, 50, 74, 0.14), 0 8px 22px rgba(35, 50, 74, 0.07);
+      --panel-shadow: 0 22px 55px rgba(35, 50, 74, 0.11), 0 6px 18px rgba(35, 50, 74, 0.06);
+      --gradient: linear-gradient(135deg, #f7a6ca, #f58ab3 52%, #73c2ff 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Sarabun", Tahoma, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 22px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      overflow-x: auto;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(245, 138, 179, .18), transparent 28%),
+        radial-gradient(circle at 92% 88%, rgba(115, 194, 255, .16), transparent 26%),
+        linear-gradient(135deg, #fff8fc, #eef7ff 52%, #ffffff);
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(4px);
+    }
+
+    body::before {
+      width: 320px;
+      height: 320px;
+      top: -140px;
+      right: -90px;
+      background: rgba(245, 138, 179, .12);
+    }
+
+    body::after {
+      width: 300px;
+      height: 300px;
+      bottom: -120px;
+      left: -90px;
+      background: rgba(115, 194, 255, .12);
+    }
+
+    button, input, textarea { font-family: inherit; }
+
+    .document {
+      position: relative;
+      width: 210mm;
+      min-width: 210mm;
+      height: 297mm;
+      min-height: 297mm;
+      padding: 17mm 18mm 14mm;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      color: var(--text);
+      background: linear-gradient(180deg, #ffffff 0%, #ffffff 80%, #f8fcff 100%);
+      border-radius: 14px;
+      box-shadow: var(--paper-shadow);
+    }
+
+    .document::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 10px;
+      background: var(--gradient);
+    }
+
+    .document::after {
+      content: "แบบร่างเอกสาร";
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-34deg);
+      color: rgba(245, 138, 179, .07);
+      font-size: 76px;
+      font-weight: 700;
+      letter-spacing: 8px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .top-mark {
+      position: absolute;
+      top: -82px;
+      right: -74px;
+      width: 220px;
+      height: 220px;
+      border: 34px solid rgba(115, 194, 255, .13);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .draft-banner {
+      position: relative;
+      z-index: 2;
+      align-self: center;
+      margin-bottom: 14px;
+      padding: 5px 14px;
+      color: #8d5f7a;
+      background: linear-gradient(90deg, #fff4fa, #f8fcff);
+      border: 1px solid var(--pink-line);
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 56px;
+      height: 56px;
+      display: block;
+      filter: drop-shadow(0 4px 10px rgba(115, 194, 255, .16));
+      object-fit: contain;
+      object-position: center;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      color: var(--navy);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .brand-sub {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10.5px;
+    }
+
+    .document-code {
+      text-align: right;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+    .title {
+      position: relative;
+      z-index: 2;
+      margin: 24px 0 20px;
+      text-align: center;
+    }
+
+    .title h1 {
+      display: inline-block;
+      margin: 0;
+      padding: 0 24px 8px;
+      color: var(--navy);
+      border-bottom: 2px solid var(--navy);
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      font-size: 14px;
+      line-height: 1.82;
+    }
+
+    .content p { margin: 0 0 12px; }
+
+    .recipient {
+      margin-bottom: 15px;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .dynamic {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .details-card {
+      margin: 18px 0;
+      overflow: hidden;
+      background: linear-gradient(180deg, #ffffff 0%, #fffefe 100%);
+      border: 1px solid #dde6f1;
+      border-radius: 11px;
+      box-shadow: 0 6px 16px rgba(35, 50, 74, .05);
+    }
+
+    .details-title {
+      padding: 9px 14px;
+      color: var(--navy);
+      background: linear-gradient(90deg, #f5faff, #ffffff);
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 205px 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-row:last-child { border-bottom: 0; }
+
+    .detail-label,
+    .detail-value {
+      padding: 10px 13px;
+      min-height: 43px;
+      display: flex;
+      align-items: center;
+      font-size: 13.2px;
+      line-height: 1.5;
+    }
+
+    .detail-label {
+      color: var(--navy);
+      background: #f8fbff;
+      border-right: 1px solid var(--line);
+      font-weight: 700;
+    }
+
+    .detail-value { font-weight: 600; }
+    .amount-value { color: var(--primary); font-weight: 700; }
+
+    .approval-box {
+      margin: 16px 0;
+      padding: 13px 15px;
+      color: #314565;
+      background: linear-gradient(120deg, #eef8ff, #ffffff);
+      border: 1px solid var(--blue-line);
+      border-left: 5px solid var(--blue);
+      border-radius: 10px;
+    }
+
+    .notice-box {
+      margin-top: 14px;
+      padding: 13px 15px;
+      background: linear-gradient(120deg, #fff5fa, #ffffff);
+      border: 1px solid var(--pink-line);
+      border-left: 5px solid var(--primary);
+      border-radius: 10px;
+    }
+
+    .notice-title {
+      margin-bottom: 4px;
+      color: #8d5f7a;
+      font-weight: 700;
+    }
+
+    .content p.closing {
+      margin: 18px 0 12px;
+    }
+
+    .signature-section {
+      position: relative;
+      z-index: 2;
+      margin-top: auto;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 22px;
+    }
+
+    .signature-card {
+      width: 290px;
+      text-align: center;
+      color: var(--navy);
+      transform: translateX(60px);
+    }
+
+    .signature-space {
+      height: 78px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .signature-image {
+      max-width: 500px;
+      max-height: 150px;
+      display: block;
+      object-fit: contain;
+      transform: translateY(50px);
+    }
+
+    .signature-line { width: 190px; margin: 0 auto 7px; border-top: 1px solid #858d9e; }
+    .signature-name { font-size: 12.5px; font-weight: 700; }
+    .signature-title { margin-top: 3px; color: var(--muted); font-size: 10.5px; }
+
+    .footer-note {
+      position: absolute;
+      left: 18mm;
+      bottom: 8mm;
+      z-index: 2;
+      color: #8d6780;
+      font-size: 8.5px;
+      font-weight: 600;
+    }
+
+    .control-panel {
+      position: sticky;
+      top: 28px;
+      width: 390px;
+      flex-shrink: 0;
+      overflow: hidden;
+      padding: 26px;
+      background: linear-gradient(145deg, rgba(255,255,255,.99), rgba(245,250,255,.97));
+      border: 1px solid rgba(255,255,255,.96);
+      border-radius: 22px;
+      box-shadow: var(--panel-shadow);
+    }
+
+    .control-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 7px;
+      background: var(--gradient);
+    }
+
+    .control-header {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .control-header h2 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .control-header h2 i {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--gradient);
+      border-radius: 11px;
+      font-size: 14px;
+      box-shadow: 0 8px 18px rgba(115, 194, 255, .18);
+    }
+
+    .control-header p {
+      margin: 7px 0 0 48px;
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .group { display: flex; flex-direction: column; }
+    .group.full { grid-column: 1 / -1; }
+
+    .group label {
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .group input,
+    .group textarea {
+      width: 100%;
+      padding: 11px 12px;
+      color: var(--navy);
+      background: linear-gradient(180deg, #ffffff 0%, #fffefe 100%);
+      border: 1px solid #e0e8f2;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .group input { height: 45px; }
+    .group textarea { min-height: 78px; resize: vertical; line-height: 1.5; }
+
+    .group input:focus,
+    .group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(245, 138, 179, .14);
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .btn {
+      min-height: 47px;
+      border: 0;
+      border-radius: 11px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.04); }
+    .save-btn { background: linear-gradient(135deg, #f58ab3, #e46f9f); }
+    .print-btn { background: linear-gradient(135deg, #73c2ff, #4ea9ef); }
+
+    .panel-note {
+      margin-top: 13px;
+      padding: 11px 12px;
+      color: #6d2d37;
+      background: linear-gradient(90deg, #fff4fa, #f8fcff);
+      border: 1px solid var(--pink-line);
+      border-radius: 10px;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media print {
+      @page { size: A4; margin: 0; }
+      html, body { width: 210mm; height: 297mm; }
+      body { display: block; margin: 0; padding: 0; background: #fff; }
+      .control-panel { display: none; }
+      .document {
+        width: 210mm;
+        min-width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @media (max-width: 1230px) {
+      body { flex-direction: column; align-items: center; }
+      .control-panel { position: static; order: -1; width: 100%; max-width: 210mm; }
+    }
+
+    @media (max-width: 620px) {
+      body { align-items: flex-start; padding: 12px; }
+      .control-panel { min-width: 360px; padding: 20px 18px; }
+      .field-grid, .button-grid { grid-template-columns: 1fr; }
+      .group.full { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main class="document" id="document-area">
+    <div class="top-mark"></div>
+
+    <header class="header">
+      <div class="brand-block">
+        <img class="brand-logo" src="Logo.png" alt="CHUBBYCHEEKS Logo">
+        <div class="brand-text">
+          <div class="brand-name">CHUBBYCHEEKS</div>
+          <div class="brand-sub">ฝ่ายดูแลและให้บริการสมาชิก</div>
+        </div>
+      </div>
+      <div class="document-code">
+        เลขที่เอกสาร: EXT-2569-001<br>
+        วันที่ออกเอกสาร: <span id="doc-issued-date">30 กรกฎาคม 2569</span>
+      </div>
+    </header>
+
+    <section class="title">
+      <h1>เรื่อง แจ้งอนุมัติขยายระยะเวลาดำเนินการ</h1>
+    </section>
+
+    <section class="content">
+      <p class="recipient">เรียน <span id="doc-recipient" class="dynamic">คุณพิมผกานต์ แซ่เตียว</span></p>
+
+      <p>
+        ตามที่ท่านได้แจ้งความประสงค์ขอขยายระยะเวลาในการดำเนินการ เนื่องจากยังไม่สามารถดำเนินการให้แล้วเสร็จภายในระยะเวลาที่กำหนดนั้น
+      </p>
+
+      <p>
+        ทางผู้ดูแลได้ตรวจสอบและพิจารณาคำร้องของท่านเรียบร้อยแล้ว จึงอนุมัติให้ขยายระยะเวลาเพิ่มเติม เพื่อให้ท่านมีเวลาในการตรวจสอบข้อมูลและดำเนินการได้อย่างถูกต้องครบถ้วน
+      </p>
+
+      <div class="details-card">
+        <div class="details-title"><i class="fa-solid fa-list-check"></i> รายละเอียดการขยายระยะเวลา</div>
+
+        <div class="detail-row">
+          <div class="detail-label">ชื่อร้านค้า/เลขผู้ขาย</div>
+          <div id="doc-shop" class="detail-value">pimpakanshop</div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-label">ชื่อสมาชิก</div>
+          <div id="doc-member" class="detail-value">คุณพิมผกานต์ แซ่เตียว</div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-label">รายการที่อยู่ระหว่างการตรวจสอบ</div>
+          <div id="doc-item" class="detail-value">การแก้ไขข้อมูลและหมายเหตุของร้านค้าเพื่อดำเนินการถอนเงิน</div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-label">ยอดเงินตามรายการในระบบ</div>
+          <div class="detail-value amount-value"><span id="doc-amount">428,260.00</span>&nbsp;บาท</div>
+        </div>
+      </div>
+
+      <div class="approval-box">
+        อนุมัติให้ขยายระยะเวลาดำเนินการถึงวันที่
+        <span id="doc-deadline" class="dynamic">31 กรกฎาคม พุทธศักราช 2569</span>
+        เวลา <span id="doc-deadline-time" class="dynamic">12.00</span> น.
+      </div>
+
+      <p>
+        กรุณาตรวจสอบรายละเอียดและดำเนินการผ่านช่องทางอย่างเป็นทางการของบริษัทเท่านั้น หากพบว่าข้อมูล ยอดเงิน หรือรายละเอียดรายการไม่ถูกต้อง กรุณาติดต่อเจ้าหน้าที่เพื่อตรวจสอบก่อนดำเนินการทุกครั้ง
+      </p>
+
+      <div class="notice-box">
+        <div class="notice-title">หมายเหตุ</div>
+        การอนุมัติครั้งนี้เป็นการขยายระยะเวลาเพื่อให้สมาชิกตรวจสอบและแก้ไขข้อมูลให้ครบถ้วน เอกสารฉบับนี้ไม่ถือเป็นใบแจ้งหนี้หรือคำสั่งให้โอนเงินเพิ่มเติม สมาชิกควรตรวจสอบเอกสาร เลขที่รายการ และข้อมูลบัญชีผู้รับกับบริษัทผ่านช่องทางที่ได้รับการยืนยันก่อนทำธุรกรรม
+      </div>
+
+      <p class="closing">จึงเรียนมาเพื่อทราบและดำเนินการภายในระยะเวลาที่กำหนด</p>
+    </section>
+
+    <section class="signature-section">
+      <div class="signature-card">
+        <div class="signature-space">
+          <img class="signature-image" src="ลายเซ็น.png" alt="ลายเซ็น">
+        </div>
+        <div class="signature-line"></div>
+        <div class="signature-name">ฝ่ายดูแลและให้บริการสมาชิก</div>
+        <div class="signature-title">ผู้มีอำนาจตรวจสอบและอนุมัติคำร้อง</div>
+      </div>
+    </section>
+
+  </main>
+
+  <aside class="control-panel">
+    <div class="control-header">
+      <h2><i class="fa-solid fa-sliders"></i> ตั้งค่าเอกสาร</h2>
+      <p>แก้ไขเฉพาะข้อมูลที่กำหนด โดยข้อความส่วนอื่นจะคงเดิม</p>
+    </div>
+
+    <div class="field-grid">
+      <div class="group full">
+        <label for="ctrl-recipient">เรียน</label>
+        <input id="ctrl-recipient" type="text" value="คุณพิมผกานต์ แซ่เตียว">
+      </div>
+
+      <div class="group full">
+        <label for="ctrl-shop">ชื่อร้านค้า/เลขผู้ขาย</label>
+        <input id="ctrl-shop" type="text" value="pimpakanshop">
+      </div>
+
+      <div class="group full">
+        <label for="ctrl-member">ชื่อสมาชิก</label>
+        <input id="ctrl-member" type="text" value="คุณพิมผกานต์ แซ่เตียว">
+      </div>
+
+      <div class="group full">
+        <label for="ctrl-item">รายการที่อยู่ระหว่างการตรวจสอบ</label>
+        <textarea id="ctrl-item">การแก้ไขข้อมูลและหมายเหตุของร้านค้าเพื่อดำเนินการถอนเงิน</textarea>
+      </div>
+
+      <div class="group full">
+        <label for="ctrl-amount">ยอดเงินตามรายการในระบบ</label>
+        <input id="ctrl-amount" type="number" value="428260" min="0" step="0.01">
+      </div>
+
+      <div class="group">
+        <label for="ctrl-date">วันที่ครบกำหนด</label>
+        <input id="ctrl-date" type="date" value="2026-07-31">
+      </div>
+
+      <div class="group">
+        <label for="ctrl-issued-date">วันที่ออกเอกสาร</label>
+        <input id="ctrl-issued-date" type="date" value="2026-07-30">
+      </div>
+
+      <div class="group">
+        <label for="ctrl-time">เวลาครบกำหนด</label>
+        <input id="ctrl-time" type="time" value="12:00">
+      </div>
+    </div>
+
+    <div class="button-grid">
+      <button class="btn save-btn" onclick="saveAsImage()"><i class="fa-solid fa-image"></i> บันทึกเป็นรูปภาพ</button>
+      <button class="btn print-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> พิมพ์ / บันทึก PDF</button>
+    </div>
+
+    <div class="panel-note">
+      <strong>ฟอนต์:</strong> Sarabun<br>
+      ธีมสีถูกปรับเป็นชมพู–ฟ้าให้เข้ากับโลโก้ CHUBBYCHEEKS และเอกสารมีลายน้ำ “แบบร่างเอกสาร” เพื่อป้องกันการนำไปใช้เป็นเอกสารทางการโดยไม่ได้รับอนุญาต
+    </div>
+  </aside>
+
+  <script>
+    const thaiMonths = [
+      "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
+      "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม",
+      "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+    ];
+
+    function safeText(value, fallback = "-") {
+      const text = String(value ?? "").trim();
+      return text || fallback;
+    }
+
+    function formatCurrency(value) {
+      const amount = Number.parseFloat(value);
+      const safeAmount = Number.isFinite(amount) ? amount : 0;
+      return safeAmount.toLocaleString("th-TH", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function formatThaiDate(value, includeEraWord = false) {
+      if (!value) return "-";
+      const [year, month, day] = value.split("-").map(Number);
+      if (!year || !month || !day) return "-";
+      const buddhistYear = year + 543;
+      const era = includeEraWord ? "พุทธศักราช " : "";
+      return `${day} ${thaiMonths[month - 1]} ${era}${buddhistYear}`;
+    }
+
+    function updateDocument() {
+      document.getElementById("doc-recipient").textContent = safeText(document.getElementById("ctrl-recipient").value);
+      document.getElementById("doc-shop").textContent = safeText(document.getElementById("ctrl-shop").value);
+      document.getElementById("doc-member").textContent = safeText(document.getElementById("ctrl-member").value);
+      document.getElementById("doc-item").textContent = safeText(document.getElementById("ctrl-item").value);
+      document.getElementById("doc-amount").textContent = formatCurrency(document.getElementById("ctrl-amount").value);
+      document.getElementById("doc-deadline").textContent = formatThaiDate(document.getElementById("ctrl-date").value, true);
+      const deadlineTime = safeText(document.getElementById("ctrl-time").value, "12:00").replace(":", ".");
+      document.getElementById("doc-deadline-time").textContent = deadlineTime;
+      document.getElementById("doc-issued-date").textContent = formatThaiDate(document.getElementById("ctrl-issued-date").value, false);
+    }
+
+    async function saveAsImage() {
+      try {
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        const source = document.getElementById("document-area");
+        const canvas = await html2canvas(source, {
+          scale: Math.max(2, window.devicePixelRatio || 1),
+          useCORS: true,
+          backgroundColor: "#ffffff",
+          logging: false
+        });
+        const link = document.createElement("a");
+        link.download = "extension_approval_document.png";
+        link.href = canvas.toDataURL("image/png", 1);
+        link.click();
+      } catch (error) {
+        console.error(error);
+        alert("ไม่สามารถบันทึกรูปภาพได้: " + error.message);
+      }
+    }
+
+    [
+      "ctrl-recipient",
+      "ctrl-shop",
+      "ctrl-member",
+      "ctrl-item",
+      "ctrl-amount",
+      "ctrl-date",
+      "ctrl-issued-date",
+      "ctrl-time"
+    ].forEach(id => {
+      document.getElementById(id).addEventListener("input", updateDocument);
+      document.getElementById(id).addEventListener("change", updateDocument);
+    });
+
+    updateDocument();
+  </script>
+</body>
+</html>

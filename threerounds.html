@@ -187,7 +187,7 @@
         }
 
         .document::after {
-            content: "FIRSTSIGHTKIDS";
+            content: "CHUBBYCHEEKS";
 
             position: absolute;
             z-index: 0;
@@ -1239,6 +1239,346 @@
                 animation-iteration-count: 1 !important;
             }
         }
+
+        /* =========================================
+           CHUBBY CHEEKS — PINK & BLUE THEME
+        ========================================= */
+        :root {
+            --primary: #ff78a9;
+            --primary-dark: #e9508b;
+            --primary-deep: #b93672;
+            --primary-light: #fff2f8;
+            --primary-soft: #ffd8e8;
+
+            --orange: #59b8ee;
+            --orange-light: #eef8ff;
+
+            --green: #4aa9e9;
+            --green-light: #eef8ff;
+
+            --blue: #4ba9e8;
+            --blue-dark: #2d86cb;
+            --blue-light: #edf8ff;
+
+            --text-dark: #35425d;
+            --text-main: #58657b;
+            --text-light: #8793a7;
+
+            --border: #e7ecf4;
+            --border-red: rgba(255, 120, 169, 0.22);
+
+            --page-background: #f4f7fc;
+            --white: #ffffff;
+
+            --primary-gradient: linear-gradient(
+                135deg,
+                #ff92b7 0%,
+                #ff6ea5 46%,
+                #77c7f5 100%
+            );
+
+            --dark-gradient: linear-gradient(
+                135deg,
+                #53637f 0%,
+                #35425d 100%
+            );
+
+            --shadow-page:
+                0 35px 80px rgba(79, 112, 154, 0.16),
+                0 8px 25px rgba(255, 120, 169, 0.08);
+
+            --shadow-panel:
+                0 25px 65px rgba(79, 112, 154, 0.13),
+                0 7px 20px rgba(255, 120, 169, 0.07);
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 8% 8%,
+                    rgba(255, 120, 169, 0.19),
+                    transparent 31%
+                ),
+                radial-gradient(
+                    circle at 92% 87%,
+                    rgba(89, 184, 238, 0.18),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff7fb 0%,
+                    #f4f8ff 48%,
+                    #f8fbff 100%
+                );
+        }
+
+        body::before {
+            background: rgba(255, 120, 169, 0.09);
+        }
+
+        body::after {
+            background: rgba(89, 184, 238, 0.08);
+        }
+
+        .document {
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(119, 199, 245, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 0% 100%,
+                    rgba(255, 146, 183, 0.08),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #ffffff 74%,
+                    #fffafd 100%
+                );
+        }
+
+        .document::after {
+            color: rgba(89, 184, 238, 0.035);
+        }
+
+        .bg-decor {
+            border-color: rgba(89, 184, 238, 0.065);
+        }
+
+        .bg-decor::before {
+            border-color: rgba(255, 120, 169, 0.055);
+        }
+
+        .header {
+            border-bottom-color: #e7edf6;
+        }
+
+        .logo-img {
+            border-color: rgba(255, 120, 169, 0.32);
+            box-shadow:
+                0 9px 23px rgba(89, 184, 238, 0.12),
+                0 4px 13px rgba(255, 120, 169, 0.13),
+                inset 0 0 0 3px rgba(255, 255, 255, 0.92);
+        }
+
+        .logo-text {
+            color: var(--primary);
+            background: linear-gradient(90deg, #ff6ea5, #57b7ef);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-logo {
+            color: #75859e;
+        }
+
+        .doc-title {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 240, 247, 0.95),
+                rgba(238, 248, 255, 0.9)
+            );
+            border-color: rgba(111, 190, 239, 0.25);
+            box-shadow: 0 6px 17px rgba(89, 184, 238, 0.06);
+        }
+
+        .doc-title p {
+            color: #ec5d98;
+        }
+
+        .recipient-box {
+            background: linear-gradient(
+                110deg,
+                #fff1f7 0%,
+                #f1f9ff 100%
+            );
+            border-color: rgba(255, 120, 169, 0.22);
+            border-left-color: #ff78a9;
+        }
+
+        .recipient-box::after {
+            color: rgba(89, 184, 238, 0.09);
+        }
+
+        .section {
+            border-color: rgba(220, 228, 240, 0.95);
+            box-shadow: 0 5px 15px rgba(78, 114, 157, 0.035);
+        }
+
+        .section-title {
+            border-bottom-color: #dde7f1;
+        }
+
+        .section-title::after {
+            background: linear-gradient(90deg, #ff78a9, #65bdf1);
+        }
+
+        .section-title span.icon-wrapper {
+            box-shadow:
+                0 5px 12px rgba(255, 120, 169, 0.16),
+                0 3px 9px rgba(89, 184, 238, 0.12);
+        }
+
+        .highlight-box {
+            color: #3e6683;
+            background: linear-gradient(
+                110deg,
+                #edf8ff 0%,
+                #fff6fb 100%
+            );
+            border-color: #cfeaf9;
+            border-left-color: #59b8ee;
+        }
+
+        .highlight-box::after {
+            background: rgba(255, 120, 169, 0.08);
+        }
+
+        .highlight-box i {
+            color: #399bd7;
+        }
+
+        .highlight-box strong {
+            color: #355d79;
+        }
+
+        .custom-list {
+            background: linear-gradient(
+                180deg,
+                #ffffff 0%,
+                #f8fbff 100%
+            );
+            border-color: #e3ebf5;
+        }
+
+        .custom-list li::before {
+            background: linear-gradient(135deg, #ff7dab, #5cb8ee);
+            box-shadow: 0 3px 7px rgba(89, 184, 238, 0.15);
+        }
+
+        .summary-box li {
+            background: linear-gradient(
+                100deg,
+                rgba(238, 248, 255, 0.95),
+                rgba(255, 244, 249, 0.82)
+            );
+            border-color: #dcecf7;
+        }
+
+        .summary-box li:nth-child(2) {
+            background: linear-gradient(
+                100deg,
+                rgba(255, 241, 247, 0.96),
+                rgba(239, 249, 255, 0.84)
+            );
+            border-color: #f1dce7;
+        }
+
+        .summary-box li::before {
+            background: linear-gradient(135deg, #58b8ee, #ff78a9);
+        }
+
+        .footer-banner {
+            background: linear-gradient(
+                120deg,
+                #e95491 0%,
+                #ff7eaa 43%,
+                #64bdf1 100%
+            );
+            box-shadow:
+                0 9px 21px rgba(255, 120, 169, 0.17),
+                0 5px 15px rgba(89, 184, 238, 0.12);
+        }
+
+        .date-area {
+            border-left-color: #d9ecf8;
+        }
+
+        .control-panel {
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(89, 184, 238, 0.09),
+                    transparent 33%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.98),
+                    rgba(250, 252, 255, 0.94)
+                );
+        }
+
+        .control-panel::after {
+            background: rgba(255, 120, 169, 0.07);
+        }
+
+        .control-panel h2 {
+            border-bottom-color: #e4ebf4;
+        }
+
+        .control-panel h2 i {
+            box-shadow:
+                0 7px 16px rgba(255, 120, 169, 0.16),
+                0 4px 11px rgba(89, 184, 238, 0.12);
+        }
+
+        .control-group label i {
+            color: #e9508b;
+            background: linear-gradient(135deg, #fff0f7, #eef8ff);
+        }
+
+        .control-group input {
+            border-color: #dce5f0;
+        }
+
+        .control-group input:hover {
+            border-color: #bdddf1;
+        }
+
+        .control-group input:focus {
+            border-color: #69bff1;
+            box-shadow:
+                0 0 0 4px rgba(89, 184, 238, 0.12),
+                0 5px 14px rgba(255, 120, 169, 0.06);
+        }
+
+        .control-group:focus-within i.input-icon {
+            color: #e9508b;
+        }
+
+        .btn-group .print-btn:first-child {
+            background: linear-gradient(135deg, #ff8eb5 0%, #ef5c98 100%) !important;
+            box-shadow: 0 8px 18px rgba(239, 92, 152, 0.22);
+        }
+
+        .btn-group .print-btn:nth-child(2) {
+            background: linear-gradient(135deg, #79c9f5 0%, #3f9edb 100%) !important;
+            box-shadow: 0 8px 18px rgba(63, 158, 219, 0.22);
+        }
+
+        .control-panel > div:last-child {
+            background: linear-gradient(
+                120deg,
+                #fff2f8,
+                #eef8ff
+            ) !important;
+            border-color: #d8eaf6 !important;
+            border-left-color: #ff78a9 !important;
+            box-shadow: 0 5px 13px rgba(89, 184, 238, 0.06) !important;
+        }
+
+        .control-panel > div:last-child p {
+            color: #52657c !important;
+        }
+
+        .control-panel > div:last-child .fa-info-circle {
+            color: #4ba9e8 !important;
+        }
+
     </style>
 </head>
 
@@ -1258,7 +1598,7 @@
                 >
 
                 <div class="logo-text-wrapper">
-                    <div class="logo-text">FIRSTSIGHTKIDS</div>
+                    <div class="logo-text">CHUBBYCHEEKS</div>
                     <div class="sub-logo">STANDARD DIGITAL COMPLIANCE</div>
                 </div>
             </div>
@@ -1338,7 +1678,7 @@
                 <li>ต้องเข้าทำรายการแก้ไขให้เสร็จให้แล้วเสร็จภายใน 1 ชั่วโมง</li>
 
                 <li>
-                    ทาง <strong>FIRSTSIGHTKIDS</strong>
+                    ทาง <strong>CHUBBYCHEEKS</strong>
                     ได้วางเงินประกันจำนวนเงินทั้งหมดเรียบร้อยแล้ว แผนงานครั้งละเป็นเงิน
                     <strong id="doc-total-amt2" class="text-red">52,824 บาท</strong>
                 </li>

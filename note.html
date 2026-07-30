@@ -8,21 +8,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --primary-color: #e63946;
-            --secondary-color: #a81c2a;
-            --primary-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            --bg-page: #f0f2f5;
+            --primary-color: #f58ab3;
+            --secondary-color: #df6f9d;
+            --primary-gradient: linear-gradient(135deg, #f7a4c8 0%, #f58ab3 48%, #73c2ff 100%);
+            --bg-page: #f6fbff;
             --bg-doc: #ffffff;
-            --text-dark: #1d3557;
-            --text-main: #4a4a4a;
-            --text-light: #6c757d;
-            --accent-yellow: #ffb703;
-            --light-red: #fff0f3;
+            --text-dark: #27364c;
+            --text-main: #56657a;
+            --text-light: #8a94a5;
+            --accent-yellow: #f5c16a;
+            --light-red: #fff2f8;
             --border-color: #e9ecef;
         }
 
         body { 
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            background: linear-gradient(135deg, #fff8fc 0%, #eef7ff 100%);
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             font-family: 'Sarabun', sans-serif; 
             margin: 0; 
@@ -41,7 +41,7 @@
             height: 297mm; 
             padding: 15mm 20mm; 
             box-sizing: border-box; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 15px rgba(255, 65, 108, 0.05);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 15px rgba(245, 138, 179, 0.10);
             position: relative; 
             color: var(--text-main); 
             flex-shrink: 0;
@@ -68,7 +68,7 @@
             transform: translate(-50%, -50%) rotate(-45deg);
             font-size: 85px; 
             font-weight: 800; 
-            color: rgba(230, 57, 70, 0.03); 
+            color: rgba(245, 138, 179, 0.06); 
             z-index: 0;
             white-space: nowrap;
             pointer-events: none;
@@ -116,7 +116,7 @@
             justify-content: center;
             color: white;
             font-size: 20px;
-            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.2);
+            box-shadow: 0 4px 10px rgba(115, 194, 255, 0.22);
             flex-shrink: 0;
         }
         
@@ -533,24 +533,24 @@
            ========================================================= */
 
         :root {
-            --primary-color: #c92f45;
-            --secondary-color: #7f1728;
-            --primary-gradient: linear-gradient(135deg, #8f1830 0%, #c92f45 52%, #ef6a72 100%);
-            --bg-page: #eef1f6;
+            --primary-color: #f58ab3;
+            --secondary-color: #df6f9d;
+            --primary-gradient: linear-gradient(135deg, #f7a4c8 0%, #f58ab3 48%, #73c2ff 100%);
+            --bg-page: #f6fbff;
             --bg-doc: #ffffff;
-            --text-dark: #17233b;
-            --text-main: #465268;
-            --text-light: #7a8497;
-            --accent-yellow: #d89a12;
-            --light-red: #fff2f4;
+            --text-dark: #27364c;
+            --text-main: #56657a;
+            --text-light: #8a94a5;
+            --accent-yellow: #f5c16a;
+            --light-red: #fff2f8;
             --border-color: #e4e8ef;
         }
 
         body {
             background:
-                radial-gradient(circle at 8% 8%, rgba(201, 47, 69, 0.13), transparent 29%),
-                radial-gradient(circle at 92% 88%, rgba(29, 53, 87, 0.09), transparent 31%),
-                linear-gradient(135deg, #f8f8fa 0%, #edf0f5 48%, #f8f2f3 100%);
+                radial-gradient(circle at 8% 8%, rgba(245, 138, 179, 0.18), transparent 29%),
+                radial-gradient(circle at 92% 88%, rgba(115, 194, 255, 0.16), transparent 31%),
+                linear-gradient(135deg, #fff8fc 0%, #eef7ff 48%, #ffffff 100%);
             background-attachment: fixed;
         }
 
@@ -569,7 +569,7 @@
             height: 380px;
             top: -170px;
             right: -130px;
-            background: rgba(201, 47, 69, 0.065);
+            background: rgba(245, 138, 179, 0.12);
         }
 
         body::after {
@@ -577,27 +577,27 @@
             height: 340px;
             bottom: -150px;
             left: -120px;
-            background: rgba(23, 35, 59, 0.05);
+            background: rgba(115, 194, 255, 0.11);
         }
 
         .document {
             background:
                 linear-gradient(rgba(255,255,255,0.985), rgba(255,255,255,0.985)),
-                radial-gradient(circle at 20% 20%, rgba(201,47,69,0.035) 0 1px, transparent 1px);
+                radial-gradient(circle at 20% 20%, rgba(115,194,255,0.06) 0 1px, transparent 1px);
             background-size: auto, 18px 18px;
             border: 1px solid rgba(255,255,255,0.94);
             border-radius: 12px;
             box-shadow:
                 0 34px 80px rgba(23, 35, 59, 0.15),
                 0 10px 26px rgba(23, 35, 59, 0.075),
-                inset 0 0 0 1px rgba(201, 47, 69, 0.025);
+                inset 0 0 0 1px rgba(245, 138, 179, 0.08);
         }
 
         .document::before {
             height: 11px;
             background:
-                linear-gradient(90deg, #751424 0%, #ba273d 40%, #ef6a72 74%, #ba273d 100%);
-            box-shadow: 0 4px 13px rgba(201, 47, 69, 0.19);
+                linear-gradient(90deg, #f7a4c8 0%, #f58ab3 42%, #73c2ff 76%, #f58ab3 100%);
+            box-shadow: 0 4px 13px rgba(115, 194, 255, 0.22);
         }
 
         .document::after {
@@ -605,14 +605,14 @@
             top: 53%;
             font-size: 61px;
             letter-spacing: 7px;
-            color: rgba(201, 47, 69, 0.028);
+            color: rgba(245, 138, 179, 0.06);
         }
 
         .bg-decor {
             background: transparent;
-            border: 27px solid rgba(201, 47, 69, 0.038);
+            border: 27px solid rgba(115, 194, 255, 0.14);
             box-shadow:
-                0 0 0 16px rgba(201, 47, 69, 0.018),
+                0 0 0 16px rgba(245, 138, 179, 0.06),
                 inset 0 0 0 1px rgba(255,255,255,0.45);
         }
 
@@ -624,7 +624,7 @@
             left: -38px;
             bottom: -12px;
             border-radius: 50%;
-            border: 8px solid rgba(201, 47, 69, 0.026);
+            border: 8px solid rgba(245, 138, 179, 0.12);
         }
 
         .bg-decor::after {
@@ -633,15 +633,15 @@
             right: 38px;
             bottom: -885px;
             padding: 4px 11px;
-            color: #8f1830;
-            background: rgba(255, 242, 244, 0.94);
-            border: 1px solid rgba(201, 47, 69, 0.18);
+            color: #9a5f85;
+            background: rgba(255, 244, 250, 0.96);
+            border: 1px solid rgba(245, 138, 179, 0.22);
             border-radius: 999px;
             font-size: 9px;
             font-weight: 800;
             letter-spacing: .2px;
             white-space: nowrap;
-            box-shadow: 0 5px 12px rgba(201, 47, 69, 0.07);
+            box-shadow: 0 5px 12px rgba(115, 194, 255, 0.10);
         }
 
         .header-note {
@@ -679,8 +679,8 @@
 
         .header-meta {
             padding: 9px 11px;
-            background: linear-gradient(135deg, rgba(255,242,244,0.92), rgba(255,255,255,0.94));
-            border: 1px solid rgba(201,47,69,0.14);
+            background: linear-gradient(135deg, rgba(255,244,250,0.95), rgba(243,249,255,0.95));
+            border: 1px solid rgba(115,194,255,0.22);
             border-radius: 10px;
             box-shadow: 0 7px 18px rgba(23,35,59,0.045);
         }
@@ -701,11 +701,11 @@
         }
 
         .alert-box {
-            background: linear-gradient(125deg, #fff8e6 0%, #fffdf7 100%);
-            border: 1px solid #f0d58a;
-            border-left: 5px solid #d89a12;
+            background: linear-gradient(125deg, #fff5fb 0%, #f3f9ff 100%);
+            border: 1px solid #f6cfe2;
+            border-left: 5px solid #73c2ff;
             box-shadow:
-                0 8px 19px rgba(216,154,18,0.075),
+                0 8px 19px rgba(115,194,255,0.10),
                 inset 0 0 0 1px rgba(255,255,255,0.55);
         }
 
@@ -717,7 +717,7 @@
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             font-size: 38px;
-            color: rgba(216,154,18,0.075);
+            color: rgba(245,138,179,0.10);
         }
 
         .content-text {
@@ -729,16 +729,16 @@
         }
 
         .highlight-text {
-            background: linear-gradient(135deg, #fff3cf, #fff9e6);
-            color: #a66700;
-            border: 1px solid #f2d58a;
+            background: linear-gradient(135deg, #fff3f9, #fff9fd);
+            color: #c96f9e;
+            border: 1px solid #f5cfe2;
             box-shadow: inset 0 0 0 1px rgba(255,255,255,.45);
         }
 
         .highlight-text-blue {
-            background: linear-gradient(135deg, #eef6ff, #f7fbff);
-            color: #145d8b;
-            border: 1px solid #cfe5f7;
+            background: linear-gradient(135deg, #eef7ff, #fbfdff);
+            color: #4d90c7;
+            border: 1px solid #d7ebfb;
             box-shadow: inset 0 0 0 1px rgba(255,255,255,.55);
         }
 
@@ -778,7 +778,7 @@
             color: #ffffff;
             background: var(--primary-gradient);
             border-radius: 8px;
-            box-shadow: 0 6px 13px rgba(201,47,69,.17);
+            box-shadow: 0 6px 13px rgba(115,194,255,.18);
         }
 
         .details-row {
@@ -792,7 +792,7 @@
 
         .details-row:last-child {
             background: linear-gradient(110deg, #fff1f3 0%, #fff9fa 100%);
-            border-top: 1px solid rgba(201,47,69,.13);
+            border-top: 1px solid rgba(245,138,179,.18);
         }
 
         .row-label {
@@ -805,7 +805,7 @@
 
         .total-row .row-value {
             color: var(--primary-color);
-            text-shadow: 1px 1px 0 rgba(201,47,69,.04);
+            text-shadow: 1px 1px 0 rgba(245,138,179,.10);
         }
 
         .system-note {
@@ -825,7 +825,7 @@
             color: #ffffff;
             background: var(--primary-gradient);
             border-radius: 9px;
-            box-shadow: 0 6px 13px rgba(201,47,69,.17);
+            box-shadow: 0 6px 13px rgba(115,194,255,.18);
             flex-shrink: 0;
         }
 
@@ -876,7 +876,7 @@
             color: #ffffff;
             background: var(--primary-gradient);
             border-radius: 11px;
-            box-shadow: 0 7px 15px rgba(201,47,69,.2);
+            box-shadow: 0 7px 15px rgba(115,194,255,.20);
         }
 
         .control-group label {
@@ -914,7 +914,7 @@
         .control-group textarea:focus {
             border-color: var(--primary-color);
             box-shadow:
-                0 0 0 4px rgba(201,47,69,.09),
+                0 0 0 4px rgba(245,138,179,.14),
                 0 6px 15px rgba(23,35,59,.05);
         }
 
@@ -942,11 +942,11 @@
         }
 
         .control-panel > div:last-child {
-            background: linear-gradient(125deg, #fff2f4, #ffffff) !important;
-            border: 1px solid #f4ccd3 !important;
+            background: linear-gradient(125deg, #fff4fa, #f6fbff) !important;
+            border: 1px solid #f5d7e6 !important;
             border-left: 4px solid var(--primary-color) !important;
             border-radius: 10px !important;
-            box-shadow: 0 6px 14px rgba(201,47,69,.045);
+            box-shadow: 0 6px 14px rgba(115,194,255,.08);
         }
 
         @media print {
@@ -1095,10 +1095,10 @@
         </div>
         
         <div class="btn-group">
-            <button class="print-btn" onclick="saveAsImage()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+            <button class="print-btn" onclick="saveAsImage()" style="background: linear-gradient(135deg, #f58ab3 0%, #e272a2 100%);">
                 <i class="fas fa-image"></i> บันทึกรูปภาพ
             </button>
-            <button class="print-btn" onclick="copyToClipboard()" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+            <button class="print-btn" onclick="copyToClipboard()" style="background: linear-gradient(135deg, #73c2ff 0%, #4faaf0 100%);">
                 <i class="fas fa-copy"></i> คัดลอกรูปภาพ
             </button>
         </div>

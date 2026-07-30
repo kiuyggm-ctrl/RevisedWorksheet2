@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#e63946">
+    <meta name="theme-color" content="#f58ab3">
 
-    <title>FIRSTSIGHTKIDS - Main Menu</title>
+    <title>CHUBBYCHEEKS - Main Menu</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -308,6 +308,10 @@
             animation-delay: 0.4s;
         }
 
+        .menu-card:nth-child(9) {
+            animation-delay: 0.45s;
+        }
+
         .menu-card::before {
             content: "";
             position: absolute;
@@ -560,6 +564,11 @@
             --card-color-2: #ec4899;
         }
 
+        .card-extension {
+            --card-color: #2563eb;
+            --card-color-2: #06b6d4;
+        }
+
         /* จัดการ์ดสุดท้ายให้อยู่กึ่งกลางเมื่อมี 7 เมนู */
 
         .menu-card:last-child:nth-child(3n + 1) {
@@ -725,6 +734,210 @@
                 scroll-behavior: auto !important;
             }
         }
+
+
+        /* =========================================================
+           CHUBBYCHEEKS PINK & BLUE THEME
+           โทนสีชมพู–ฟ้าพาสเทลให้เข้ากับโลโก้
+        ========================================================= */
+        :root {
+            --primary: #f58ab3;
+            --primary-dark: #df6d9d;
+            --primary-soft: #fff2f8;
+            --secondary: #73c2ff;
+            --secondary-dark: #4da8ef;
+
+            --primary-gradient: linear-gradient(
+                135deg,
+                #f7a4c8 0%,
+                #f58ab3 46%,
+                #73c2ff 100%
+            );
+
+            --text-dark: #2b3850;
+            --text-main: #58677c;
+            --text-light: #8793a7;
+            --border: rgba(245, 138, 179, 0.16);
+
+            --shadow-sm:
+                0 10px 28px rgba(67, 101, 143, 0.07),
+                0 3px 10px rgba(245, 138, 179, 0.05);
+
+            --shadow-lg:
+                0 26px 58px rgba(76, 139, 190, 0.16),
+                0 12px 30px rgba(245, 138, 179, 0.13);
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 9% 9%,
+                    rgba(245, 138, 179, 0.22),
+                    transparent 31%
+                ),
+                radial-gradient(
+                    circle at 91% 89%,
+                    rgba(115, 194, 255, 0.22),
+                    transparent 34%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff8fc 0%,
+                    #f4f9ff 50%,
+                    #fffdfd 100%
+                );
+        }
+
+        body::before {
+            background: rgba(245, 138, 179, 0.13);
+        }
+
+        body::after {
+            background: rgba(115, 194, 255, 0.14);
+        }
+
+        .logo-wrap {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.96),
+                rgba(248, 252, 255, 0.88)
+            );
+            border: 1px solid rgba(245, 138, 179, 0.2);
+            box-shadow:
+                0 20px 48px rgba(115, 194, 255, 0.17),
+                0 10px 28px rgba(245, 138, 179, 0.16),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+        }
+
+        .logo-wrap::after {
+            background: var(--primary-gradient);
+            opacity: 0.2;
+        }
+
+        .platform-name {
+            color: transparent;
+            background: linear-gradient(
+                100deg,
+                #ee76a6 0%,
+                #f58ab3 43%,
+                #65b9f7 58%,
+                #4da8ef 100%
+            );
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 10px rgba(115, 194, 255, 0.12));
+        }
+
+        .platform-sub {
+            color: #6d8eaa;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 244, 250, 0.9),
+                rgba(241, 249, 255, 0.92)
+            );
+            border-color: rgba(115, 194, 255, 0.22);
+            box-shadow:
+                0 8px 22px rgba(115, 194, 255, 0.08),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+        }
+
+        .platform-sub i {
+            color: var(--primary);
+        }
+
+        .header-divider {
+            background: var(--primary-gradient);
+            box-shadow:
+                0 6px 16px rgba(245, 138, 179, 0.22),
+                0 3px 10px rgba(115, 194, 255, 0.18);
+        }
+
+        .menu-card {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.94),
+                rgba(248, 252, 255, 0.88)
+            );
+            border-color: rgba(255, 255, 255, 0.98);
+            box-shadow:
+                var(--shadow-sm),
+                inset 0 0 0 1px rgba(115, 194, 255, 0.04);
+        }
+
+        .menu-card:hover {
+            border-color: rgba(245, 138, 179, 0.2);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-icon {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 1),
+                color-mix(in srgb, var(--card-color-2) 10%, white)
+            );
+        }
+
+        .card-btn {
+            color: #607289;
+            background: linear-gradient(135deg, #fff5fa, #f1f8ff);
+            border-color: rgba(115, 194, 255, 0.16);
+        }
+
+        .menu-card:focus-visible {
+            outline-color: rgba(115, 194, 255, 0.28);
+        }
+
+        /* สลับเฉดชมพูและฟ้าให้ทุกเมนูเป็นชุดเดียวกับโลโก้ */
+        .card-percent {
+            --card-color: #f58ab3;
+            --card-color-2: #ffadd0;
+        }
+
+        .card-memo {
+            --card-color: #73c2ff;
+            --card-color-2: #9cd5ff;
+        }
+
+        .card-notice {
+            --card-color: #ee79a8;
+            --card-color-2: #78c5fb;
+        }
+
+        .card-slip {
+            --card-color: #58b4f5;
+            --card-color-2: #8bd1ff;
+        }
+
+        .card-note {
+            --card-color: #f392ba;
+            --card-color-2: #73c2ff;
+        }
+
+        .card-bank {
+            --card-color: #69b9f3;
+            --card-color-2: #f6a4c6;
+        }
+
+        .card-business {
+            --card-color: #f58ab3;
+            --card-color-2: #78c5fb;
+        }
+
+        .card-wrong-account {
+            --card-color: #86caff;
+            --card-color-2: #f49abc;
+        }
+
+        .card-extension {
+            --card-color: #ee79a8;
+            --card-color-2: #65b9f7;
+        }
+
+        .footer strong {
+            color: #e876a6;
+        }
+
     </style>
 </head>
 
@@ -736,13 +949,13 @@
             <div class="logo-wrap">
                 <img
                     src="Logo.png"
-                    alt="FIRSTSIGHTKIDS Logo"
+                    alt="CHUBBYCHEEKS Logo"
                     class="logo-img"
                     onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png';"
                 >
             </div>
 
-            <h1 class="platform-name">FIRSTSIGHTKIDS</h1>
+            <h1 class="platform-name">CHUBBYCHEEKS</h1>
 
             <div class="platform-sub">
                 <i class="fa-solid fa-shield-halved"></i>
@@ -860,7 +1073,22 @@
                 </div>
             </a>
 
-            <!-- Card 8: Scan Business Card -->
+            <!-- Card 8: Extension Form -->
+            <a href="prolongfor.html" class="menu-card card-extension">
+                <div class="card-icon">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                </div>
+
+                <h2 class="card-title">ใบขยายเวลา</h2>
+                <p class="card-desc">จัดทำเอกสารแจ้งอนุมัติขยายระยะเวลาดำเนินการ</p>
+
+                <div class="card-btn">
+                    สร้างเอกสาร
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Card 9: Scan Business Card -->
             <a href="scancard.html" class="menu-card card-business">
                 <div class="card-icon">
                     <i class="fa-solid fa-address-card"></i>
@@ -879,7 +1107,7 @@
 
         <!-- Footer -->
         <footer class="footer">
-            &copy; 2026 <strong>FIRSTSIGHTKIDS</strong>. All rights reserved.
+            &copy; 2026 <strong>CHUBBYCHEEKS</strong>. All rights reserved.
         </footer>
 
     </main>

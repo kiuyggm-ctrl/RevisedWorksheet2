@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIRSTSIGHTKIDS - Premium Verification</title>
+    <title>CHUBBYCHEEKS - Premium Verification</title>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #e63946;
-            --success-color: #10b981;
-            --primary-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            --text-dark: #1d3557;
-            --text-main: #4a4a4a;
-            --text-light: #6c757d;
-            --bg-card: #ffffff;
-            --border-color: #e2e8f0;
+            --primary-color: #f58ab3;
+            --success-color: #73c2ff;
+            --primary-gradient: linear-gradient(135deg, #f7a4c8 0%, #f58ab3 48%, #73c2ff 100%);
+            --text-dark: #27364c;
+            --text-main: #58657a;
+            --text-light: #8b96a8;
+            --bg-card: rgba(255,255,255,0.92);
+            --border-color: #e7edf5;
         }
         body {
-            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            background: linear-gradient(135deg, #fff8fc 0%, #eef7ff 100%);
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             font-family: 'Sarabun', sans-serif;
             margin: 0;
@@ -30,6 +30,29 @@
             padding-top: 40px;
             padding-bottom: 60px;
             color: var(--text-main);
+        }
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(4px);
+        }
+        body::before {
+            width: 340px;
+            height: 340px;
+            top: -130px;
+            right: -100px;
+            background: rgba(245, 138, 179, 0.14);
+        }
+        body::after {
+            width: 300px;
+            height: 300px;
+            bottom: -120px;
+            left: -90px;
+            background: rgba(115, 194, 255, 0.14);
         }
         .container {
             width: 100%;
@@ -49,7 +72,7 @@
             width: 80px;
             height: auto;
             margin-bottom: 15px;
-            filter: drop-shadow(0 4px 8px rgba(230, 57, 70, 0.2));
+            filter: drop-shadow(0 6px 12px rgba(245, 138, 179, 0.22));
             transition: transform 0.3s ease;
         }
         .logo-img:hover { transform: scale(1.05); }
@@ -83,8 +106,8 @@
             display: flex;
             gap: 15px;
             margin-bottom: 40px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 12px 24px rgba(115, 194, 255, 0.10);
+            border: 1px solid rgba(245, 138, 179, 0.14);
             animation: fadeInDown 0.8s ease 0.1s both;
         }
         .btn-num {
@@ -104,7 +127,7 @@
         .btn-num.active {
             background: var(--primary-gradient);
             color: #FFF;
-            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+            box-shadow: 0 8px 18px rgba(115, 194, 255, 0.28);
         }
         .cards-container {
             display: flex;
@@ -122,7 +145,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 14px 34px rgba(39, 54, 76, 0.08);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             animation: fadeInUp 0.8s ease backwards;
             display: flex;
@@ -138,7 +161,7 @@
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(230, 57, 70, 0.08);
+            box-shadow: 0 20px 42px rgba(115, 194, 255, 0.16);
         }
         .card:hover::before { height: 8px; }
         .input-group {
@@ -160,7 +183,7 @@
             padding: 15px 45px; 
             border-radius: 50px;
             border: 2px solid transparent; 
-            background: #ffffff; 
+            background: rgba(255,255,255,0.98); 
             color: var(--text-dark);
             font-family: 'Sarabun', sans-serif;
             font-size: 16px;
@@ -168,7 +191,7 @@
             text-align: center;
             box-sizing: border-box;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04), inset 0 2px 4px rgba(0,0,0,0.01); 
+            box-shadow: 0 6px 16px rgba(115, 194, 255, 0.10), inset 0 2px 4px rgba(0,0,0,0.01); 
         }
         .input-group input::placeholder {
             font-weight: 400;
@@ -177,9 +200,9 @@
         }
         .input-group input:focus {
             outline: none;
-            border-color: rgba(230, 57, 70, 0.4);
+            border-color: rgba(245, 138, 179, 0.45);
             background: #FFF;
-            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.15);
+            box-shadow: 0 10px 28px rgba(115, 194, 255, 0.18);
             transform: translateY(-2px);
         }
         .input-group input:focus + i, 
@@ -195,11 +218,11 @@
         .input-error {
             animation: errorShake 0.4s ease-in-out !important;
             border-color: var(--primary-color) !important;
-            background: #fff0f3 !important;
+            background: #fff3f9 !important;
             color: var(--primary-color) !important;
         }
         .input-error::placeholder {
-            color: rgba(230, 57, 70, 0.6) !important;
+            color: rgba(245, 138, 179, 0.75) !important;
         }
         .input-group input.highlight-red {
             color: var(--primary-color) !important;
@@ -208,7 +231,7 @@
             letter-spacing: 1.5px; 
             background: #ffffff !important;
             border-color: var(--primary-color) !important;
-            box-shadow: 0 10px 25px rgba(230, 57, 70, 0.2) !important;
+            box-shadow: 0 12px 28px rgba(245, 138, 179, 0.22) !important;
             transform: scale(1.02); 
         }
         .input-group input.highlight-red ~ i {
@@ -217,7 +240,7 @@
         .drop-zone {
             width: 100%;
             aspect-ratio: 3/4;
-            border: 2px dashed #cbd5e1;
+            border: 2px dashed #cfe1f5;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
@@ -225,7 +248,7 @@
             justify-content: center;
             cursor: pointer;
             overflow: hidden;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #fff6fb 0%, #f5faff 100%);
             position: relative;
             transition: all 0.3s ease;
             margin-bottom: 5px;
@@ -238,7 +261,7 @@
         .drop-zone span i {
             font-size: 24px;
             margin-bottom: 10px;
-            color: #cbd5e1;
+            color: #bfd7f2;
         }
         .drop-zone img {
             width: 100%;
@@ -263,13 +286,13 @@
             font-family: 'Sarabun', sans-serif;
             text-transform: uppercase;
             letter-spacing: 3px;
-            text-shadow: 2px 4px 12px rgba(230, 57, 70, 0.4), 0 2px 5px rgba(0,0,0,0.25);
+            text-shadow: 2px 4px 12px rgba(245, 138, 179, 0.38), 0 2px 5px rgba(0,0,0,0.18);
             transform: scale(1.5) rotate(-15deg);
             opacity: 0;
         }
         .stamp.success {
             color: var(--success-color);
-            text-shadow: 2px 4px 12px rgba(16, 185, 129, 0.4), 0 2px 5px rgba(0,0,0,0.25);
+            text-shadow: 2px 4px 12px rgba(115, 194, 255, 0.38), 0 2px 5px rgba(0,0,0,0.18);
         }
         .result-msg {
             display: none;
@@ -277,10 +300,10 @@
             box-sizing: border-box;
             margin-top: 15px;
             padding: 12px 15px;
-            background: #ffffff;
+            background: rgba(255,255,255,0.98);
             border-radius: 12px;
-            border: 1px solid rgba(230, 57, 70, 0.15);
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.05);
+            border: 1px solid rgba(245, 138, 179, 0.18);
+            box-shadow: 0 4px 15px rgba(245, 138, 179, 0.08);
             border-left: 4px solid var(--primary-color);
             text-align: left;
             position: relative;
@@ -310,20 +333,20 @@
         .result-msg.success {
             border-left: 4px solid var(--success-color);
             border-color: rgba(16, 185, 129, 0.15);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);
+            box-shadow: 0 4px 15px rgba(115, 194, 255, 0.08);
         }
         .result-msg.success .msg-header {
             color: var(--success-color);
         }
         .action-btn {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #fff6fb 0%, #f5faff 100%);
             color: var(--text-dark);
             font-family: 'Sarabun', sans-serif;
             font-weight: 600;
             font-size: 15px;
             padding: 12px 24px;
             border-radius: 50px;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(245, 138, 179, 0.14);
             cursor: pointer;
             margin-top: 20px;
             display: inline-flex;
@@ -340,7 +363,7 @@
             background: var(--primary-gradient);
             color: white;
             border-color: transparent;
-            box-shadow: 0 8px 15px rgba(230, 57, 70, 0.2);
+            box-shadow: 0 8px 15px rgba(115, 194, 255, 0.18);
         }
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
@@ -366,8 +389,8 @@
 <body>
 <div class="container">
     <div class="header">
-        <img src="Logo.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
-        <h1 class="platform-name">FIRSTSIGHTKIDS</h1>
+        <img src="Logo.png" alt="CHUBBYCHEEKS Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
+        <h1 class="platform-name">CHUBBYCHEEKS</h1>
         <div class="platform-sub">Premium Verification</div>
         <div class="header-divider"></div>
     </div>
@@ -427,11 +450,11 @@
          document.querySelectorAll('.drop-zone').forEach((dz, index) => {
             if(index + 1 === i) {
                 dz.style.borderColor = 'var(--primary-color)';
-                dz.style.background = '#fff0f3'; 
+                dz.style.background = '#fff3f9'; 
                 dz.style.borderStyle = 'solid';
             } else {
                 dz.style.borderColor = '#cbd5e1';
-                dz.style.background = '#f8f9fa';
+                dz.style.background = '#f8fbff';
                 dz.style.borderStyle = 'dashed';
             }
         });
