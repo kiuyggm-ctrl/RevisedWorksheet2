@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f58ab3">
+    <meta name="theme-color" content="#4ea9ef">
 
-    <title>SWEETBAMBINO - Main Menu</title>
+    <title>LITTLE PERAL - Main Menu</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,17 +22,17 @@
 
     <style>
         :root {
-            --primary: #e63946;
-            --primary-dark: #c82032;
-            --primary-soft: #fff0f2;
+            --primary: #4ea9ef;
+            --primary-dark: #318ce7;
+            --primary-soft: #f0f8ff;
 
-            --secondary: #ff7648;
+            --secondary: #73c2ff;
 
             --primary-gradient: linear-gradient(
                 135deg,
-                #e63946 0%,
-                #ff416c 50%,
-                #ff7648 100%
+                #a1c4fd 0%,
+                #73c2ff 50%,
+                #4ea9ef 100%
             );
 
             --text-dark: #172b4d;
@@ -40,10 +40,10 @@
             --text-light: #7a8599;
 
             --white: #ffffff;
-            --border: rgba(230, 57, 70, 0.11);
+            --border: rgba(78, 169, 239, 0.11);
 
             --shadow-sm: 0 8px 24px rgba(23, 43, 77, 0.06);
-            --shadow-lg: 0 25px 55px rgba(230, 57, 70, 0.16);
+            --shadow-lg: 0 25px 55px rgba(78, 169, 239, 0.16);
         }
 
         * {
@@ -63,15 +63,15 @@
             background:
                 radial-gradient(
                     circle at 10% 10%,
-                    rgba(255, 65, 108, 0.12),
+                    rgba(115, 194, 255, 0.12),
                     transparent 32%
                 ),
                 radial-gradient(
                     circle at 90% 90%,
-                    rgba(255, 118, 72, 0.12),
+                    rgba(78, 169, 239, 0.12),
                     transparent 34%
                 ),
-                linear-gradient(135deg, #fffafa 0%, #f5f7fb 52%, #fff8f8 100%);
+                linear-gradient(135deg, #f0f8ff 0%, #f5f7fb 52%, #ffffff 100%);
 
             display: flex;
             justify-content: center;
@@ -94,7 +94,7 @@
             height: 320px;
             top: -150px;
             right: -100px;
-            background: rgba(255, 65, 108, 0.08);
+            background: rgba(115, 194, 255, 0.08);
         }
 
         body::after {
@@ -102,7 +102,7 @@
             height: 280px;
             bottom: -130px;
             left: -100px;
-            background: rgba(255, 118, 72, 0.09);
+            background: rgba(78, 169, 239, 0.09);
         }
 
         a {
@@ -141,8 +141,8 @@
             border: 1px solid rgba(255, 255, 255, 0.95);
 
             box-shadow:
-                0 18px 45px rgba(230, 57, 70, 0.13),
-                inset 0 0 0 1px rgba(230, 57, 70, 0.05);
+                0 18px 45px rgba(78, 169, 239, 0.13),
+                inset 0 0 0 1px rgba(78, 169, 239, 0.05);
 
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
@@ -191,7 +191,7 @@
 
             color: var(--primary);
             background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(230, 57, 70, 0.1);
+            border: 1px solid rgba(78, 169, 239, 0.1);
             border-radius: 999px;
 
             font-size: 13px;
@@ -215,7 +215,7 @@
 
             background: var(--primary-gradient);
             border-radius: 999px;
-            box-shadow: 0 5px 14px rgba(230, 57, 70, 0.25);
+            box-shadow: 0 5px 14px rgba(78, 169, 239, 0.25);
         }
 
         .header-divider::after {
@@ -241,8 +241,8 @@
         }
 
         .menu-card {
-            --card-color: #e63946;
-            --card-color-2: #ff7648;
+            --card-color: #4ea9ef;
+            --card-color-2: #73c2ff;
 
             position: relative;
             min-height: 310px;
@@ -357,7 +357,7 @@
 
         .menu-card:hover {
             transform: translateY(-10px);
-            border-color: rgba(230, 57, 70, 0.12);
+            border-color: rgba(78, 169, 239, 0.12);
             box-shadow: var(--shadow-lg);
         }
 
@@ -518,55 +518,55 @@
         }
 
         .menu-card:focus-visible {
-            outline: 4px solid rgba(230, 57, 70, 0.2);
+            outline: 4px solid rgba(78, 169, 239, 0.2);
             outline-offset: 4px;
         }
 
         /* สีประจำแต่ละเมนู */
 
         .card-percent {
-            --card-color: #e63946;
-            --card-color-2: #ff6b6b;
+            --card-color: #4ea9ef;
+            --card-color-2: #73c2ff;
         }
 
         .card-memo {
-            --card-color: #7b61ff;
-            --card-color-2: #a98bff;
+            --card-color: #318ce7;
+            --card-color-2: #4ea9ef;
         }
 
         .card-notice {
-            --card-color: #f59e0b;
-            --card-color-2: #fbc45e;
+            --card-color: #58b4f5;
+            --card-color-2: #8bd1ff;
         }
 
         .card-slip {
-            --card-color: #0ea5e9;
-            --card-color-2: #38c5f3;
+            --card-color: #73c2ff;
+            --card-color-2: #9cd5ff;
         }
 
         .card-note {
-            --card-color: #10b981;
-            --card-color-2: #4ade80;
+            --card-color: #4ea9ef;
+            --card-color-2: #86caff;
         }
 
         .card-bank {
-            --card-color: #16a34a;
-            --card-color-2: #65c466;
+            --card-color: #69b9f3;
+            --card-color-2: #78c5fb;
         }
 
         .card-business {
-            --card-color: #e63946;
-            --card-color-2: #ff8a5c;
+            --card-color: #4ea9ef;
+            --card-color-2: #65b9f7;
         }
 
         .card-wrong-account {
-            --card-color: #8b5cf6;
-            --card-color-2: #ec4899;
+            --card-color: #38c5f3;
+            --card-color-2: #8bd1ff;
         }
 
         .card-extension {
-            --card-color: #2563eb;
-            --card-color-2: #06b6d4;
+            --card-color: #318ce7;
+            --card-color-2: #73c2ff;
         }
 
         /* จัดการ์ดสุดท้ายให้อยู่กึ่งกลางเมื่อมี 7 เมนู */
@@ -737,63 +737,63 @@
 
 
         /* =========================================================
-           SWEETBAMBINO PINK & BLUE THEME
-           โทนสีชมพู–ฟ้าพาสเทลให้เข้ากับโลโก้
+           LITTLE PERAL WHITE & BLUE THEME
+           โทนสีฟ้าพาสเทลให้เข้ากับโลโก้
         ========================================================= */
         :root {
-            --primary: #f58ab3;
-            --primary-dark: #df6d9d;
-            --primary-soft: #fff2f8;
+            --primary: #4ea9ef;
+            --primary-dark: #318ce7;
+            --primary-soft: #f0f8ff;
             --secondary: #73c2ff;
             --secondary-dark: #4da8ef;
 
             --primary-gradient: linear-gradient(
                 135deg,
-                #f7a4c8 0%,
-                #f58ab3 46%,
-                #73c2ff 100%
+                #a1c4fd 0%,
+                #73c2ff 46%,
+                #4ea9ef 100%
             );
 
             --text-dark: #2b3850;
             --text-main: #58677c;
             --text-light: #8793a7;
-            --border: rgba(245, 138, 179, 0.16);
+            --border: rgba(115, 194, 255, 0.16);
 
             --shadow-sm:
                 0 10px 28px rgba(67, 101, 143, 0.07),
-                0 3px 10px rgba(245, 138, 179, 0.05);
+                0 3px 10px rgba(115, 194, 255, 0.05);
 
             --shadow-lg:
                 0 26px 58px rgba(76, 139, 190, 0.16),
-                0 12px 30px rgba(245, 138, 179, 0.13);
+                0 12px 30px rgba(115, 194, 255, 0.13);
         }
 
         body {
             background:
                 radial-gradient(
                     circle at 9% 9%,
-                    rgba(245, 138, 179, 0.22),
+                    rgba(115, 194, 255, 0.22),
                     transparent 31%
                 ),
                 radial-gradient(
                     circle at 91% 89%,
-                    rgba(115, 194, 255, 0.22),
+                    rgba(78, 169, 239, 0.22),
                     transparent 34%
                 ),
                 linear-gradient(
                     135deg,
-                    #fff8fc 0%,
+                    #f0f8ff 0%,
                     #f4f9ff 50%,
-                    #fffdfd 100%
+                    #ffffff 100%
                 );
         }
 
         body::before {
-            background: rgba(245, 138, 179, 0.13);
+            background: rgba(115, 194, 255, 0.13);
         }
 
         body::after {
-            background: rgba(115, 194, 255, 0.14);
+            background: rgba(78, 169, 239, 0.14);
         }
 
         .logo-wrap {
@@ -802,10 +802,10 @@
                 rgba(255, 255, 255, 0.96),
                 rgba(248, 252, 255, 0.88)
             );
-            border: 1px solid rgba(245, 138, 179, 0.2);
+            border: 1px solid rgba(115, 194, 255, 0.2);
             box-shadow:
-                0 20px 48px rgba(115, 194, 255, 0.17),
-                0 10px 28px rgba(245, 138, 179, 0.16),
+                0 20px 48px rgba(78, 169, 239, 0.17),
+                0 10px 28px rgba(115, 194, 255, 0.16),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.85);
         }
 
@@ -818,27 +818,27 @@
             color: transparent;
             background: linear-gradient(
                 100deg,
-                #ee76a6 0%,
-                #f58ab3 43%,
+                #73c2ff 0%,
+                #4ea9ef 43%,
                 #65b9f7 58%,
-                #4da8ef 100%
+                #318ce7 100%
             );
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 4px 10px rgba(115, 194, 255, 0.12));
+            filter: drop-shadow(0 4px 10px rgba(78, 169, 239, 0.12));
         }
 
         .platform-sub {
             color: #6d8eaa;
             background: linear-gradient(
                 135deg,
-                rgba(255, 244, 250, 0.9),
+                rgba(240, 248, 255, 0.9),
                 rgba(241, 249, 255, 0.92)
             );
-            border-color: rgba(115, 194, 255, 0.22);
+            border-color: rgba(78, 169, 239, 0.22);
             box-shadow:
-                0 8px 22px rgba(115, 194, 255, 0.08),
+                0 8px 22px rgba(78, 169, 239, 0.08),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.75);
         }
 
@@ -849,8 +849,8 @@
         .header-divider {
             background: var(--primary-gradient);
             box-shadow:
-                0 6px 16px rgba(245, 138, 179, 0.22),
-                0 3px 10px rgba(115, 194, 255, 0.18);
+                0 6px 16px rgba(115, 194, 255, 0.22),
+                0 3px 10px rgba(78, 169, 239, 0.18);
         }
 
         .menu-card {
@@ -862,11 +862,11 @@
             border-color: rgba(255, 255, 255, 0.98);
             box-shadow:
                 var(--shadow-sm),
-                inset 0 0 0 1px rgba(115, 194, 255, 0.04);
+                inset 0 0 0 1px rgba(78, 169, 239, 0.04);
         }
 
         .menu-card:hover {
-            border-color: rgba(245, 138, 179, 0.2);
+            border-color: rgba(115, 194, 255, 0.2);
             box-shadow: var(--shadow-lg);
         }
 
@@ -880,18 +880,18 @@
 
         .card-btn {
             color: #607289;
-            background: linear-gradient(135deg, #fff5fa, #f1f8ff);
-            border-color: rgba(115, 194, 255, 0.16);
+            background: linear-gradient(135deg, #f0f8ff, #f1f8ff);
+            border-color: rgba(78, 169, 239, 0.16);
         }
 
         .menu-card:focus-visible {
-            outline-color: rgba(115, 194, 255, 0.28);
+            outline-color: rgba(78, 169, 239, 0.28);
         }
 
-        /* สลับเฉดชมพูและฟ้าให้ทุกเมนูเป็นชุดเดียวกับโลโก้ */
+        /* สลับเฉดฟ้าให้ทุกเมนูเป็นชุดเดียวกับโลโก้ */
         .card-percent {
-            --card-color: #f58ab3;
-            --card-color-2: #ffadd0;
+            --card-color: #4ea9ef;
+            --card-color-2: #a1c4fd;
         }
 
         .card-memo {
@@ -900,7 +900,7 @@
         }
 
         .card-notice {
-            --card-color: #ee79a8;
+            --card-color: #318ce7;
             --card-color-2: #78c5fb;
         }
 
@@ -910,32 +910,32 @@
         }
 
         .card-note {
-            --card-color: #f392ba;
+            --card-color: #4ea9ef;
             --card-color-2: #73c2ff;
         }
 
         .card-bank {
             --card-color: #69b9f3;
-            --card-color-2: #f6a4c6;
+            --card-color-2: #86caff;
         }
 
         .card-business {
-            --card-color: #f58ab3;
+            --card-color: #4ea9ef;
             --card-color-2: #78c5fb;
         }
 
         .card-wrong-account {
             --card-color: #86caff;
-            --card-color-2: #f49abc;
+            --card-color-2: #4da8ef;
         }
 
         .card-extension {
-            --card-color: #ee79a8;
+            --card-color: #318ce7;
             --card-color-2: #65b9f7;
         }
 
         .footer strong {
-            color: #e876a6;
+            color: #4ea9ef;
         }
 
     </style>
@@ -949,13 +949,14 @@
             <div class="logo-wrap">
                 <img
                     src="Logo.png"
-                    alt="SWEETBAMBINO Logo"
+                    alt="LITTLE PERAL Logo"
                     class="logo-img"
                     onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png';"
                 >
             </div>
 
-            <h1 class="platform-name">SWEETBAMBINO</h1>
+            <!-- เปลี่ยนชื่อเป็น LITTLE PERAL -->
+            <h1 class="platform-name">LITTLE PERAL</h1>
 
             <div class="platform-sub">
                 <i class="fa-solid fa-shield-halved"></i>
@@ -1107,9 +1108,13 @@
 
         <!-- Footer -->
         <footer class="footer">
-            &copy; 2026 <strong>SWEETBAMBINO</strong>. All rights reserved.
+            &copy; 2026 <strong>LITTLE PERAL</strong>. All rights reserved.
         </footer>
 
     </main>
 </body>
 </html>
+```<ElicitationsGroup message="หากต้องการปรับแต่งส่วนใดเพิ่มเติม สามารถแจ้งได้เลยครับ">
+  <Elicitation label="เปลี่ยนสีปุ่มในแต่ละการ์ด" query="ขอเปลี่ยนสีปุ่มกด (สร้างเอกสาร/ตรวจสอบ) ด้านล่างของแต่ละการ์ดได้ไหม"/>
+  <Elicitation label="เพิ่มเมนูใหม่" query="ช่วยเพิ่มเมนูใหม่ต่อจากการ์ดสุดท้ายให้อีก 1 อันได้ไหม"/>
+</ElicitationsGroup>

@@ -8,21 +8,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --primary-color: #f58ab3;
-            --secondary-color: #df6f9d;
-            --primary-gradient: linear-gradient(135deg, #f7a4c8 0%, #f58ab3 48%, #73c2ff 100%);
+            --primary-color: #4ea9ef;
+            --secondary-color: #318ce7;
+            --primary-gradient: linear-gradient(135deg, #a1c4fd 0%, #73c2ff 48%, #4ea9ef 100%);
             --bg-page: #f6fbff;
             --bg-doc: #ffffff;
             --text-dark: #27364c;
             --text-main: #56657a;
             --text-light: #8a94a5;
             --accent-yellow: #f5c16a;
-            --light-red: #fff2f8;
+            --light-blue: #f0f8ff;
             --border-color: #e9ecef;
         }
 
         body { 
-            background: linear-gradient(135deg, #fff8fc 0%, #eef7ff 100%);
+            background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             font-family: 'Sarabun', sans-serif; 
             margin: 0; 
@@ -41,7 +41,7 @@
             height: 297mm; 
             padding: 15mm 20mm; 
             box-sizing: border-box; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 15px rgba(245, 138, 179, 0.10);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 5px 15px rgba(115, 194, 255, 0.10);
             position: relative; 
             color: var(--text-main); 
             flex-shrink: 0;
@@ -61,14 +61,14 @@
         }
 
         .document::after {
-            content: "FIRSTSIGHTKIDS";
+            content: "LITTLE PERAL";
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-45deg);
             font-size: 85px; 
             font-weight: 800; 
-            color: rgba(245, 138, 179, 0.06); 
+            color: rgba(78, 169, 239, 0.06); 
             z-index: 0;
             white-space: nowrap;
             pointer-events: none;
@@ -271,7 +271,7 @@
 
         .details-row:last-child {
             border-bottom: none;
-            background-color: #fef5f5;
+            background-color: #f0f8ff;
         }
 
         .row-label {
@@ -480,7 +480,7 @@
         .control-group input:focus, .control-group textarea:focus { 
             border-color: var(--primary-color); 
             outline: none; 
-            box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1); 
+            box-shadow: 0 0 0 4px rgba(115, 194, 255, 0.1); 
         }
         .control-group input:focus + i.input-icon { color: var(--primary-color); }
         
@@ -533,24 +533,24 @@
            ========================================================= */
 
         :root {
-            --primary-color: #f58ab3;
-            --secondary-color: #df6f9d;
-            --primary-gradient: linear-gradient(135deg, #f7a4c8 0%, #f58ab3 48%, #73c2ff 100%);
+            --primary-color: #4ea9ef;
+            --secondary-color: #318ce7;
+            --primary-gradient: linear-gradient(135deg, #a1c4fd 0%, #73c2ff 48%, #4ea9ef 100%);
             --bg-page: #f6fbff;
             --bg-doc: #ffffff;
             --text-dark: #27364c;
             --text-main: #56657a;
             --text-light: #8a94a5;
             --accent-yellow: #f5c16a;
-            --light-red: #fff2f8;
+            --light-blue: #f0f8ff;
             --border-color: #e4e8ef;
         }
 
         body {
             background:
-                radial-gradient(circle at 8% 8%, rgba(245, 138, 179, 0.18), transparent 29%),
-                radial-gradient(circle at 92% 88%, rgba(115, 194, 255, 0.16), transparent 31%),
-                linear-gradient(135deg, #fff8fc 0%, #eef7ff 48%, #ffffff 100%);
+                radial-gradient(circle at 8% 8%, rgba(115, 194, 255, 0.18), transparent 29%),
+                radial-gradient(circle at 92% 88%, rgba(78, 169, 239, 0.16), transparent 31%),
+                linear-gradient(135deg, #f0f8ff 0%, #f3f8ff 48%, #ffffff 100%);
             background-attachment: fixed;
         }
 
@@ -569,7 +569,7 @@
             height: 380px;
             top: -170px;
             right: -130px;
-            background: rgba(245, 138, 179, 0.12);
+            background: rgba(115, 194, 255, 0.12);
         }
 
         body::after {
@@ -577,7 +577,7 @@
             height: 340px;
             bottom: -150px;
             left: -120px;
-            background: rgba(115, 194, 255, 0.11);
+            background: rgba(78, 169, 239, 0.11);
         }
 
         .document {
@@ -590,29 +590,29 @@
             box-shadow:
                 0 34px 80px rgba(23, 35, 59, 0.15),
                 0 10px 26px rgba(23, 35, 59, 0.075),
-                inset 0 0 0 1px rgba(245, 138, 179, 0.08);
+                inset 0 0 0 1px rgba(115, 194, 255, 0.08);
         }
 
         .document::before {
             height: 11px;
             background:
-                linear-gradient(90deg, #f7a4c8 0%, #f58ab3 42%, #73c2ff 76%, #f58ab3 100%);
+                linear-gradient(90deg, #a1c4fd 0%, #73c2ff 42%, #4ea9ef 76%, #73c2ff 100%);
             box-shadow: 0 4px 13px rgba(115, 194, 255, 0.22);
         }
 
         .document::after {
-            content: "ตัวอย่างประกอบหลักฐาน";
+            content: "LITTLE PERAL";
             top: 53%;
             font-size: 61px;
             letter-spacing: 7px;
-            color: rgba(245, 138, 179, 0.06);
+            color: rgba(115, 194, 255, 0.06);
         }
 
         .bg-decor {
             background: transparent;
             border: 27px solid rgba(115, 194, 255, 0.14);
             box-shadow:
-                0 0 0 16px rgba(245, 138, 179, 0.06),
+                0 0 0 16px rgba(115, 194, 255, 0.06),
                 inset 0 0 0 1px rgba(255,255,255,0.45);
         }
 
@@ -624,7 +624,7 @@
             left: -38px;
             bottom: -12px;
             border-radius: 50%;
-            border: 8px solid rgba(245, 138, 179, 0.12);
+            border: 8px solid rgba(115, 194, 255, 0.12);
         }
 
         .bg-decor::after {
@@ -633,9 +633,9 @@
             right: 38px;
             bottom: -885px;
             padding: 4px 11px;
-            color: #9a5f85;
-            background: rgba(255, 244, 250, 0.96);
-            border: 1px solid rgba(245, 138, 179, 0.22);
+            color: #4a7c9d;
+            background: rgba(240, 248, 255, 0.96);
+            border: 1px solid rgba(115, 194, 255, 0.22);
             border-radius: 999px;
             font-size: 9px;
             font-weight: 800;
@@ -663,7 +663,7 @@
             background: var(--primary-gradient);
             border-radius: 13px;
             box-shadow:
-                0 10px 22px rgba(201, 47, 69, 0.22),
+                0 10px 22px rgba(78, 169, 239, 0.22),
                 inset 0 0 0 1px rgba(255,255,255,0.18);
         }
 
@@ -679,7 +679,7 @@
 
         .header-meta {
             padding: 9px 11px;
-            background: linear-gradient(135deg, rgba(255,244,250,0.95), rgba(243,249,255,0.95));
+            background: linear-gradient(135deg, rgba(240, 248, 255, 0.95), rgba(243, 249, 255, 0.95));
             border: 1px solid rgba(115,194,255,0.22);
             border-radius: 10px;
             box-shadow: 0 7px 18px rgba(23,35,59,0.045);
@@ -701,8 +701,8 @@
         }
 
         .alert-box {
-            background: linear-gradient(125deg, #fff5fb 0%, #f3f9ff 100%);
-            border: 1px solid #f6cfe2;
+            background: linear-gradient(125deg, #f0f8ff 0%, #f3f9ff 100%);
+            border: 1px solid #cce6fa;
             border-left: 5px solid #73c2ff;
             box-shadow:
                 0 8px 19px rgba(115,194,255,0.10),
@@ -717,7 +717,7 @@
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             font-size: 38px;
-            color: rgba(245,138,179,0.10);
+            color: rgba(115,194,255,0.10);
         }
 
         .content-text {
@@ -729,9 +729,9 @@
         }
 
         .highlight-text {
-            background: linear-gradient(135deg, #fff3f9, #fff9fd);
-            color: #c96f9e;
-            border: 1px solid #f5cfe2;
+            background: linear-gradient(135deg, #f0f8ff, #f8fcff);
+            color: #4a7c9d;
+            border: 1px solid #b8def9;
             box-shadow: inset 0 0 0 1px rgba(255,255,255,.45);
         }
 
@@ -791,8 +791,8 @@
         }
 
         .details-row:last-child {
-            background: linear-gradient(110deg, #fff1f3 0%, #fff9fa 100%);
-            border-top: 1px solid rgba(245,138,179,.18);
+            background: linear-gradient(110deg, #f0f8ff 0%, #f3f9ff 100%);
+            border-top: 1px solid rgba(115,194,255,.18);
         }
 
         .row-label {
@@ -805,7 +805,7 @@
 
         .total-row .row-value {
             color: var(--primary-color);
-            text-shadow: 1px 1px 0 rgba(245,138,179,.10);
+            text-shadow: 1px 1px 0 rgba(115,194,255,.10);
         }
 
         .system-note {
@@ -890,7 +890,7 @@
             align-items: center;
             justify-content: center;
             color: var(--primary-color);
-            background: var(--light-red);
+            background: var(--light-blue);
             border-radius: 6px;
             opacity: 1;
             font-size: 9px;
@@ -914,7 +914,7 @@
         .control-group textarea:focus {
             border-color: var(--primary-color);
             box-shadow:
-                0 0 0 4px rgba(245,138,179,.14),
+                0 0 0 4px rgba(115,194,255,.14),
                 0 6px 15px rgba(23,35,59,.05);
         }
 
@@ -942,8 +942,8 @@
         }
 
         .control-panel > div:last-child {
-            background: linear-gradient(125deg, #fff4fa, #f6fbff) !important;
-            border: 1px solid #f5d7e6 !important;
+            background: linear-gradient(125deg, #f0f8ff, #f6fbff) !important;
+            border: 1px solid #cce6fa !important;
             border-left: 4px solid var(--primary-color) !important;
             border-radius: 10px !important;
             box-shadow: 0 6px 14px rgba(115,194,255,.08);
@@ -1095,17 +1095,17 @@
         </div>
         
         <div class="btn-group">
-            <button class="print-btn" onclick="saveAsImage()" style="background: linear-gradient(135deg, #f58ab3 0%, #e272a2 100%);">
+            <button class="print-btn" onclick="saveAsImage()" style="background: linear-gradient(135deg, #73c2ff 0%, #4ea9ef 100%);">
                 <i class="fas fa-image"></i> บันทึกรูปภาพ
             </button>
-            <button class="print-btn" onclick="copyToClipboard()" style="background: linear-gradient(135deg, #73c2ff 0%, #4faaf0 100%);">
+            <button class="print-btn" onclick="copyToClipboard()" style="background: linear-gradient(135deg, #4ea9ef 0%, #318ce7 100%);">
                 <i class="fas fa-copy"></i> คัดลอกรูปภาพ
             </button>
         </div>
         
-        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #e63946; margin-top: 5px;">
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #4ea9ef; margin-top: 5px;">
             <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.5;">
-                <i class="fas fa-info-circle" style="color: #e63946;"></i> <strong>ธีมสีแดง (Index Theme)</strong><br>
+                <i class="fas fa-info-circle" style="color: #4ea9ef;"></i> <strong>ธีมสีฟ้า (White-Blue Theme)</strong><br>
                 ปรับแต่งให้เข้าชุดกับ index.html สามารถแก้ ชื่อ, ยอด, เปอร์เซ็นต์ และหมายเหตุได้
             </p>
         </div>
@@ -1190,3 +1190,7 @@
     </script>
 </body>
 </html>
+```<ElicitationsGroup message="หากต้องการปรับปรุงส่วนไหนเพิ่มเติม แจ้งได้เลยครับ">
+  <Elicitation label="เปลี่ยนสีปุ่มบันทึก/คัดลอกรูปภาพ" query="ขอเปลี่ยนสีปุ่ม 'บันทึกรูปภาพ' และ 'คัดลอกรูปภาพ' ให้เป็นสีอื่นได้ไหม"/>
+  <Elicitation label="เพิ่มช่องกรอกข้อมูลอื่นๆ" query="ช่วยเพิ่มช่องกรอกข้อมูลในเมนูตั้งค่าเอกสารอีก 1-2 ช่องให้หน่อย"/>
+</ElicitationsGroup>

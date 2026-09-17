@@ -187,7 +187,7 @@
         }
 
         .document::after {
-            content: "SWEETBAMBINO";
+            content: "LITTLE PERAL";
 
             position: absolute;
             z-index: 0;
@@ -1579,6 +1579,351 @@
             color: #4ba9e8 !important;
         }
 
+    
+
+        /* =========================================
+           LITTLE PERAL — WHITE & BLUE THEME
+        ========================================= */
+        :root {
+            --primary: #4ea5e8;
+            --primary-dark: #2f7fc6;
+            --primary-deep: #205d98;
+            --primary-light: #eef7ff;
+            --primary-soft: #d9edff;
+
+            --orange: #7cc4f2;
+            --orange-light: #f3faff;
+
+            --green: #4ea5e8;
+            --green-light: #eef7ff;
+
+            --blue: #4ea5e8;
+            --blue-dark: #2f7fc6;
+            --blue-light: #eef7ff;
+
+            --text-dark: #20344d;
+            --text-main: #51657d;
+            --text-light: #8191a5;
+
+            --border: #e4edf6;
+            --border-red: rgba(78, 165, 232, 0.22);
+
+            --page-background: #f4f8fc;
+            --white: #ffffff;
+
+            --primary-gradient: linear-gradient(
+                135deg,
+                #8fd1fb 0%,
+                #5cb8ef 48%,
+                #3f95dd 100%
+            );
+
+            --dark-gradient: linear-gradient(
+                135deg,
+                #58708c 0%,
+                #355274 100%
+            );
+
+            --shadow-page:
+                0 35px 80px rgba(76, 121, 167, 0.14),
+                0 8px 25px rgba(92, 184, 239, 0.08);
+
+            --shadow-panel:
+                0 25px 65px rgba(76, 121, 167, 0.12),
+                0 7px 20px rgba(92, 184, 239, 0.07);
+        }
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 8% 8%,
+                    rgba(124, 196, 242, 0.18),
+                    transparent 31%
+                ),
+                radial-gradient(
+                    circle at 92% 87%,
+                    rgba(78, 165, 232, 0.14),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fbfdff 0%,
+                    #f2f8ff 48%,
+                    #f8fbff 100%
+                );
+        }
+
+        body::before {
+            background: rgba(124, 196, 242, 0.08);
+        }
+
+        body::after {
+            background: rgba(78, 165, 232, 0.07);
+        }
+
+        .document {
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(143, 209, 251, 0.09),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 0% 100%,
+                    rgba(217, 237, 255, 0.45),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #ffffff 74%,
+                    #f7fbff 100%
+                );
+        }
+
+        .document::after {
+            color: rgba(78, 165, 232, 0.045);
+        }
+
+        .bg-decor {
+            border-color: rgba(78, 165, 232, 0.08);
+        }
+
+        .bg-decor::before {
+            border-color: rgba(143, 209, 251, 0.1);
+        }
+
+        .header {
+            border-bottom-color: #e4edf6;
+        }
+
+        .logo-img {
+            border-color: rgba(78, 165, 232, 0.28);
+            box-shadow:
+                0 9px 23px rgba(92, 184, 239, 0.12),
+                0 4px 13px rgba(78, 165, 232, 0.10),
+                inset 0 0 0 3px rgba(255, 255, 255, 0.94);
+        }
+
+        .logo-text {
+            color: var(--primary);
+            background: linear-gradient(90deg, #6ac1f4, #3f95dd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-logo {
+            color: #75859a;
+        }
+
+        .doc-title {
+            background: linear-gradient(
+                135deg,
+                rgba(242, 248, 255, 0.96),
+                rgba(255, 255, 255, 0.92)
+            );
+            border-color: rgba(78, 165, 232, 0.25);
+            box-shadow: 0 6px 17px rgba(92, 184, 239, 0.06);
+        }
+
+        .doc-title p {
+            color: #3f95dd;
+        }
+
+        .recipient-box {
+            background: linear-gradient(
+                110deg,
+                #f4faff 0%,
+                #ffffff 100%
+            );
+            border-color: rgba(78, 165, 232, 0.22);
+            border-left-color: #4ea5e8;
+        }
+
+        .recipient-box::after {
+            color: rgba(78, 165, 232, 0.09);
+        }
+
+        .recipient-box .small-text i {
+            color: #4ea5e8;
+        }
+
+        .section {
+            border-color: rgba(220, 228, 240, 0.95);
+            box-shadow: 0 5px 15px rgba(78, 114, 157, 0.035);
+        }
+
+        .section-title {
+            border-bottom-color: #dde7f1;
+        }
+
+        .section-title::after {
+            background: linear-gradient(90deg, #7cc4f2, #3f95dd);
+        }
+
+        .section-title span.icon-wrapper {
+            box-shadow:
+                0 5px 12px rgba(92, 184, 239, 0.16),
+                0 3px 9px rgba(78, 165, 232, 0.11);
+        }
+
+        .highlight-box {
+            color: #3e6683;
+            background: linear-gradient(
+                110deg,
+                #edf7ff 0%,
+                #f9fcff 100%
+            );
+            border-color: #cfe4f6;
+            border-left-color: #59b8ee;
+        }
+
+        .highlight-box::after {
+            background: rgba(124, 196, 242, 0.10);
+        }
+
+        .highlight-box i {
+            color: #399bd7;
+        }
+
+        .highlight-box strong {
+            color: #355d79;
+        }
+
+        .custom-list {
+            background: linear-gradient(
+                180deg,
+                #ffffff 0%,
+                #f8fbff 100%
+            );
+            border-color: #e3ebf5;
+        }
+
+        .custom-list li::before {
+            background: linear-gradient(135deg, #79c9f5, #4ea5e8);
+            box-shadow: 0 3px 7px rgba(89, 184, 238, 0.15);
+        }
+
+        .summary-box li {
+            background: linear-gradient(
+                100deg,
+                rgba(238, 248, 255, 0.95),
+                rgba(255, 255, 255, 0.90)
+            );
+            border-color: #dcecf7;
+        }
+
+        .summary-box li:nth-child(2) {
+            background: linear-gradient(
+                100deg,
+                rgba(244, 250, 255, 0.98),
+                rgba(238, 248, 255, 0.88)
+            );
+            border-color: #d9e8f4;
+        }
+
+        .summary-box li::before {
+            background: linear-gradient(135deg, #58b8ee, #3f95dd);
+        }
+
+        .footer-banner {
+            background: linear-gradient(
+                120deg,
+                #72c3f3 0%,
+                #4ea5e8 43%,
+                #357fcb 100%
+            );
+            box-shadow:
+                0 9px 21px rgba(92, 184, 239, 0.16),
+                0 5px 15px rgba(63, 149, 221, 0.12);
+        }
+
+        .date-area {
+            border-left-color: #d9ecf8;
+        }
+
+        .control-panel {
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(92, 184, 239, 0.09),
+                    transparent 33%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.98),
+                    rgba(250, 252, 255, 0.94)
+                );
+        }
+
+        .control-panel::after {
+            background: rgba(143, 209, 251, 0.10);
+        }
+
+        .control-panel h2 {
+            border-bottom-color: #e4ebf4;
+        }
+
+        .control-panel h2 i {
+            box-shadow:
+                0 7px 16px rgba(92, 184, 239, 0.18),
+                0 4px 11px rgba(78, 165, 232, 0.12);
+        }
+
+        .control-group label i {
+            color: #3f95dd;
+            background: linear-gradient(135deg, #eef7ff, #f7fbff);
+        }
+
+        .control-group input {
+            border-color: #dce5f0;
+        }
+
+        .control-group input:hover {
+            border-color: #bdddf1;
+        }
+
+        .control-group input:focus {
+            border-color: #69bff1;
+            box-shadow:
+                0 0 0 4px rgba(89, 184, 238, 0.12),
+                0 5px 14px rgba(92, 184, 239, 0.06);
+        }
+
+        .control-group:focus-within i.input-icon {
+            color: #3f95dd;
+        }
+
+        .btn-group .print-btn:first-child {
+            background: linear-gradient(135deg, #6ec8f4 0%, #3495df 100%) !important;
+            box-shadow: 0 8px 18px rgba(52, 149, 223, 0.22);
+        }
+
+        .btn-group .print-btn:nth-child(2) {
+            background: linear-gradient(135deg, #8fd4fb 0%, #4ea5e8 100%) !important;
+            box-shadow: 0 8px 18px rgba(78, 165, 232, 0.22);
+        }
+
+        .control-panel > div:last-child {
+            background: linear-gradient(
+                120deg,
+                #f3faff,
+                #ffffff
+            ) !important;
+            border-color: #d8eaf6 !important;
+            border-left-color: #4ea5e8 !important;
+            box-shadow: 0 5px 13px rgba(89, 184, 238, 0.06) !important;
+        }
+
+        .control-panel > div:last-child p {
+            color: #52657c !important;
+        }
+
+        .control-panel > div:last-child .fa-info-circle {
+            color: #4ea5e8 !important;
+        }
+
     </style>
 </head>
 
@@ -1598,7 +1943,7 @@
                 >
 
                 <div class="logo-text-wrapper">
-                    <div class="logo-text">SWEETBAMBINO</div>
+                    <div class="logo-text">LITTLE PERAL</div>
                     <div class="sub-logo">STANDARD DIGITAL COMPLIANCE</div>
                 </div>
             </div>
@@ -1678,7 +2023,7 @@
                 <li>ต้องเข้าทำรายการแก้ไขให้เสร็จให้แล้วเสร็จภายใน 1 ชั่วโมง</li>
 
                 <li>
-                    ทาง <strong>SWEETBAMBINO</strong>
+                    ทาง <strong>LITTLE PERAL</strong>
                     ได้วางเงินประกันจำนวนเงินทั้งหมดเรียบร้อยแล้ว แผนงานครั้งละเป็นเงิน
                     <strong id="doc-total-amt2" class="text-red">52,824 บาท</strong>
                 </li>
