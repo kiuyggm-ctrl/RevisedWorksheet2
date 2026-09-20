@@ -13,7 +13,7 @@
 
   <style>
     :root {
-      /* เปลี่ยนตัวแปรสีจากโทนแดง/ชมพู เป็นโทนฟ้า */
+      /* โทนสีฟ้า (LITTLE PERAL) */
       --primary: #4ea9ef;
       --primary-dark: #318ce7;
       --primary-soft: #f0f8ff;
@@ -30,6 +30,20 @@
       --paper-shadow: 0 30px 75px rgba(35, 50, 74, 0.14), 0 8px 22px rgba(35, 50, 74, 0.07);
       --panel-shadow: 0 22px 55px rgba(35, 50, 74, 0.11), 0 6px 18px rgba(35, 50, 74, 0.06);
       --gradient: linear-gradient(135deg, #a1c4fd, #73c2ff 52%, #4ea9ef 100%);
+    }
+
+    /* โทนสีแดง-ขาว (SHARPSTEPS) */
+    .theme-sharpsteps {
+      --primary: #e63946; 
+      --primary-dark: #d62828;
+      --primary-soft: #fff0f3;
+      --pink: #ff4d6d;
+      --pink-soft: #fff0f3;
+      --pink-line: #ffccd5;
+      --blue: #ff4d6d;
+      --blue-soft: #fff4f6;
+      --blue-line: #ffccd5;
+      --gradient: linear-gradient(135deg, #ff8fa3, #ff4d6d 52%, #e63946 100%);
     }
 
     * {
@@ -51,6 +65,14 @@
         radial-gradient(circle at 10% 10%, rgba(115, 194, 255, .18), transparent 28%),
         radial-gradient(circle at 92% 88%, rgba(78, 169, 239, .16), transparent 26%),
         linear-gradient(135deg, #f0f8ff, #eef7ff 52%, #ffffff);
+      transition: background 0.4s ease;
+    }
+
+    .theme-sharpsteps body {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(230, 57, 70, 0.15), transparent 28%),
+        radial-gradient(circle at 92% 88%, rgba(255, 77, 109, 0.12), transparent 26%),
+        linear-gradient(135deg, #fff0f3, #fff4f6 52%, #ffffff);
     }
 
     body::before,
@@ -61,6 +83,7 @@
       border-radius: 50%;
       pointer-events: none;
       filter: blur(4px);
+      transition: background 0.4s ease;
     }
 
     body::before {
@@ -79,6 +102,9 @@
       background: rgba(78, 169, 239, .12);
     }
 
+    .theme-sharpsteps body::before { background: rgba(230, 57, 70, 0.1); }
+    .theme-sharpsteps body::after { background: rgba(255, 77, 109, 0.08); }
+
     button, input, textarea { font-family: inherit; }
 
     .document {
@@ -95,6 +121,7 @@
       background: linear-gradient(180deg, #ffffff 0%, #ffffff 80%, #f8fcff 100%);
       border-radius: 14px;
       box-shadow: var(--paper-shadow);
+      transition: all 0.4s ease;
     }
 
     .document::before {
@@ -119,6 +146,10 @@
       pointer-events: none;
     }
 
+    .theme-sharpsteps .document::after {
+      color: rgba(230, 57, 70, 0.05);
+    }
+
     .top-mark {
       position: absolute;
       top: -82px;
@@ -128,6 +159,10 @@
       border: 34px solid rgba(115, 194, 255, .13);
       border-radius: 50%;
       pointer-events: none;
+    }
+
+    .theme-sharpsteps .top-mark {
+      border-color: rgba(230, 57, 70, 0.1);
     }
 
     .draft-banner {
@@ -142,6 +177,11 @@
       border-radius: 999px;
       font-size: 10px;
       font-weight: 700;
+    }
+
+    .theme-sharpsteps .draft-banner {
+      color: #d62828;
+      background: linear-gradient(90deg, #fff0f3, #ffffff);
     }
 
     .header {
@@ -170,22 +210,27 @@
       flex-shrink: 0;
     }
 
+    .theme-sharpsteps .brand-logo {
+      filter: drop-shadow(0 4px 10px rgba(230, 57, 70, .16));
+    }
+
     .brand-text {
       display: flex;
       flex-direction: column;
     }
 
     .brand-name {
-      color: var(--navy);
-      font-size: 18px;
-      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 19px;
+      font-weight: 800;
       line-height: 1.25;
     }
 
     .brand-sub {
-      margin-top: 3px;
+      margin-top: 2px;
       color: var(--muted);
       font-size: 10.5px;
+      font-weight: 600;
     }
 
     .document-code {
@@ -276,6 +321,11 @@
       font-weight: 700;
     }
 
+    .theme-sharpsteps .detail-label, 
+    .theme-sharpsteps .details-title {
+      background: #fff4f6;
+    }
+
     .detail-value { font-weight: 600; }
     .amount-value { color: var(--primary); font-weight: 700; }
 
@@ -289,6 +339,10 @@
       border-radius: 10px;
     }
 
+    .theme-sharpsteps .approval-box {
+      background: linear-gradient(120deg, #fff0f3, #ffffff);
+    }
+
     .notice-box {
       margin-top: 14px;
       padding: 13px 15px;
@@ -298,10 +352,18 @@
       border-radius: 10px;
     }
 
+    .theme-sharpsteps .notice-box {
+      background: linear-gradient(120deg, #fff0f3, #ffffff);
+    }
+
     .notice-title {
       margin-bottom: 4px;
       color: #4a7c9d;
       font-weight: 700;
+    }
+
+    .theme-sharpsteps .notice-title {
+      color: #d62828;
     }
 
     .content p.closing {
@@ -353,6 +415,36 @@
       font-weight: 600;
     }
 
+    /* ปุ่มสลับแพลตฟอร์ม สีแดง-ขาว */
+    .platform-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #ff4d6d 0%, #e63946 100%);
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 15.5px;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(230, 57, 70, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .platform-toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(230, 57, 70, 0.4);
+      background: linear-gradient(135deg, #ff758f 0%, #d62828 100%);
+    }
+
+    .platform-toggle-btn:active {
+      transform: translateY(1px);
+    }
+
     .control-panel {
       position: sticky;
       top: 28px;
@@ -402,6 +494,10 @@
       box-shadow: 0 8px 18px rgba(115, 194, 255, .18);
     }
 
+    .theme-sharpsteps .control-header h2 i {
+      box-shadow: 0 8px 18px rgba(230, 57, 70, .18);
+    }
+
     .control-header p {
       margin: 7px 0 0 48px;
       color: var(--muted);
@@ -449,6 +545,11 @@
       box-shadow: 0 0 0 4px rgba(115, 194, 255, .14);
     }
 
+    .theme-sharpsteps .group input:focus,
+    .theme-sharpsteps .group textarea:focus {
+      box-shadow: 0 0 0 4px rgba(230, 57, 70, .14);
+    }
+
     .button-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -468,8 +569,8 @@
     }
 
     .btn:hover { transform: translateY(-2px); filter: brightness(1.04); }
-    .save-btn { background: linear-gradient(135deg, #73c2ff, #4ea9ef); }
-    .print-btn { background: linear-gradient(135deg, #4ea9ef, #318ce7); }
+    .save-btn { background: linear-gradient(135deg, var(--blue), var(--primary)); }
+    .print-btn { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
 
     .panel-note {
       margin-top: 13px;
@@ -480,6 +581,11 @@
       border-radius: 10px;
       font-size: 11px;
       line-height: 1.5;
+    }
+
+    .theme-sharpsteps .panel-note {
+      color: #8a3030;
+      background: linear-gradient(90deg, #fff0f3, #ffffff);
     }
 
     @media print {
@@ -519,9 +625,9 @@
 
     <header class="header">
       <div class="brand-block">
-        <img class="brand-logo" src="Logo.png" alt="LITTLE PERAL Logo">
+        <img id="brand-logo" class="brand-logo" src="Logo.png" alt="Logo">
         <div class="brand-text">
-          <div class="brand-name">LITTLE PERAL</div>
+          <div id="brand-name" class="brand-name">LITTLE PERAL</div>
           <div class="brand-sub">ฝ่ายดูแลและให้บริการสมาชิก</div>
         </div>
       </div>
@@ -602,6 +708,10 @@
   </main>
 
   <aside class="control-panel">
+    <button id="togglePlatformBtn" class="platform-toggle-btn">
+      <i class="fas fa-exchange-alt"></i> สลับแพลตฟอร์ม (SHARPSTEPS)
+    </button>
+
     <div class="control-header">
       <h2><i class="fa-solid fa-sliders"></i> ตั้งค่าเอกสาร</h2>
       <p>แก้ไขเฉพาะข้อมูลที่กำหนด โดยข้อความส่วนอื่นจะคงเดิม</p>
@@ -656,11 +766,35 @@
 
     <div class="panel-note">
       <strong>ฟอนต์:</strong> Sarabun<br>
-      ธีมสีถูกปรับเป็นขาว-ฟ้าให้เข้ากับโลโก้ LITTLE PERAL และเอกสารมีลายน้ำ “แบบร่างเอกสาร” เพื่อป้องกันการนำไปใช้เป็นเอกสารทางการโดยไม่ได้รับอนุญาต
+      ธีมเริ่มต้นถูกปรับให้เข้ากับโลโก้ LITTLE PERAL และสามารถกดปุ่มสลับแพลตฟอร์มเพื่อเปลี่ยนธีมและโลโก้เป็น SHARPSTEPS ได้
     </div>
   </aside>
 
   <script>
+    // === Platform Toggle Logic ===
+    const togglePlatformBtn = document.getElementById("togglePlatformBtn");
+    const brandLogo = document.getElementById("brand-logo");
+    const brandName = document.getElementById("brand-name");
+    const documentRoot = document.documentElement;
+
+    let isSharpSteps = false;
+
+    togglePlatformBtn.addEventListener("click", () => {
+      isSharpSteps = !isSharpSteps;
+      if (isSharpSteps) {
+        documentRoot.classList.add("theme-sharpsteps");
+        brandLogo.src = "Logo2.png";
+        brandName.innerText = "SHARPSTEPS";
+        togglePlatformBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> กลับสู่ LITTLE PERAL';
+      } else {
+        documentRoot.classList.remove("theme-sharpsteps");
+        brandLogo.src = "Logo.png";
+        brandName.innerText = "LITTLE PERAL";
+        togglePlatformBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> สลับแพลตฟอร์ม (SHARPSTEPS)';
+      }
+    });
+
+    // === Content Logic ===
     const thaiMonths = [
       "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน",
       "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม",

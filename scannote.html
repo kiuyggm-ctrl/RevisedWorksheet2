@@ -8,7 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            /* เปลี่ยนโทนสีหลักเป็นสีฟ้า */
+            /* -------------------------------------
+               LITTLE PERAL (BLUE THEME - DEFAULT)
+            -------------------------------------- */
             --primary-color: #4ea9ef;
             --success-color: #318ce7;
             --primary-gradient: linear-gradient(135deg, #a1c4fd 0%, #73c2ff 48%, #4ea9ef 100%);
@@ -18,6 +20,20 @@
             --bg-card: rgba(255,255,255,0.92);
             --border-color: #e7edf5;
         }
+
+        /* -------------------------------------
+           SHARPSTEPS (RED & WHITE THEME)
+        -------------------------------------- */
+        .theme-sharpsteps {
+            --primary-color: #e63946;
+            --success-color: #2a9d8f; /* ใช้สีเขียวอมฟ้าสำหรับสถานะสำเร็จให้ตัดกับสีแดง */
+            --primary-gradient: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 48%, #e63946 100%);
+            --text-dark: #3a1a1a;
+            --text-main: #6f3e3e;
+            --text-light: #976666;
+            --border-color: #f6dada;
+        }
+
         body {
             /* ปรับพื้นหลังเป็นโทนฟ้า */
             background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
@@ -32,7 +48,14 @@
             padding-top: 40px;
             padding-bottom: 60px;
             color: var(--text-main);
+            transition: background 0.4s ease;
         }
+        
+        .theme-sharpsteps body {
+            background: linear-gradient(135deg, #fff0f3 0%, #ffffff 100%);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%3C9c9c9c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
         body::before,
         body::after {
             content: "";
@@ -41,13 +64,13 @@
             border-radius: 50%;
             pointer-events: none;
             filter: blur(4px);
+            transition: background 0.4s ease;
         }
         body::before {
             width: 340px;
             height: 340px;
             top: -130px;
             right: -100px;
-            /* ปรับสีเงากลมด้านบนขวา */
             background: rgba(115, 194, 255, 0.14);
         }
         body::after {
@@ -55,9 +78,43 @@
             height: 300px;
             bottom: -120px;
             left: -90px;
-            /* ปรับสีเงากลมด้านล่างซ้าย */
             background: rgba(78, 169, 239, 0.14);
         }
+        .theme-sharpsteps body::before { background: rgba(230, 57, 70, 0.12); }
+        .theme-sharpsteps body::after { background: rgba(255, 77, 109, 0.12); }
+
+        /* ปุ่มสลับแพลตฟอร์ม */
+        .top-bar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        .platform-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #ff4d6d 0%, #e63946 100%);
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            box-shadow: 0 6px 15px rgba(230, 57, 70, 0.25);
+            transition: all 0.3s ease;
+        }
+        .platform-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.35);
+            background: linear-gradient(135deg, #ff758f 0%, #d62828 100%);
+        }
+        .platform-toggle-btn:active {
+            transform: translateY(1px);
+        }
+
         .container {
             width: 100%;
             max-width: 1100px;
@@ -71,13 +128,17 @@
             text-align: center;
             margin-bottom: 40px;
             animation: fadeInDown 0.8s ease;
+            margin-top: 20px;
         }
         .logo-img {
             width: 80px;
             height: auto;
             margin-bottom: 15px;
             filter: drop-shadow(0 6px 12px rgba(115, 194, 255, 0.22));
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
+        }
+        .theme-sharpsteps .logo-img {
+            filter: drop-shadow(0 6px 12px rgba(230, 57, 70, 0.22));
         }
         .logo-img:hover { transform: scale(1.05); }
         .platform-name {
@@ -87,6 +148,7 @@
             margin: 0;
             letter-spacing: 1px;
             text-transform: uppercase;
+            transition: color 0.4s ease;
         }
         .platform-sub {
             font-size: 15px;
@@ -113,6 +175,11 @@
             box-shadow: 0 12px 24px rgba(115, 194, 255, 0.10);
             border: 1px solid rgba(115, 194, 255, 0.14);
             animation: fadeInDown 0.8s ease 0.1s both;
+            transition: all 0.4s ease;
+        }
+        .theme-sharpsteps .selector {
+            box-shadow: 0 12px 24px rgba(230, 57, 70, 0.10);
+            border-color: rgba(230, 57, 70, 0.14);
         }
         .btn-num {
             width: 45px;
@@ -133,6 +200,10 @@
             color: #FFF;
             box-shadow: 0 8px 18px rgba(115, 194, 255, 0.28);
         }
+        .theme-sharpsteps .btn-num.active {
+            box-shadow: 0 8px 18px rgba(230, 57, 70, 0.28);
+        }
+
         .cards-container {
             display: flex;
             flex-wrap: wrap;
@@ -167,7 +238,11 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 42px rgba(115, 194, 255, 0.16);
         }
+        .theme-sharpsteps .card:hover {
+            box-shadow: 0 20px 42px rgba(230, 57, 70, 0.16);
+        }
         .card:hover::before { height: 8px; }
+
         .input-group {
             position: relative;
             margin-bottom: 25px; 
@@ -197,6 +272,10 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             box-shadow: 0 6px 16px rgba(115, 194, 255, 0.10), inset 0 2px 4px rgba(0,0,0,0.01); 
         }
+        .theme-sharpsteps .input-group input {
+            box-shadow: 0 6px 16px rgba(230, 57, 70, 0.10), inset 0 2px 4px rgba(0,0,0,0.01);
+        }
+
         .input-group input::placeholder {
             font-weight: 400;
             color: #a0aec0;
@@ -209,10 +288,15 @@
             box-shadow: 0 10px 28px rgba(115, 194, 255, 0.18);
             transform: translateY(-2px);
         }
+        .theme-sharpsteps .input-group input:focus {
+            border-color: rgba(230, 57, 70, 0.45);
+            box-shadow: 0 10px 28px rgba(230, 57, 70, 0.18);
+        }
         .input-group input:focus + i, 
         .input-group input:focus ~ i {
             color: var(--primary-color);
         }
+
         @keyframes errorShake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-6px) rotate(-1deg); }
@@ -225,9 +309,17 @@
             background: #f0f8ff !important;
             color: var(--primary-color) !important;
         }
+        .theme-sharpsteps .input-error {
+            background: #fff0f3 !important;
+        }
+
         .input-error::placeholder {
             color: rgba(115, 194, 255, 0.75) !important;
         }
+        .theme-sharpsteps .input-error::placeholder {
+            color: rgba(230, 57, 70, 0.75) !important;
+        }
+
         .input-group input.highlight-red {
             color: var(--primary-color) !important;
             font-weight: 800 !important;
@@ -238,9 +330,13 @@
             box-shadow: 0 12px 28px rgba(115, 194, 255, 0.22) !important;
             transform: scale(1.02); 
         }
+        .theme-sharpsteps .input-group input.highlight-red {
+            box-shadow: 0 12px 28px rgba(230, 57, 70, 0.22) !important;
+        }
         .input-group input.highlight-red ~ i {
             color: var(--primary-color) !important;
         }
+
         .drop-zone {
             width: 100%;
             aspect-ratio: 3/4;
@@ -257,6 +353,20 @@
             transition: all 0.3s ease;
             margin-bottom: 5px;
         }
+        .theme-sharpsteps .drop-zone {
+            border-color: #ffccd5;
+            background: linear-gradient(135deg, #fff0f3 0%, #fff4f6 100%);
+        }
+        
+        .drop-zone.active {
+            border-color: var(--primary-color) !important;
+            background: #f0f8ff !important;
+            border-style: solid !important;
+        }
+        .theme-sharpsteps .drop-zone.active {
+            background: #fff0f3 !important;
+        }
+
         .drop-zone span {
             color: var(--text-light);
             font-weight: 500;
@@ -267,6 +377,8 @@
             margin-bottom: 10px;
             color: #bfd7f2;
         }
+        .theme-sharpsteps .drop-zone span i { color: #ffccd5; }
+
         .drop-zone img {
             width: 100%;
             height: 100%;
@@ -294,10 +406,18 @@
             transform: scale(1.5) rotate(-15deg);
             opacity: 0;
         }
+        .theme-sharpsteps .stamp {
+            text-shadow: 2px 4px 12px rgba(230, 57, 70, 0.38), 0 2px 5px rgba(0,0,0,0.18);
+        }
+
         .stamp.success {
             color: var(--success-color);
-            text-shadow: 2px 4px 12px rgba(78, 169, 239, 0.38), 0 2px 5px rgba(0,0,0,0.18);
+            text-shadow: 2px 4px 12px rgba(49, 140, 231, 0.38), 0 2px 5px rgba(0,0,0,0.18);
         }
+        .theme-sharpsteps .stamp.success {
+            text-shadow: 2px 4px 12px rgba(42, 157, 143, 0.38), 0 2px 5px rgba(0,0,0,0.18);
+        }
+
         .result-msg {
             display: none;
             width: 100%;
@@ -314,6 +434,11 @@
             opacity: 0;
             transform: translateY(-10px);
         }
+        .theme-sharpsteps .result-msg {
+            border-color: rgba(230, 57, 70, 0.18);
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.08);
+        }
+
         .msg-header {
             display: flex;
             align-items: center;
@@ -339,9 +464,15 @@
             border-color: rgba(49, 140, 231, 0.15);
             box-shadow: 0 4px 15px rgba(115, 194, 255, 0.08);
         }
+        .theme-sharpsteps .result-msg.success {
+            border-color: rgba(42, 157, 143, 0.15);
+            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.08);
+        }
+
         .result-msg.success .msg-header {
             color: var(--success-color);
         }
+
         .action-btn {
             background: linear-gradient(135deg, #f0f8ff 0%, #f5faff 100%);
             color: var(--text-dark);
@@ -362,6 +493,11 @@
             position: relative; 
             overflow: hidden;
         }
+        .theme-sharpsteps .action-btn {
+            background: linear-gradient(135deg, #fff0f3 0%, #fff4f6 100%);
+            border-color: rgba(230, 57, 70, 0.14);
+        }
+
         .action-btn i { font-size: 14px; transition: transform 0.3s ease; }
         .action-btn:hover {
             background: var(--primary-gradient);
@@ -369,6 +505,28 @@
             border-color: transparent;
             box-shadow: 0 8px 15px rgba(115, 194, 255, 0.18);
         }
+        .theme-sharpsteps .action-btn:hover {
+            box-shadow: 0 8px 15px rgba(230, 57, 70, 0.18);
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                padding: 0 20px;
+                box-sizing: border-box;
+            }
+            .platform-toggle-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -391,25 +549,60 @@
     </style>
 </head>
 <body>
+
+<!-- ปุ่มสลับแพลตฟอร์ม -->
+<div class="top-bar">
+    <button id="togglePlatformBtn" class="platform-toggle-btn">
+        <i class="fas fa-exchange-alt"></i> สลับแพลตฟอร์ม (SHARPSTEPS)
+    </button>
+</div>
+
 <div class="container">
     <div class="header">
-        <img src="Logo.png" alt="LITTLE PERAL Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
-        <!-- เปลี่ยนชื่อจาก SWEETBAMBINO เป็น LITTLE PERAL -->
-        <h1 class="platform-name">LITTLE PERAL</h1>
+        <img id="brand-logo" src="Logo.png" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
+        <h1 id="brand-name" class="platform-name">LITTLE PERAL</h1>
         <div class="platform-sub">Premium Verification</div>
         <div class="header-divider"></div>
     </div>
+    
     <div class="selector">
         <button class="btn-num active" onclick="render(1)">1</button>
         <button class="btn-num" onclick="render(2)">2</button>
         <button class="btn-num" onclick="render(3)">3</button>
     </div>
+    
     <div class="cards-container" id="cards-container"></div>
 </div>
+
 <script>
+    // === การจัดการระบบสลับแพลตฟอร์ม ===
+    const togglePlatformBtn = document.getElementById("togglePlatformBtn");
+    const brandLogo = document.getElementById("brand-logo");
+    const brandName = document.getElementById("brand-name");
+    const documentRoot = document.documentElement;
+
+    let isSharpSteps = false;
+
+    togglePlatformBtn.addEventListener("click", () => {
+        isSharpSteps = !isSharpSteps;
+        if (isSharpSteps) {
+            documentRoot.classList.add("theme-sharpsteps");
+            brandLogo.src = "Logo2.png";
+            brandName.innerText = "SHARPSTEPS";
+            togglePlatformBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> กลับสู่ LITTLE PERAL';
+        } else {
+            documentRoot.classList.remove("theme-sharpsteps");
+            brandLogo.src = "Logo.png";
+            brandName.innerText = "LITTLE PERAL";
+            togglePlatformBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> สลับแพลตฟอร์ม (SHARPSTEPS)';
+        }
+    });
+
+    // === ระบบการแสดงผลและจัดการสลิป ===
     let slips = {1:null, 2:null, 3:null};
     let activeChannel = 1;
     let currentCount = 1;
+
     function render(n) {
         currentCount = n;
         document.querySelectorAll('.btn-num').forEach((btn, i) => btn.classList.toggle('active', i === n-1));
@@ -454,13 +647,9 @@
          activeChannel = i;
          document.querySelectorAll('.drop-zone').forEach((dz, index) => {
             if(index + 1 === i) {
-                dz.style.borderColor = 'var(--primary-color)';
-                dz.style.background = '#f0f8ff'; 
-                dz.style.borderStyle = 'solid';
+                dz.classList.add('active');
             } else {
-                dz.style.borderColor = '#cbd5e1';
-                dz.style.background = '#f8fbff';
-                dz.style.borderStyle = 'dashed';
+                dz.classList.remove('active');
             }
         });
     }
@@ -482,10 +671,13 @@
 
         const rect = event.currentTarget.getBoundingClientRect();
         const clickX = event.clientX - rect.left;
+        // หากคลิกค่อนไปทางขวาของปุ่ม จะถือว่าผ่าน (Success)
         const isSuccess = clickX >= (rect.width / 2);
+        
         const stampOverlay = document.getElementById(`stamp-${i}`);
         const stampElement = stampOverlay.querySelector('.stamp');
         const msgElement = document.getElementById(`msg-${i}`);
+        
         stampElement.style.animation = 'none';
         msgElement.style.animation = 'none';
         void stampElement.offsetWidth;
@@ -522,6 +714,8 @@
         stampElement.style.animation = 'stampPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
         msgElement.style.animation = 'slideDown 0.4s ease forwards';
     }
+
+    // รองรับการกด Paste (Ctrl+V) เพื่อวางรูปภาพ
     window.addEventListener('paste', e => {
         const item = e.clipboardData.items[0];
         if (item && item.type.startsWith('image')) {
@@ -533,11 +727,8 @@
             reader.readAsDataURL(item.getAsFile());
         }
     });
+
     render(1);
 </script>
 </body>
 </html>
-```<ElicitationsGroup message="หากต้องการปรับแต่งส่วนไหนเพิ่มเติม แจ้งได้เลยครับ">
-  <Elicitation label="เปลี่ยนสีปุ่มตัวเลข" query="ขอเปลี่ยนสีปุ่มตัวเลข 1 2 3 ตอนที่กดให้เป็นสีอื่นได้ไหม"/>
-  <Elicitation label="เพิ่มข้อความแจ้งเตือน" query="ช่วยเพิ่มข้อความแจ้งเตือนเล็กๆ ด้านล่างสุดว่า 'เอกสารสำหรับตรวจสอบเท่านั้น' ได้ไหม"/>
-</ElicitationsGroup>
