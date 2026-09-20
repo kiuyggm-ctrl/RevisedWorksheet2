@@ -3,51 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#4ea9ef">
-
-    <title>LITTLE PERAL - Main Menu</title>
-
+    <title>SMART OPERATION CENTER | Heaven x Hell</title>
+    
+    <!-- ฟอนต์ Kanit สำหรับหัวข้อ และ Sarabun สำหรับเนื้อหา -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ไอคอน FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #4ea9ef;
-            --primary-dark: #318ce7;
-            --primary-soft: #f0f8ff;
-
-            --secondary: #73c2ff;
-
-            --primary-gradient: linear-gradient(
-                135deg,
-                #a1c4fd 0%,
-                #73c2ff 50%,
-                #4ea9ef 100%
-            );
-
-            --text-dark: #172b4d;
-            --text-main: #49566c;
-            --text-light: #7a8599;
-
-            --white: #ffffff;
-            --border: rgba(78, 169, 239, 0.11);
-
-            --shadow-sm: 0 8px 24px rgba(23, 43, 77, 0.06);
-            --shadow-lg: 0 25px 55px rgba(78, 169, 239, 0.16);
+            /* Heaven Colors (LITTLE PERAL) */
+            --heaven-glow: #00f2fe;
+            --heaven-base: #4facfe;
+            --heaven-grad: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            
+            /* Hell Colors (SHARPSTEPS) */
+            --hell-glow: #ff4d6d;
+            --hell-base: #e63946;
+            --hell-grad: linear-gradient(135deg, #ff8fa3 0%, #e63946 100%);
+            
+            /* Mix Colors */
+            --mix-grad: linear-gradient(90deg, #4facfe 0%, #b34df8 50%, #e63946 100%);
+            
+            /* Dark Theme Variables */
+            --bg-deep: #090a0f;
+            --card-bg: rgba(20, 25, 40, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-light: #e2e8f0;
+            --text-muted: #94a3b8;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         html {
@@ -55,1066 +47,528 @@
         }
 
         body {
-            margin: 0;
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-light);
             min-height: 100vh;
-            font-family: "Sarabun", sans-serif;
-            color: var(--text-main);
-
-            background:
-                radial-gradient(
-                    circle at 10% 10%,
-                    rgba(115, 194, 255, 0.12),
-                    transparent 32%
-                ),
-                radial-gradient(
-                    circle at 90% 90%,
-                    rgba(78, 169, 239, 0.12),
-                    transparent 34%
-                ),
-                linear-gradient(135deg, #f0f8ff 0%, #f5f7fb 52%, #ffffff 100%);
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow-x: hidden;
+            position: relative;
         }
 
-        body::before,
-        body::after {
-            content: "";
+        /* ----------------------------------
+           Heaven & Hell Background Effects
+        ----------------------------------- */
+        .universe-bg {
             position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1;
-            border-radius: 50%;
-            filter: blur(4px);
-            pointer-events: none;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #13111c 0%, #050508 100%);
+        }
+        
+        .heaven-side {
+            position: absolute;
+            top: -20%; left: -15%;
+            width: 70vw; height: 70vw;
+            background: radial-gradient(circle, rgba(78, 169, 239, 0.25) 0%, rgba(0, 242, 254, 0.05) 45%, transparent 70%);
+            filter: blur(80px);
+            animation: pulseGlow 12s infinite alternate ease-in-out;
+        }
+        
+        .hell-side {
+            position: absolute;
+            bottom: -20%; right: -15%;
+            width: 70vw; height: 70vw;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.25) 0%, rgba(255, 77, 109, 0.05) 45%, transparent 70%);
+            filter: blur(80px);
+            animation: pulseGlow 10s infinite alternate-reverse ease-in-out;
         }
 
-        body::before {
-            width: 320px;
-            height: 320px;
-            top: -150px;
-            right: -100px;
-            background: rgba(115, 194, 255, 0.08);
+        @keyframes pulseGlow {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+            100% { transform: scale(1.1) translate(30px, -30px); opacity: 1; }
         }
 
-        body::after {
-            width: 280px;
-            height: 280px;
-            bottom: -130px;
-            left: -100px;
-            background: rgba(78, 169, 239, 0.09);
-        }
-
-        a {
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        /* ----------------------------------
+           Container & Layout
+        ----------------------------------- */
         .container {
-            width: 100%;
             max-width: 1240px;
-            padding: 60px 24px 35px;
-        }
-
-        /* =========================
-           Header
-        ========================= */
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 0.75s ease both;
-        }
-
-        .logo-wrap {
-            position: relative;
-            width: 104px;
-            height: 104px;
-            margin: 0 auto 18px;
-            padding: 11px;
-            border-radius: 30px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background: rgba(255, 255, 255, 0.82);
-            border: 1px solid rgba(255, 255, 255, 0.95);
-
-            box-shadow:
-                0 18px 45px rgba(78, 169, 239, 0.13),
-                inset 0 0 0 1px rgba(78, 169, 239, 0.05);
-
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-        }
-
-        .logo-wrap::after {
-            content: "";
-            position: absolute;
-            inset: -5px;
-            z-index: -1;
-            border-radius: 34px;
-            background: var(--primary-gradient);
-            opacity: 0.12;
-            filter: blur(7px);
-        }
-
-        .logo-img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: transform 0.35s ease;
-        }
-
-        .logo-wrap:hover .logo-img {
-            transform: scale(1.06);
-        }
-
-        .platform-name {
-            margin: 0;
-            color: var(--text-dark);
-            font-size: clamp(30px, 4vw, 43px);
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-        }
-
-        .platform-sub {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            margin-top: 10px;
-            padding: 7px 16px;
-
-            color: var(--primary);
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(78, 169, 239, 0.1);
-            border-radius: 999px;
-
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1.6px;
-            text-transform: uppercase;
-
-            box-shadow: 0 7px 20px rgba(23, 43, 77, 0.04);
-        }
-
-        .platform-sub i {
-            font-size: 11px;
-        }
-
-        .header-divider {
-            position: relative;
-            width: 75px;
-            height: 5px;
-            margin: 22px auto 0;
-            overflow: hidden;
-
-            background: var(--primary-gradient);
-            border-radius: 999px;
-            box-shadow: 0 5px 14px rgba(78, 169, 239, 0.25);
-        }
-
-        .header-divider::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 35%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            transform: skewX(-25deg);
-            animation: shine 3s infinite;
-        }
-
-        /* =========================
-           Menu Grid
-        ========================= */
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 24px;
-        }
-
-        .menu-card {
-            --card-color: #4ea9ef;
-            --card-color-2: #73c2ff;
-
-            position: relative;
-            min-height: 310px;
-            padding: 34px 27px 28px;
-            overflow: hidden;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-
-            text-align: center;
-            text-decoration: none;
-
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(255, 255, 255, 0.95);
-            border-radius: 26px;
-
-            box-shadow:
-                var(--shadow-sm),
-                inset 0 0 0 1px rgba(23, 43, 77, 0.025);
-
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-
-            transition:
-                transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-                box-shadow 0.35s ease,
-                border-color 0.35s ease;
-
-            animation: fadeInUp 0.7s ease both;
-        }
-
-        .menu-card:nth-child(1) {
-            animation-delay: 0.05s;
-        }
-
-        .menu-card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .menu-card:nth-child(3) {
-            animation-delay: 0.15s;
-        }
-
-        .menu-card:nth-child(4) {
-            animation-delay: 0.2s;
-        }
-
-        .menu-card:nth-child(5) {
-            animation-delay: 0.25s;
-        }
-
-        .menu-card:nth-child(6) {
-            animation-delay: 0.3s;
-        }
-
-        .menu-card:nth-child(7) {
-            animation-delay: 0.35s;
-        }
-
-        .menu-card:nth-child(8) {
-            animation-delay: 0.4s;
-        }
-
-        .menu-card:nth-child(9) {
-            animation-delay: 0.45s;
-        }
-
-        .menu-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 22px;
-            right: 22px;
-            height: 5px;
-
-            background: linear-gradient(
-                90deg,
-                var(--card-color),
-                var(--card-color-2)
-            );
-
-            border-radius: 0 0 999px 999px;
-            transition:
-                left 0.35s ease,
-                right 0.35s ease,
-                height 0.35s ease;
-        }
-
-        .menu-card::after {
-            content: "";
-            position: absolute;
-            z-index: 0;
-            width: 170px;
-            height: 170px;
-            right: -85px;
-            bottom: -100px;
-            border-radius: 50%;
-
-            background: linear-gradient(
-                135deg,
-                var(--card-color),
-                var(--card-color-2)
-            );
-
-            opacity: 0.055;
-            transition:
-                transform 0.45s ease,
-                opacity 0.45s ease;
-        }
-
-        .menu-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(78, 169, 239, 0.12);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .menu-card:hover::before {
-            left: 0;
-            right: 0;
-            height: 7px;
-        }
-
-        .menu-card:hover::after {
-            opacity: 0.1;
-            transform: scale(1.35);
-        }
-
-        .card-icon,
-        .card-title,
-        .card-desc,
-        .card-btn {
+            margin: 0 auto;
+            padding: 60px 24px;
             position: relative;
             z-index: 1;
         }
 
-        .card-icon {
-            width: 82px;
-            height: 82px;
-            flex-shrink: 0;
-            margin-bottom: 23px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            color: var(--card-color);
-            background: linear-gradient(
-                145deg,
-                rgba(255, 255, 255, 1),
-                color-mix(in srgb, var(--card-color) 9%, white)
-            );
-
-            border: 1px solid color-mix(
-                in srgb,
-                var(--card-color) 12%,
-                white
-            );
-
-            border-radius: 25px;
-
-            box-shadow:
-                0 12px 25px color-mix(
-                    in srgb,
-                    var(--card-color) 13%,
-                    transparent
-                ),
-                inset 0 0 0 5px rgba(255, 255, 255, 0.55);
-
-            transition:
-                transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-                color 0.35s ease,
-                background 0.35s ease,
-                box-shadow 0.35s ease;
-        }
-
-        .card-icon i {
-            font-size: 32px;
-            transition: transform 0.35s ease;
-        }
-
-        .menu-card:hover .card-icon {
-            color: #ffffff;
-            background: linear-gradient(
-                135deg,
-                var(--card-color),
-                var(--card-color-2)
-            );
-
-            transform: translateY(-3px) rotate(4deg) scale(1.07);
-
-            box-shadow:
-                0 16px 30px color-mix(
-                    in srgb,
-                    var(--card-color) 28%,
-                    transparent
-                ),
-                inset 0 0 0 5px rgba(255, 255, 255, 0.12);
-        }
-
-        .menu-card:hover .card-icon i {
-            transform: scale(1.05);
-        }
-
-        .card-title {
-            margin: 0 0 9px;
-            color: var(--text-dark);
-            font-size: 21px;
-            font-weight: 800;
-            line-height: 1.35;
-        }
-
-        .card-desc {
-            min-height: 44px;
-            margin: 0 0 24px;
-
-            color: var(--text-light);
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1.65;
-        }
-
-        .card-btn {
-            margin-top: auto;
-            padding: 10px 20px;
-
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
-
-            color: var(--text-dark);
-            background: #f7f8fb;
-            border: 1px solid rgba(23, 43, 77, 0.07);
-            border-radius: 999px;
-
-            font-size: 13.5px;
-            font-weight: 700;
-
-            transition:
-                color 0.3s ease,
-                background 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-
-        .card-btn i {
-            font-size: 11px;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-card:hover .card-btn {
-            color: #ffffff;
-
-            background: linear-gradient(
-                135deg,
-                var(--card-color),
-                var(--card-color-2)
-            );
-
-            border-color: transparent;
-
-            box-shadow: 0 8px 18px color-mix(
-                in srgb,
-                var(--card-color) 20%,
-                transparent
-            );
-        }
-
-        .menu-card:hover .card-btn i {
-            transform: translateX(4px);
-        }
-
-        .menu-card:focus-visible {
-            outline: 4px solid rgba(78, 169, 239, 0.2);
-            outline-offset: 4px;
-        }
-
-        /* สีประจำแต่ละเมนู */
-
-        .card-percent {
-            --card-color: #4ea9ef;
-            --card-color-2: #73c2ff;
-        }
-
-        .card-memo {
-            --card-color: #318ce7;
-            --card-color-2: #4ea9ef;
-        }
-
-        .card-notice {
-            --card-color: #58b4f5;
-            --card-color-2: #8bd1ff;
-        }
-
-        .card-slip {
-            --card-color: #73c2ff;
-            --card-color-2: #9cd5ff;
-        }
-
-        .card-note {
-            --card-color: #4ea9ef;
-            --card-color-2: #86caff;
-        }
-
-        .card-bank {
-            --card-color: #69b9f3;
-            --card-color-2: #78c5fb;
-        }
-
-        .card-business {
-            --card-color: #4ea9ef;
-            --card-color-2: #65b9f7;
-        }
-
-        .card-wrong-account {
-            --card-color: #38c5f3;
-            --card-color-2: #8bd1ff;
-        }
-
-        .card-extension {
-            --card-color: #318ce7;
-            --card-color-2: #73c2ff;
-        }
-
-        /* จัดการ์ดสุดท้ายให้อยู่กึ่งกลางเมื่อมี 7 เมนู */
-
-        .menu-card:last-child:nth-child(3n + 1) {
-            grid-column: 2;
-        }
-
-        /* =========================
-           Footer
-        ========================= */
-
-        .footer {
-            margin-top: 52px;
+        /* ----------------------------------
+           Header (Versus Section)
+        ----------------------------------- */
+        .header-section {
             text-align: center;
+            margin-bottom: 70px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .dual-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 35px;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 35px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo-wrapper img {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 18px;
+            padding: 8px;
+        }
+
+        .logo-wrapper span {
+            font-family: 'Kanit', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Heaven Logo Styling */
+        .heaven-logo {
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.1);
+            border-bottom: 3px solid var(--heaven-base);
+        }
+        .heaven-logo img { box-shadow: 0 0 20px rgba(78, 169, 239, 0.4); }
+        .heaven-logo span { color: var(--heaven-glow); text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
+        .heaven-logo:hover { transform: translateY(-8px); box-shadow: 0 20px 45px rgba(0, 242, 254, 0.2); }
+
+        /* Hell Logo Styling */
+        .hell-logo {
+            box-shadow: 0 15px 35px rgba(230, 57, 70, 0.1);
+            border-bottom: 3px solid var(--hell-base);
+        }
+        .hell-logo img { box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); }
+        .hell-logo span { color: var(--hell-glow); text-shadow: 0 0 10px rgba(255, 77, 109, 0.5); }
+        .hell-logo:hover { transform: translateY(-8px); box-shadow: 0 20px 45px rgba(230, 57, 70, 0.2); }
+
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px; height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(179, 77, 248, 0.4);
+            position: relative;
+        }
+
+        .vs-divider::before, .vs-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%; width: 40px; height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .vs-divider::before { right: 100%; margin-right: 15px; }
+        .vs-divider::after { left: 100%; margin-left: 15px; }
+
+        .main-title {
+            font-family: 'Kanit', sans-serif;
+            font-size: clamp(28px, 5vw, 46px);
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            background: var(--mix-grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+        }
+
+        .main-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* ----------------------------------
+           Cards Grid
+        ----------------------------------- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 28px;
+        }
+
+        /* Card Glassmorphism */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(25px) saturate(150%);
+            -webkit-backdrop-filter: blur(25px) saturate(150%);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 35px 30px;
+            text-decoration: none;
             color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        /* Staggered Animations */
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.15s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.25s; }
+        .card:nth-child(5) { animation-delay: 0.3s; }
+        .card:nth-child(6) { animation-delay: 0.35s; }
+        .card:nth-child(7) { animation-delay: 0.4s; }
+        .card:nth-child(8) { animation-delay: 0.45s; }
+        .card:nth-child(9) { animation-delay: 0.5s; }
+
+        /* Dynamic Glow Border on Top */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: var(--mix-grad);
+            opacity: 0.5;
+            transition: opacity 0.4s, height 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(78, 169, 239, 0.15),
+                0 0 30px rgba(230, 57, 70, 0.15);
+            background: rgba(30, 35, 55, 0.75);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+            height: 5px;
+            box-shadow: 0 0 15px rgba(179, 77, 248, 0.6);
+        }
+
+        /* Card Elements */
+        .card-icon {
+            width: 65px; height: 65px;
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.4s ease;
+        }
+
+        .card-content h3 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            color: #fff;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .card-content p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14.5px;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .card-bottom {
+            margin-top: auto;
+            padding-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-btn-text {
+            font-family: 'Kanit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .card-arrow {
+            font-size: 16px;
+            color: var(--text-muted);
+            width: 35px; height: 35px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        /* Hover Effects inside Card */
+        .card:hover .card-icon {
+            background: var(--mix-grad);
+            box-shadow: 0 10px 25px rgba(179, 77, 248, 0.3);
+            transform: scale(1.1) rotate(5deg);
+            border-color: transparent;
+        }
+
+        .card:hover h3 {
+            background: var(--mix-grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card:hover .card-content p { color: #cbd5e1; }
+        .card:hover .card-btn-text { color: #fff; }
+        
+        .card:hover .card-arrow {
+            background: #fff;
+            color: #000;
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+        }
+
+        /* ----------------------------------
+           Footer
+        ----------------------------------- */
+        .footer {
+            margin-top: 70px;
+            text-align: center;
+            color: var(--text-muted);
             font-size: 13px;
             font-weight: 500;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
         }
 
         .footer strong {
-            color: var(--text-dark);
-            font-weight: 700;
+            background: var(--mix-grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
-        /* =========================
-           Animations
-        ========================= */
-
+        /* ----------------------------------
+           Keyframes & Responsive
+        ----------------------------------- */
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-25px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(35px);
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .dual-logos {
+                flex-direction: column;
+                gap: 15px;
             }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            .vs-divider::before, .vs-divider::after { display: none; }
+            .logo-wrapper { width: 100%; max-width: 280px; }
+            .grid-container { grid-template-columns: 1fr; }
+            .card { padding: 25px; }
+            .main-title { font-size: 26px; }
         }
-
-        @keyframes shine {
-            0% {
-                left: -55%;
-            }
-
-            55%,
-            100% {
-                left: 130%;
-            }
-        }
-
-        /* =========================
-           Responsive
-        ========================= */
-
-        @media (max-width: 1000px) {
-            .menu-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .menu-card:last-child:nth-child(3n + 1) {
-                grid-column: auto;
-            }
-
-            .menu-card:last-child:nth-child(odd) {
-                grid-column: 1 / -1;
-                width: calc(50% - 12px);
-                justify-self: center;
-            }
-        }
-
-        @media (max-width: 680px) {
-            body {
-                align-items: flex-start;
-            }
-
-            .container {
-                padding: 38px 16px 25px;
-            }
-
-            .header {
-                margin-bottom: 35px;
-            }
-
-            .logo-wrap {
-                width: 88px;
-                height: 88px;
-                border-radius: 25px;
-            }
-
-            .platform-name {
-                font-size: 29px;
-                letter-spacing: 1px;
-            }
-
-            .platform-sub {
-                padding: 6px 12px;
-                font-size: 11px;
-                letter-spacing: 1px;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-                gap: 17px;
-                max-width: 430px;
-                margin: 0 auto;
-            }
-
-            .menu-card {
-                min-height: auto;
-                padding: 27px 22px 23px;
-                border-radius: 23px;
-            }
-
-            .menu-card:last-child:nth-child(odd) {
-                grid-column: auto;
-                width: 100%;
-            }
-
-            .card-icon {
-                width: 72px;
-                height: 72px;
-                margin-bottom: 18px;
-                border-radius: 22px;
-            }
-
-            .card-icon i {
-                font-size: 28px;
-            }
-
-            .card-title {
-                font-size: 20px;
-            }
-
-            .card-desc {
-                min-height: auto;
-                margin-bottom: 20px;
-            }
-
-            .footer {
-                margin-top: 38px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-
-        /* =========================================================
-           LITTLE PERAL WHITE & BLUE THEME
-           โทนสีฟ้าพาสเทลให้เข้ากับโลโก้
-        ========================================================= */
-        :root {
-            --primary: #4ea9ef;
-            --primary-dark: #318ce7;
-            --primary-soft: #f0f8ff;
-            --secondary: #73c2ff;
-            --secondary-dark: #4da8ef;
-
-            --primary-gradient: linear-gradient(
-                135deg,
-                #a1c4fd 0%,
-                #73c2ff 46%,
-                #4ea9ef 100%
-            );
-
-            --text-dark: #2b3850;
-            --text-main: #58677c;
-            --text-light: #8793a7;
-            --border: rgba(115, 194, 255, 0.16);
-
-            --shadow-sm:
-                0 10px 28px rgba(67, 101, 143, 0.07),
-                0 3px 10px rgba(115, 194, 255, 0.05);
-
-            --shadow-lg:
-                0 26px 58px rgba(76, 139, 190, 0.16),
-                0 12px 30px rgba(115, 194, 255, 0.13);
-        }
-
-        body {
-            background:
-                radial-gradient(
-                    circle at 9% 9%,
-                    rgba(115, 194, 255, 0.22),
-                    transparent 31%
-                ),
-                radial-gradient(
-                    circle at 91% 89%,
-                    rgba(78, 169, 239, 0.22),
-                    transparent 34%
-                ),
-                linear-gradient(
-                    135deg,
-                    #f0f8ff 0%,
-                    #f4f9ff 50%,
-                    #ffffff 100%
-                );
-        }
-
-        body::before {
-            background: rgba(115, 194, 255, 0.13);
-        }
-
-        body::after {
-            background: rgba(78, 169, 239, 0.14);
-        }
-
-        .logo-wrap {
-            background: linear-gradient(
-                145deg,
-                rgba(255, 255, 255, 0.96),
-                rgba(248, 252, 255, 0.88)
-            );
-            border: 1px solid rgba(115, 194, 255, 0.2);
-            box-shadow:
-                0 20px 48px rgba(78, 169, 239, 0.17),
-                0 10px 28px rgba(115, 194, 255, 0.16),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.85);
-        }
-
-        .logo-wrap::after {
-            background: var(--primary-gradient);
-            opacity: 0.2;
-        }
-
-        .platform-name {
-            color: transparent;
-            background: linear-gradient(
-                100deg,
-                #73c2ff 0%,
-                #4ea9ef 43%,
-                #65b9f7 58%,
-                #318ce7 100%
-            );
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 4px 10px rgba(78, 169, 239, 0.12));
-        }
-
-        .platform-sub {
-            color: #6d8eaa;
-            background: linear-gradient(
-                135deg,
-                rgba(240, 248, 255, 0.9),
-                rgba(241, 249, 255, 0.92)
-            );
-            border-color: rgba(78, 169, 239, 0.22);
-            box-shadow:
-                0 8px 22px rgba(78, 169, 239, 0.08),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.75);
-        }
-
-        .platform-sub i {
-            color: var(--primary);
-        }
-
-        .header-divider {
-            background: var(--primary-gradient);
-            box-shadow:
-                0 6px 16px rgba(115, 194, 255, 0.22),
-                0 3px 10px rgba(78, 169, 239, 0.18);
-        }
-
-        .menu-card {
-            background: linear-gradient(
-                145deg,
-                rgba(255, 255, 255, 0.94),
-                rgba(248, 252, 255, 0.88)
-            );
-            border-color: rgba(255, 255, 255, 0.98);
-            box-shadow:
-                var(--shadow-sm),
-                inset 0 0 0 1px rgba(78, 169, 239, 0.04);
-        }
-
-        .menu-card:hover {
-            border-color: rgba(115, 194, 255, 0.2);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-icon {
-            background: linear-gradient(
-                145deg,
-                rgba(255, 255, 255, 1),
-                color-mix(in srgb, var(--card-color-2) 10%, white)
-            );
-        }
-
-        .card-btn {
-            color: #607289;
-            background: linear-gradient(135deg, #f0f8ff, #f1f8ff);
-            border-color: rgba(78, 169, 239, 0.16);
-        }
-
-        .menu-card:focus-visible {
-            outline-color: rgba(78, 169, 239, 0.28);
-        }
-
-        /* สลับเฉดฟ้าให้ทุกเมนูเป็นชุดเดียวกับโลโก้ */
-        .card-percent {
-            --card-color: #4ea9ef;
-            --card-color-2: #a1c4fd;
-        }
-
-        .card-memo {
-            --card-color: #73c2ff;
-            --card-color-2: #9cd5ff;
-        }
-
-        .card-notice {
-            --card-color: #318ce7;
-            --card-color-2: #78c5fb;
-        }
-
-        .card-slip {
-            --card-color: #58b4f5;
-            --card-color-2: #8bd1ff;
-        }
-
-        .card-note {
-            --card-color: #4ea9ef;
-            --card-color-2: #73c2ff;
-        }
-
-        .card-bank {
-            --card-color: #69b9f3;
-            --card-color-2: #86caff;
-        }
-
-        .card-business {
-            --card-color: #4ea9ef;
-            --card-color-2: #78c5fb;
-        }
-
-        .card-wrong-account {
-            --card-color: #86caff;
-            --card-color-2: #4da8ef;
-        }
-
-        .card-extension {
-            --card-color: #318ce7;
-            --card-color-2: #65b9f7;
-        }
-
-        .footer strong {
-            color: #4ea9ef;
-        }
-
     </style>
 </head>
-
 <body>
-    <main class="container">
 
-        <!-- Header -->
-        <header class="header">
-            <div class="logo-wrap">
-                <img
-                    src="Logo.png"
-                    alt="LITTLE PERAL Logo"
-                    class="logo-img"
-                    onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png';"
-                >
+    <!-- พื้นหลังสวรรค์-นรก -->
+    <div class="universe-bg">
+        <div class="heaven-side"></div>
+        <div class="hell-side"></div>
+    </div>
+
+    <div class="container">
+        <!-- ส่วนหัว (ประชัน 2 แพลตฟอร์ม) -->
+        <header class="header-section">
+            <div class="dual-logos">
+                <!-- สวรรค์ (LITTLE PERAL) -->
+                <div class="logo-wrapper heaven-logo">
+                    <img src="Logo.png" alt="LITTLE PERAL" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
+                    <span>LITTLE PERAL</span>
+                </div>
+                
+                <!-- จุดตัด (VS) -->
+                <div class="vs-divider">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                
+                <!-- นรก (SHARPSTEPS) -->
+                <div class="logo-wrapper hell-logo">
+                    <img src="Logo2.png" alt="SHARPSTEPS" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3233/3233509.png'">
+                    <span>SHARPSTEPS</span>
+                </div>
             </div>
-
-            <!-- เปลี่ยนชื่อเป็น LITTLE PERAL -->
-            <h1 class="platform-name">LITTLE PERAL</h1>
-
-            <div class="platform-sub">
-                <i class="fa-solid fa-shield-halved"></i>
-                Standard Digital Compliance
-            </div>
-
-            <div class="header-divider"></div>
+            
+            <h1 class="main-title">SMART OPERATION CENTER</h1>
+            <p class="main-subtitle">ศูนย์รวมระบบจัดการเอกสารและตรวจสอบข้อมูลแบบไร้ขีดจำกัด</p>
         </header>
 
-        <!-- Menu Cards -->
-        <section class="menu-grid" aria-label="เมนูระบบ">
-
-            <!-- Card 1: 3% -->
-            <a href="threerounds.html" class="menu-card card-percent">
-                <div class="card-icon">
-                    <i class="fa-solid fa-percent"></i>
+        <!-- เมนูหลัก 9 ไฟล์ -->
+        <div class="grid-container">
+            
+            <!-- 1. 3% -->
+            <a href="threerounds.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-percent"></i></div>
+                <div class="card-content">
+                    <h3>หัก 3%</h3>
+                    <p>แบบฟอร์มหัก 3% สำหรับการดำเนินการสามรอบ เพื่อสรุปยอดให้สมาชิก</p>
                 </div>
-
-                <h2 class="card-title">หัก 3%</h2>
-                <p class="card-desc">แบบฟอร์มหัก 3% สำหรับการดำเนินการสามรอบ</p>
-
-                <div class="card-btn">
-                    สร้างเอกสาร
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">สร้างเอกสาร</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <!-- Card 2: Memo -->
-            <a href="memo.html" class="menu-card card-memo">
-                <div class="card-icon">
-                    <i class="fa-solid fa-clipboard-list"></i>
+            <!-- 2. Memo -->
+            <a href="memo.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                <div class="card-content">
+                    <h3>บันทึกข้อความ</h3>
+                    <p>จัดทำแบบฟอร์มบันทึกข้อความและรายละเอียดแจ้งเตือนต่างๆ ให้ถูกต้อง</p>
                 </div>
-
-                <h2 class="card-title">บันทึกข้อความ</h2>
-                <p class="card-desc">จัดทำแบบฟอร์มบันทึกข้อความและรายละเอียดต่าง ๆ</p>
-
-                <div class="card-btn">
-                    สร้างเอกสาร
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">สร้างเอกสาร</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <!-- Card 3: Notice -->
-            <a href="note.html" class="menu-card card-notice">
-                <div class="card-icon">
-                    <i class="fa-solid fa-bell"></i>
+            <!-- 3. Notice -->
+            <a href="note.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-bell"></i></div>
+                <div class="card-content">
+                    <h3>ใบแจ้งเตือนระบบ (Note)</h3>
+                    <p>ออกเอกสารแจ้งเตือนการระบุหมายเหตุผิดพลาดเพื่อนำไปสู่การแก้ไขคำสั่ง</p>
                 </div>
-
-                <h2 class="card-title">ใบแจ้งเตือน</h2>
-                <p class="card-desc">จัดทำแบบฟอร์มใบแจ้งเตือนจากระบบ</p>
-
-                <div class="card-btn">
-                    สร้างเอกสาร
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">สร้างเอกสาร</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <!-- Card 4: Scan Slip -->
-            <a href="scanslip.html" class="menu-card card-slip">
-                <div class="card-icon">
-                    <i class="fa-solid fa-receipt"></i>
+            <!-- 4. Scan Slip -->
+            <a href="scanslip.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-receipt"></i></div>
+                <div class="card-content">
+                    <h3>สแกนสลิป</h3>
+                    <p>ระบบตรวจสอบข้อมูลและรายละเอียดสลิปโอนเงินอย่างรวดเร็วด้วย AI</p>
                 </div>
-
-                <h2 class="card-title">สแกนสลิป</h2>
-                <p class="card-desc">ระบบตรวจสอบข้อมูลและรายละเอียดสลิปโอนเงิน</p>
-
-                <div class="card-btn">
-                    ตรวจสอบ
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">ตรวจสอบ</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <!-- Card 5: Scan Note -->
-            <a href="scannote.html" class="menu-card card-note">
-                <div class="card-icon">
-                    <i class="fa-solid fa-file-signature"></i>
+            <!-- 5. Scan Note -->
+            <a href="scannote.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-file-signature"></i></div>
+                <div class="card-content">
+                    <h3>สแกนหมายเหตุ</h3>
+                    <p>ระบบตรวจสอบข้อความและข้อมูลในหมายเหตุอัจฉริยะ (Smart Contract)</p>
                 </div>
-
-                <h2 class="card-title">สแกนหมายเหตุ</h2>
-                <p class="card-desc">ระบบตรวจสอบข้อความและข้อมูลในหมายเหตุ</p>
-
-                <div class="card-btn">
-                    ตรวจสอบ
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">ตรวจสอบ</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <!-- Card 6: KBANK -->
-            <a href="KBANK.html" class="menu-card card-bank">
-                <div class="card-icon">
-                    <i class="fa-solid fa-building-columns"></i>
+            <!-- 6. KBANK -->
+            <a href="KBANK.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="card-content">
+                    <h3>สั่งจ่ายไม่ได้ (KBANK)</h3>
+                    <p>จัดทำเอกสารแจ้งเตือนสำหรับรายการสั่งจ่ายธนาคารกสิกรไทยขัดข้อง</p>
                 </div>
-
-                <h2 class="card-title">สั่งจ่ายไม่ได้กสิกร</h2>
-                <p class="card-desc">จัดทำเอกสารสำหรับรายการสั่งจ่ายธนาคารกสิกรไทย</p>
-
-                <div class="card-btn">
-                    สร้างเอกสาร
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">สร้างเอกสาร</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <!-- Card 7: Wrong Account Correction -->
-            <a href="wrongaccount.html" class="menu-card card-wrong-account">
-                <div class="card-icon">
-                    <i class="fa-solid fa-user-pen"></i>
+            <!-- 7. Wrong Account Correction -->
+            <a href="wrongaccount.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-user-pen"></i></div>
+                <div class="card-content">
+                    <h3>แก้ไขบัญชีผิด</h3>
+                    <p>จัดทำเอกสารคำร้องสำหรับแก้ไขหมายเลขบัญชีธนาคารที่กรอกผิดพลาด</p>
                 </div>
-
-                <h2 class="card-title">แก้ไขบัญชีผิด</h2>
-                <p class="card-desc">จัดทำเอกสารคำร้องสำหรับแก้ไขหมายเลขบัญชีที่กรอกผิด</p>
-
-                <div class="card-btn">
-                    สร้างเอกสาร
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">สร้างเอกสาร</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <!-- Card 8: Extension Form -->
-            <a href="prolongfor.html" class="menu-card card-extension">
-                <div class="card-icon">
-                    <i class="fa-solid fa-calendar-plus"></i>
+            <!-- 8. Extension Form -->
+            <a href="prolongfor.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-calendar-plus"></i></div>
+                <div class="card-content">
+                    <h3>ใบขยายเวลา</h3>
+                    <p>สร้างหนังสืออนุมัติแจ้งขอขยายระยะเวลาในการดำเนินการให้แก่สมาชิก</p>
                 </div>
-
-                <h2 class="card-title">ใบขยายเวลา</h2>
-                <p class="card-desc">จัดทำเอกสารแจ้งอนุมัติขยายระยะเวลาดำเนินการ</p>
-
-                <div class="card-btn">
-                    สร้างเอกสาร
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">สร้างเอกสาร</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-            <!-- Card 9: Scan Business Card -->
-            <a href="scancard.html" class="menu-card card-business">
-                <div class="card-icon">
-                    <i class="fa-solid fa-address-card"></i>
+            <!-- 9. Scan Business Card -->
+            <a href="scancard.html" class="card">
+                <div class="card-icon"><i class="fa-solid fa-address-card"></i></div>
+                <div class="card-content">
+                    <h3>สแกนนามบัตร</h3>
+                    <p>ตรวจสอบและยืนยันข้อมูลร้านค้า อนุมัติค่าสินค้าผ่านระบบหน้าบัตร</p>
                 </div>
-
-                <h2 class="card-title">สแกนนามบัตร</h2>
-                <p class="card-desc">ระบบตรวจสอบและอ่านข้อมูลจากนามบัตร</p>
-
-                <div class="card-btn">
-                    สแกนนามบัตร
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-bottom">
+                    <span class="card-btn-text">สแกนนามบัตร</span>
+                    <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </div>
             </a>
 
-        </section>
+        </div>
 
         <!-- Footer -->
         <footer class="footer">
-            &copy; 2026 <strong>LITTLE PERAL</strong>. All rights reserved.
+            &copy; 2026 <strong>HEAVEN & HELL PLATFORM</strong>. All rights reserved.
         </footer>
 
-    </main>
+    </div>
+
 </body>
 </html>
-```<ElicitationsGroup message="หากต้องการปรับแต่งส่วนใดเพิ่มเติม สามารถแจ้งได้เลยครับ">
-  <Elicitation label="เปลี่ยนสีปุ่มในแต่ละการ์ด" query="ขอเปลี่ยนสีปุ่มกด (สร้างเอกสาร/ตรวจสอบ) ด้านล่างของแต่ละการ์ดได้ไหม"/>
-  <Elicitation label="เพิ่มเมนูใหม่" query="ช่วยเพิ่มเมนูใหม่ต่อจากการ์ดสุดท้ายให้อีก 1 อันได้ไหม"/>
-</ElicitationsGroup>
