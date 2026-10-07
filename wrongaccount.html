@@ -930,8 +930,8 @@
                 <img src="Signature.png" alt="Signature" class="signature-img" onerror="this.style.display='none'">
                 <img src="ลายเซ็น.png" alt="ลายเซ็น" class="signature-img-2" onerror="this.style.display='none'">
                 <div class="signature-line"></div>
-                <div class="signature-name"> นางสาวมนตรา ง้าวกาเขียว)</div>
-                <div class="signature-title">ผู้จัดการ บริษัท มัม ซีเครท จำกัด</div>
+                <div class="signature-name" id="signature-name">นางสาวมนตรา ง้าวกาเขียว</div>
+                <div class="signature-title" id="signature-title">ผู้จัดการ บริษัท มัม ซีเครท จำกัด</div>
                 <div class="signature-date">
                     ออก ณ วันที่
                     <span id="doc-date-footer">18 เมษายน 2569</span>
@@ -1042,6 +1042,8 @@
         const togglePlatformBtn = document.getElementById("togglePlatformBtn");
         const brandLogo = document.getElementById("brand-logo");
         const pageTitle = document.getElementById("page-title");
+        const signatureName = document.getElementById("signature-name");
+        const signatureTitle = document.getElementById("signature-title");
         const documentRoot = document.documentElement;
 
         let isSharpSteps = false;
@@ -1052,11 +1054,15 @@
                 documentRoot.classList.add("theme-sharpsteps");
                 brandLogo.src = "Logo2.png";
                 pageTitle.innerText = "SHARPSTEPS - เอกสารคำร้องแก้ไขหมายเลขบัญชี";
+                signatureName.textContent = "นายอาลีฟ เตซาน";
+                signatureTitle.textContent = "ผู้จัดการ บริษัท โจลี่ รีเทล จำกัด";
                 togglePlatformBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> กลับสู่ LITTLE PERAL';
             } else {
                 documentRoot.classList.remove("theme-sharpsteps");
                 brandLogo.src = "Logo.png";
                 pageTitle.innerText = "LITTLE PERAL - เอกสารคำร้องแก้ไขหมายเลขบัญชี";
+                signatureName.textContent = "นางสาวมนตรา ง้าวกาเขียว";
+                signatureTitle.textContent = "ผู้จัดการ บริษัท มัม ซีเครท จำกัด";
                 togglePlatformBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> สลับแพลตฟอร์ม (SHARPSTEPS)';
             }
         });
